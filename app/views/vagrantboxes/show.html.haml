@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @vagrantbox.name
+%p
+  %b Path:
+  = @vagrantbox.path
+
+= link_to 'Edit', edit_vagrantbox_path(@vagrantbox)
+\|
+= link_to 'Back', vagrantboxes_path

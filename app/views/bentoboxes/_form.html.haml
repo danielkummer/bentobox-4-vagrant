@@ -15,5 +15,14 @@
   .field
     = f.label :public
     = f.check_box :public
+
+  .field
+    = f.label :vagrantbox
+    = f.collection_select( :vagrantbox, Vagrantbox.all, :id, :name, :prompt => true )
+
+  .field
+    = f.label :ingredients
+    = f.collection_select(:ingredients, Ingredient.all, :id, :name, {}, {multiple: true})
+
   .actions
     = f.submit 'Save'

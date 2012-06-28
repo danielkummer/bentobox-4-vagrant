@@ -1,0 +1,16 @@
+= form_for @vagrantbox do |f|
+  -if @vagrantbox.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@vagrantbox.errors.count, "error")} prohibited this vagrantbox from being saved:"
+      %ul
+        - @vagrantbox.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :path
+    = f.text_field :path
+  .actions
+    = f.submit 'Save'

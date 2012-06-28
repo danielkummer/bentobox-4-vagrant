@@ -1,6 +1,10 @@
 class User
   include Mongoid::Document
+  has_many :bentoboxes
+
   field :name
 
-  attr_accessible :name
+
+
+
 end

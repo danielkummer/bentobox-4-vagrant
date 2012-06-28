@@ -1,0 +1,25 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @ingredient.name
+%p
+  %b Snippet:
+  = @ingredient.snippet
+
+- if @ingredient.portmappings.size > 0
+  %p= @ingredient.portmappings.inspect
+  %p portmappings
+  - for mapping in @ingredient.portmappings
+    %p= mapping.port
+
+%p new portmapping
+
+= form_for [@ingredient, Portmapping.new ] do |f|
+  = f.label :port
+  = f.text_field :port
+  = f.submit
+
+= link_to 'Edit', edit_ingredient_path(@ingredient)
+\|
+= link_to 'Back', ingredients_path

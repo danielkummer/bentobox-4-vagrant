@@ -1,0 +1,21 @@
+%h1 Listing vagrantboxes
+
+%table
+  %tr
+    %th Name
+    %th Path
+    %th
+    %th
+    %th
+
+  - @vagrantboxes.each do |vagrantbox|
+    %tr
+      %td= vagrantbox.name
+      %td= vagrantbox.path
+      %td= link_to 'Show', vagrantbox
+      %td= link_to 'Edit', edit_vagrantbox_path(vagrantbox)
+      %td= link_to 'Destroy', vagrantbox, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Vagrantbox', new_vagrantbox_path
