@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @bentobox.name
+%p
+  %b Description:
+  = @bentobox.description
+%p
+  %b Public:
+  = @bentobox.public
+
+= link_to 'Edit', edit_bentobox_path(@bentobox)
+\|
+= link_to 'Back', bentoboxes_path

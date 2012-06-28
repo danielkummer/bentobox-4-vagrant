@@ -1,0 +1,23 @@
+%h1 Listing bentoboxes
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th Public
+    %th
+    %th
+    %th
+
+  - @bentoboxes.each do |bentobox|
+    %tr
+      %td= bentobox.name
+      %td= bentobox.description
+      %td= bentobox.public
+      %td= link_to 'Show', bentobox
+      %td= link_to 'Edit', edit_bentobox_path(bentobox)
+      %td= link_to 'Destroy', bentobox, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Bentobox', new_bentobox_path

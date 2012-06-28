@@ -1,0 +1,19 @@
+= form_for @bentobox do |f|
+  -if @bentobox.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@bentobox.errors.count, "error")} prohibited this bentobox from being saved:"
+      %ul
+        - @bentobox.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :public
+    = f.check_box :public
+  .actions
+    = f.submit 'Save'
