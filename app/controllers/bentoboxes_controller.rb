@@ -1,44 +1,26 @@
 class BentoboxesController < ApplicationController
-  # GET /bentoboxes
-  # GET /bentoboxes.json
+  respond_to :html
   def index
     @bentoboxes = Bentobox.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @bentoboxes }
-    end
+    respond_with @bentoboxes
   end
 
-  # GET /bentoboxes/1
-  # GET /bentoboxes/1.json
   def show
     @bentobox = Bentobox.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @bentobox }
-    end
+    respond_with @bentoboxes
   end
 
-  # GET /bentoboxes/new
-  # GET /bentoboxes/new.json
   def new
     @bentobox = Bentobox.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @bentobox }
-    end
+    respond_with @bentoboxe
   end
 
-  # GET /bentoboxes/1/edit
   def edit
     @bentobox = Bentobox.find(params[:id])
+
   end
 
-  # POST /bentoboxes
-  # POST /bentoboxes.json
   def create
     @bentobox = Bentobox.new(params[:bentobox])
 
@@ -53,8 +35,6 @@ class BentoboxesController < ApplicationController
     end
   end
 
-  # PUT /bentoboxes/1
-  # PUT /bentoboxes/1.json
   def update
     @bentobox = Bentobox.find(params[:id])
 
@@ -69,8 +49,6 @@ class BentoboxesController < ApplicationController
     end
   end
 
-  # DELETE /bentoboxes/1
-  # DELETE /bentoboxes/1.json
   def destroy
     @bentobox = Bentobox.find(params[:id])
     @bentobox.destroy

@@ -22,7 +22,10 @@
 
   .field
     = f.label :ingredients
-    = f.collection_select(:ingredients, Ingredient.all, :id, :name, {}, {multiple: true})
+    /grouped_collection_select(:city, :country_id, @continents, :countries, :name, :id, :name)
+    /option_groups_from_collection_for_select(@continents, :countries, :name, :id, :name, 3)
+    /http://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-grouped_collection_select
+    = f.collection_select(:ingredient_ids, Ingredient.asc(:name), :id, :name, {}, {multiple: true})
 
   .actions
     = f.submit 'Save'
