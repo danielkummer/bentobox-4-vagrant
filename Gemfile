@@ -16,8 +16,6 @@ group :development, :test do
   gem 'capistrano'
   gem 'rspec-rails'
   gem 'mongoid-rspec'
-end
-group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'

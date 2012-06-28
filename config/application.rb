@@ -66,7 +66,6 @@ module VagrantCook
     config.assets.version = '1.0'
 
     #mongoid config
-    config.mongoid.logger = Logger.new($stdout, :warn)
-    config.mongoid.persist_in_safe_mode = true
+    Mongoid.logger.level = Logger::DEBUG
   end
 end
