@@ -3,7 +3,7 @@ class Ingredient
   embeds_many :portmappings
   belongs_to :category
 
-  #has_and_belongs_to_many :bentoboxes, :inverse_of => :ingredients
+  has_and_belongs_to_many :bentoboxes, :inverse_of => :ingredients
 
   field :name
   field :snippet

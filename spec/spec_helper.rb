@@ -10,7 +10,7 @@ require 'capybara/rspec'
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
-  #config.include Mongoid::Matchers
+  config.include Mongoid::Matchers
 
 
   # Clean up the database
