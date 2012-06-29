@@ -4,5 +4,6 @@ class Portmapping
 
   field :port, type: Integer
 
-  validates_format_of :port, with: /^[0-9]*$/i
+  validates :port, numericality: { only_integer: true}
+  validates :port, inclusion: {in: 1025..65535}
 end

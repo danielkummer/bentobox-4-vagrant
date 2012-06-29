@@ -4,4 +4,7 @@ class Ingredient
 
   field :name
   field :snippet
+
+  validates :name, :snippet, :presence => true
+  validates :name, :uniqueness => true
 end

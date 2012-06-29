@@ -3,5 +3,8 @@ class Vagrantbox
   field :name, type: String
   field :path, type: String
 
-  has_and_belongs_to_many :bentoboxes
+  has_many :bentoboxes
+
+  validates :name, :path, :presence => true
+  validates :name, :uniqueness => true
 end

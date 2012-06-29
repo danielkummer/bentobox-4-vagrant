@@ -5,6 +5,6 @@ class User
   field :name
 
 
-
+  validates :name, :presence => true
 
 end
