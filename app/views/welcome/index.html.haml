@@ -1,7 +1,9 @@
 %h1 Welcome#index
 %p Find me in app/views/welcome/index.html.haml
 
-= link_to 'users', users_path
-= link_to 'bendoboxes', bentoboxes_path
-= link_to 'ingredients', ingredients_path
-= link_to 'vagrant boxes', vagrantboxes_path
+%ul
+  %li= link_to 'users', users_path
+  %li= link_to 'bendoboxes', bentoboxes_path
+  %li= link_to 'ingredients', ingredients_path
+  %li= link_to 'vagrant boxes', vagrantboxes_path
+  %li= link_to 'categories', categories_path

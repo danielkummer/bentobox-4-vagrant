@@ -1,6 +1,6 @@
 class Portmapping
   include Mongoid::Document
-  embedded_in :ingredient
+  embedded_in :ingredient, :inverse_of => :portmappings
 
   field :port, type: Integer
 

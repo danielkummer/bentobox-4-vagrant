@@ -1,6 +1,4 @@
 class VagrantboxesController < ApplicationController
-  # GET /vagrantboxes
-  # GET /vagrantboxes.json
   def index
     @vagrantboxes = Vagrantbox.all
 
@@ -10,8 +8,6 @@ class VagrantboxesController < ApplicationController
     end
   end
 
-  # GET /vagrantboxes/1
-  # GET /vagrantboxes/1.json
   def show
     @vagrantbox = Vagrantbox.find(params[:id])
 
@@ -21,8 +17,6 @@ class VagrantboxesController < ApplicationController
     end
   end
 
-  # GET /vagrantboxes/new
-  # GET /vagrantboxes/new.json
   def new
     @vagrantbox = Vagrantbox.new
 
@@ -32,13 +26,10 @@ class VagrantboxesController < ApplicationController
     end
   end
 
-  # GET /vagrantboxes/1/edit
   def edit
     @vagrantbox = Vagrantbox.find(params[:id])
   end
 
-  # POST /vagrantboxes
-  # POST /vagrantboxes.json
   def create
     @vagrantbox = Vagrantbox.new(params[:vagrantbox])
 
@@ -53,8 +44,6 @@ class VagrantboxesController < ApplicationController
     end
   end
 
-  # PUT /vagrantboxes/1
-  # PUT /vagrantboxes/1.json
   def update
     @vagrantbox = Vagrantbox.find(params[:id])
 
@@ -69,8 +58,6 @@ class VagrantboxesController < ApplicationController
     end
   end
 
-  # DELETE /vagrantboxes/1
-  # DELETE /vagrantboxes/1.json
   def destroy
     @vagrantbox = Vagrantbox.find(params[:id])
     @vagrantbox.destroy

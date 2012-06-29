@@ -1,5 +1,7 @@
 class BentoboxesController < ApplicationController
   respond_to :html
+  respond_to :text, only: [:show]
+
   def index
     @bentoboxes = Bentobox.all
 
@@ -8,17 +10,18 @@ class BentoboxesController < ApplicationController
 
   def show
     @bentobox = Bentobox.find(params[:id])
-    respond_with @bentoboxe
+    respond_with @bentobox
   end
 
   def new
     @bentobox = Bentobox.new
-    respond_with @bentoboxe
+    @ingredients = Ingredient.all
+    respond_with @bentobox
   end
 
   def edit
     @bentobox = Bentobox.find(params[:id])
-
+    @ingredients = Ingredient.all
   end
 
   def create
