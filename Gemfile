@@ -23,3 +23,4 @@ group :development, :test do
 end
 
 gem 'database_cleaner', :group => :test
+gem 'simplecov', :require => false, :group => :test
