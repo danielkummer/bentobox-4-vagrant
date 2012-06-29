@@ -8,8 +8,7 @@
   = @ingredient.snippet
 
 - if @ingredient.portmappings.size > 0
-  %p= @ingredient.portmappings.inspect
-  %p portmappings
+  %p Portmappings:
   - for mapping in @ingredient.portmappings
     %p= mapping.port
 

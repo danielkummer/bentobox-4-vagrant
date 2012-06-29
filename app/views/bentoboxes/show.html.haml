@@ -10,6 +10,17 @@
   %b Public:
   = @bentobox.public
 
+%p
+  %b Vagrantbox:
+  = @bentobox.vagrantbox.name
+
+%p
+  %b Ingredients:
+  %p= @bentobox.ingredients.inspect
+  %ul
+  -for ingredient in @bentobox.ingredients
+    %li= ingredient.name
+
 = link_to 'Edit', edit_bentobox_path(@bentobox)
 \|
 = link_to 'Back', bentoboxes_path

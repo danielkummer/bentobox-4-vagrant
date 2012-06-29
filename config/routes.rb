@@ -1,5 +1,7 @@
 VagrantCook::Application.routes.draw do
 
+  resources :categories
+
   resources :ingredients do
     resources :portmappings
   end

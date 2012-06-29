@@ -12,5 +12,16 @@
   .field
     = f.label :snippet
     = f.text_field :snippet
+
+  .field
+    = f.label :category
+    = f.collection_select(:category, Category.all, :id, :name, :prompt => true)
+
+  .fieldset
+    = f.fields_for :portmappings do |map|
+      = map.label :port
+      = map.text_field :port
+
+
   .actions
     = f.submit 'Save'

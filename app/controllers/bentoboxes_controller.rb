@@ -8,7 +8,7 @@ class BentoboxesController < ApplicationController
 
   def show
     @bentobox = Bentobox.find(params[:id])
-    respond_with @bentoboxes
+    respond_with @bentoboxe
   end
 
   def new

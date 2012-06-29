@@ -21,7 +21,7 @@
     = f.collection_select( :vagrantbox, Vagrantbox.all, :id, :name, :prompt => true )
 
   .field
-    = f.label :ingredients
+    = f.label :ingredient_ids
     /grouped_collection_select(:city, :country_id, @continents, :countries, :name, :id, :name)
     /option_groups_from_collection_for_select(@continents, :countries, :name, :id, :name, 3)
     /http://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-grouped_collection_select
