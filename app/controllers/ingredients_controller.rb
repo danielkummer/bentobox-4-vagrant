@@ -2,6 +2,7 @@ class IngredientsController < ApplicationController
   respond_to :html
 
   def initialize
+    super()
     @network = [:hostonly, :bridged]
   end
 

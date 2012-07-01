@@ -1,6 +1,6 @@
 %h1 Listing ingredients
 
-%table
+%table{class: 'table table-striped'}
   %tr
     %th Name
     %th Cookbooks
@@ -16,10 +16,10 @@
       %td= ingredient.cookbooks
       %td= ingredient.share_folder
       %td= ingredient.network_config
-      %td= link_to 'Show', ingredient
-      %td= link_to 'Edit', edit_ingredient_path(ingredient)
-      %td= link_to 'Destroy', ingredient, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Show', ingredient, class: "btn btn-info"
+      %td= link_to 'Edit', edit_ingredient_path(ingredient), class: "btn btn-success"
+      %td= link_to 'Destroy', ingredient, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"
 
 %br
 
-= link_to 'New Ingredient', new_ingredient_path
+= link_to 'New Ingredient', new_ingredient_path, class: "btn btn-large btn-success"

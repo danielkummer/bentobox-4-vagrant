@@ -1,4 +1,4 @@
-= form_for @bentobox do |f|
+= form_for @bentobox, html:{class: "form-horizontal"} do |f|
   -if @bentobox.errors.any?
     #error_explanation
       %h2= "#{pluralize(@bentobox.errors.count, "error")} prohibited this bentobox from being saved:"
@@ -6,37 +6,43 @@
         - @bentobox.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :public
-    = f.check_box :public
-
-  .field
-    = f.label :vagrantbox
-    = f.collection_select( :vagrantbox, Vagrantbox.all, :id, :name, :prompt => true )
-
-  .field
-    = f.label :ingredient_ids, "Choose your ingredients"
-    /= f.grouped_collection_select(:ingredient_ids, Category.all, :ingredients, :name, :id, :name, {}, {multiple: true})
-
-    = hidden_field_tag "bentobox[ingredient_ids][]", nil
-    - for category in Category.asc(:name)
-      %fieldset
-        %legend= category.name
-        - for ingredient in category.ingredients.all
-          .field
-            = check_box_tag "bentobox[ingredient_ids][]", ingredient.id, @bentobox.ingredient_ids.include?(ingredient.id), id: dom_id(ingredient)
-            = label_tag dom_id(ingredient), ingredient.name
+  %fieldset
+    %legend Pick your stuff
+    .control-group
+      = f.label :name, class: "control-label"
+      .controls
+        = f.text_field :name, class: "input-xlarge"
 
 
+    .control-group
+      = f.label :description, class: "control-label"
+      .controls
+        = f.text_area :description, class: "input-xlarge", rows: 3
+    .control-group
+      = f.label :public, class: "control-label"
+      .controls
+        = f.check_box :public
 
+    .control-group
+      = f.label :vagrantbox, class: "control-label"
+      .controls
+        = f.collection_select( :vagrantbox, Vagrantbox.all, :id, :name, :prompt => true )
 
+    .control-group
+      = f.label :ingredient_ids, "Choose your ingredients", class: "control-label"
+      /= f.grouped_collection_select(:ingredient_ids, Category.all, :ingredients, :name, :id, :name, {}, {multiple: true})
+      .controls
+        = hidden_field_tag "bentobox[ingredient_ids][]", nil
+        - for category in Category.asc(:name)
+          %fieldset
+            %legend= category.name
+            - for ingredient in category.ingredients.all
+              .field
+                = label_tag dom_id(ingredient), class: "checkbox" do
+                  = check_box_tag "bentobox[ingredient_ids][]", ingredient.id, @bentobox.ingredient_ids.include?(ingredient.id), id: dom_id(ingredient)
+                  = ingredient.name
 
+    .form-actions
+      = f.submit 'Save', class: "btn btn-primary
+      = link_to 'Back', bentoboxes_path, class: "btn"
 
-  .actions
-    = f.submit 'Save'

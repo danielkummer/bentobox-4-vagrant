@@ -1,6 +1,6 @@
 %h1 Listing bentoboxes
 
-%table
+%table{class: 'table table-striped'}
   %tr
     %th Name
     %th Description
@@ -14,10 +14,10 @@
       %td= bentobox.name
       %td= bentobox.description
       %td= bentobox.public
-      %td= link_to 'Show', bentobox
-      %td= link_to 'Edit', edit_bentobox_path(bentobox)
-      %td= link_to 'Destroy', bentobox, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Show', bentobox, class: "btn btn-info"
+      %td= link_to 'Edit', edit_bentobox_path(bentobox), class: "btn btn-success"
+      %td= link_to 'Destroy', bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"
 
 %br
 
-= link_to 'New Bentobox', new_bentobox_path
+= link_to 'New Bentobox', new_bentobox_path, class: "btn btn-large btn-success"
