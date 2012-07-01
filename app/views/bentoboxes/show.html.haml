@@ -20,6 +20,6 @@
   -for ingredient in @bentobox.ingredients
     %li= ingredient.name
 
-= link_to 'Edit', edit_bentobox_path(@bentobox)
-\|
-= link_to 'Back', bentoboxes_path
+= link_to "Vagrantconfig", params.merge(:format => :text), :class => "btn btn-success btn-large"
+= link_to 'Edit', edit_bentobox_path(@bentobox), class: "btn btn-info"
+= link_to 'Back', bentoboxes_path, class: "btn"
