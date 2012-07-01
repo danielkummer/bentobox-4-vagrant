@@ -8,9 +8,7 @@ class Ingredient
 
   field :name
   field :cookbooks
-  field :share_folder
   field :network_config
-
 
   validates :name, :presence => true
   validates :name, :uniqueness => true

@@ -1,0 +1,22 @@
+.form.form-inline
+  .fieldset
+    .control-group
+      = f.label :logical_name
+      .controls
+        = f.text_field :logical_name
+    .control-group
+      = f.label :host_path
+      .controls
+        = f.text_field :host_path
+    .control-group
+      = f.label :guest_path
+      .controls
+        = f.text_field :guest_path
+    .control-group
+      = f.label :additional_options
+      .controls
+        = f.text_field :additional_options
+    .control-group
+      = f.label :_destroy, "delete"
+      .controls
+        = link_to 'remove', '#', class: "remove_fields"

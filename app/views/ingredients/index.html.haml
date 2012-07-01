@@ -14,7 +14,7 @@
     %tr
       %td= ingredient.name
       %td= ingredient.cookbooks
-      %td= ingredient.share_folder
+      %td= ingredient.share_folders.exists?
       %td= ingredient.network_config
       %td= link_to 'Show', ingredient, class: "btn btn-info"
       %td= link_to 'Edit', edit_ingredient_path(ingredient), class: "btn btn-success"
