@@ -4,7 +4,7 @@ describe "ingredients/new" do
   before(:each) do
     assign(:ingredient, stub_model(Ingredient,
       :name => "MyString",
-      :snippet => "MyString"
+      :cookbooks => "MyString"
     ).as_new_record)
   end
 

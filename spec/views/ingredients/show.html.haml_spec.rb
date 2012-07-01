@@ -4,7 +4,7 @@ describe "ingredients/show" do
   before(:each) do
     @ingredient = assign(:ingredient, stub_model(Ingredient,
       :name => "Name",
-      :snippet => "Snippet"
+      :cookbooks => "Snippet"
     ))
   end
 

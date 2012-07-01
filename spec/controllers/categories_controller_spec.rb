@@ -24,7 +24,7 @@ describe CategoriesController do
   # Category. As you add validations to Category, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {name: "testcategory"}
   end
   
   # This should return the minimal set of values that should be in the session
@@ -36,7 +36,7 @@ describe CategoriesController do
 
   describe "GET index" do
     it "assigns all categories as @categories" do
-      category = Category.create! valid_attributes
+      category = FactoryGirl.create(:category)
       get :index, {}, valid_session
       assigns(:categories).should eq([category])
     end
@@ -44,7 +44,7 @@ describe CategoriesController do
 
   describe "GET show" do
     it "assigns the requested category as @category" do
-      category = Category.create! valid_attributes
+      category = FactoryGirl.create(:category)
       get :show, {:id => category.to_param}, valid_session
       assigns(:category).should eq(category)
     end
@@ -59,7 +59,7 @@ describe CategoriesController do
 
   describe "GET edit" do
     it "assigns the requested category as @category" do
-      category = Category.create! valid_attributes
+      category = FactoryGirl.create(:category)
       get :edit, {:id => category.to_param}, valid_session
       assigns(:category).should eq(category)
     end
@@ -105,7 +105,7 @@ describe CategoriesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested category" do
-        category = Category.create! valid_attributes
+        category = FactoryGirl.create(:category)
         # Assuming there are no other categories in the database, this
         # specifies that the Category created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,13 +115,13 @@ describe CategoriesController do
       end
 
       it "assigns the requested category as @category" do
-        category = Category.create! valid_attributes
+        category = FactoryGirl.create(:category)
         put :update, {:id => category.to_param, :category => valid_attributes}, valid_session
         assigns(:category).should eq(category)
       end
 
       it "redirects to the category" do
-        category = Category.create! valid_attributes
+        category = FactoryGirl.create(:category)
         put :update, {:id => category.to_param, :category => valid_attributes}, valid_session
         response.should redirect_to(category)
       end
@@ -129,7 +129,7 @@ describe CategoriesController do
 
     describe "with invalid params" do
       it "assigns the category as @category" do
-        category = Category.create! valid_attributes
+        category = FactoryGirl.create(:category)
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
         put :update, {:id => category.to_param, :category => {}}, valid_session
@@ -137,7 +137,7 @@ describe CategoriesController do
       end
 
       it "re-renders the 'edit' template" do
-        category = Category.create! valid_attributes
+        category = FactoryGirl.create(:category)
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
         put :update, {:id => category.to_param, :category => {}}, valid_session
@@ -148,14 +148,14 @@ describe CategoriesController do
 
   describe "DELETE destroy" do
     it "destroys the requested category" do
-      category = Category.create! valid_attributes
+      category = FactoryGirl.create(:category)
       expect {
         delete :destroy, {:id => category.to_param}, valid_session
       }.to change(Category, :count).by(-1)
     end
 
     it "redirects to the categories list" do
-      category = Category.create! valid_attributes
+      category = FactoryGirl.create(:category)
       delete :destroy, {:id => category.to_param}, valid_session
       response.should redirect_to(categories_url)
     end

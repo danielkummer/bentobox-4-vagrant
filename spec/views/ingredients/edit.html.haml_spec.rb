@@ -4,7 +4,7 @@ describe "ingredients/edit" do
   before(:each) do
     @ingredient = assign(:ingredient, stub_model(Ingredient,
       :name => "MyString",
-      :snippet => "MyString"
+      :cookbooks => "MyString"
     ))
   end
 

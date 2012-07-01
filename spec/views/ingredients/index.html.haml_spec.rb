@@ -5,11 +5,11 @@ describe "ingredients/index" do
     assign(:ingredients, [
       stub_model(Ingredient,
         :name => "Name",
-        :snippet => "Snippet"
+        :cookbooks => "Snippet"
       ),
       stub_model(Ingredient,
         :name => "Name",
-        :snippet => "Snippet"
+        :cookbooks => "Snippet"
       )
     ])
   end

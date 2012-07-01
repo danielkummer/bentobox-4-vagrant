@@ -3,23 +3,18 @@ require 'spec_helper'
 
 describe BentoboxesController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Bentobox. As you add validations to Bentobox, be sure to
-  # update the return value of this method accordingly.
   def valid_attributes
     {}
   end
-  
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # BentoboxesController. Be sure to keep this updated too.
+
   def valid_session
     {}
   end
 
+
   describe "GET index" do
     it "assigns all bentoboxes as @bentoboxes" do
-      bentobox = Bentobox.create! valid_attributes
+      bentobox = FactoryGirl.create(:bentobox)
       get :index, {}, valid_session
       assigns(:bentoboxes).should eq([bentobox])
     end
@@ -27,7 +22,7 @@ describe BentoboxesController do
 
   describe "GET show" do
     it "assigns the requested bentobox as @bentobox" do
-      bentobox = Bentobox.create! valid_attributes
+      bentobox = FactoryGirl.create(:bentobox)
       get :show, {:id => bentobox.to_param}, valid_session
       assigns(:bentobox).should eq(bentobox)
     end
@@ -42,7 +37,7 @@ describe BentoboxesController do
 
   describe "GET edit" do
     it "assigns the requested bentobox as @bentobox" do
-      bentobox = Bentobox.create! valid_attributes
+      bentobox = FactoryGirl.create(:bentobox)
       get :edit, {:id => bentobox.to_param}, valid_session
       assigns(:bentobox).should eq(bentobox)
     end
@@ -52,18 +47,18 @@ describe BentoboxesController do
     describe "with valid params" do
       it "creates a new Bentobox" do
         expect {
-          post :create, {:bentobox => valid_attributes}, valid_session
+          post :create, {:bentobox => FactoryGirl.create(:bentobox)}, valid_session
         }.to change(Bentobox, :count).by(1)
       end
 
       it "assigns a newly created bentobox as @bentobox" do
-        post :create, {:bentobox => valid_attributes}, valid_session
+        post :create, {:bentobox => FactoryGirl.create(:bentobox)}, valid_session
         assigns(:bentobox).should be_a(Bentobox)
         assigns(:bentobox).should be_persisted
       end
 
       it "redirects to the created bentobox" do
-        post :create, {:bentobox => valid_attributes}, valid_session
+        post :create, {:bentobox => FactoryGirl.create(:bentobox)}, valid_session
         response.should redirect_to(Bentobox.last)
       end
     end
@@ -88,7 +83,7 @@ describe BentoboxesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested bentobox" do
-        bentobox = Bentobox.create! valid_attributes
+        bentobox = FactoryGirl.create(:bentobox)
         # Assuming there are no other bentoboxes in the database, this
         # specifies that the Bentobox created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -98,13 +93,13 @@ describe BentoboxesController do
       end
 
       it "assigns the requested bentobox as @bentobox" do
-        bentobox = Bentobox.create! valid_attributes
+        bentobox = FactoryGirl.create(:bentobox)
         put :update, {:id => bentobox.to_param, :bentobox => valid_attributes}, valid_session
         assigns(:bentobox).should eq(bentobox)
       end
 
       it "redirects to the bentobox" do
-        bentobox = Bentobox.create! valid_attributes
+        bentobox = FactoryGirl.create(:bentobox)
         put :update, {:id => bentobox.to_param, :bentobox => valid_attributes}, valid_session
         response.should redirect_to(bentobox)
       end
@@ -112,7 +107,7 @@ describe BentoboxesController do
 
     describe "with invalid params" do
       it "assigns the bentobox as @bentobox" do
-        bentobox = Bentobox.create! valid_attributes
+        bentobox = FactoryGirl.create(:bentobox)
         # Trigger the behavior that occurs when invalid params are submitted
         Bentobox.any_instance.stub(:save).and_return(false)
         put :update, {:id => bentobox.to_param, :bentobox => {}}, valid_session
@@ -120,7 +115,7 @@ describe BentoboxesController do
       end
 
       it "re-renders the 'edit' template" do
-        bentobox = Bentobox.create! valid_attributes
+        bentobox = FactoryGirl.create(:bentobox)
         # Trigger the behavior that occurs when invalid params are submitted
         Bentobox.any_instance.stub(:save).and_return(false)
         put :update, {:id => bentobox.to_param, :bentobox => {}}, valid_session
@@ -131,14 +126,14 @@ describe BentoboxesController do
 
   describe "DELETE destroy" do
     it "destroys the requested bentobox" do
-      bentobox = Bentobox.create! valid_attributes
+      bentobox = FactoryGirl.create(:bentobox)
       expect {
         delete :destroy, {:id => bentobox.to_param}, valid_session
       }.to change(Bentobox, :count).by(-1)
     end
 
     it "redirects to the bentoboxes list" do
-      bentobox = Bentobox.create! valid_attributes
+      bentobox = FactoryGirl.create(:bentobox)
       delete :destroy, {:id => bentobox.to_param}, valid_session
       response.should redirect_to(bentoboxes_url)
     end

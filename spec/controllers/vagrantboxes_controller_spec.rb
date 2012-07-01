@@ -36,7 +36,7 @@ describe VagrantboxesController do
 
   describe "GET index" do
     it "assigns all vagrantboxes as @vagrantboxes" do
-      vagrantbox = Vagrantbox.create! valid_attributes
+      vagrantbox = FactoryGirl.create(:vagrantbox)
       get :index, {}, valid_session
       assigns(:vagrantboxes).should eq([vagrantbox])
     end
@@ -44,7 +44,7 @@ describe VagrantboxesController do
 
   describe "GET show" do
     it "assigns the requested vagrantbox as @vagrantbox" do
-      vagrantbox = Vagrantbox.create! valid_attributes
+      vagrantbox = FactoryGirl.create(:vagrantbox)
       get :show, {:id => vagrantbox.to_param}, valid_session
       assigns(:vagrantbox).should eq(vagrantbox)
     end
@@ -59,7 +59,7 @@ describe VagrantboxesController do
 
   describe "GET edit" do
     it "assigns the requested vagrantbox as @vagrantbox" do
-      vagrantbox = Vagrantbox.create! valid_attributes
+      vagrantbox = FactoryGirl.create(:vagrantbox)
       get :edit, {:id => vagrantbox.to_param}, valid_session
       assigns(:vagrantbox).should eq(vagrantbox)
     end
@@ -69,18 +69,18 @@ describe VagrantboxesController do
     describe "with valid params" do
       it "creates a new Vagrantbox" do
         expect {
-          post :create, {:vagrantbox => valid_attributes}, valid_session
+          post :create, {:vagrantbox => FactoryGirl.create(:bentobox)}, valid_session
         }.to change(Vagrantbox, :count).by(1)
       end
 
       it "assigns a newly created vagrantbox as @vagrantbox" do
-        post :create, {:vagrantbox => valid_attributes}, valid_session
+        post :create, {:vagrantbox => FactoryGirl.create(:bentobox)}, valid_session
         assigns(:vagrantbox).should be_a(Vagrantbox)
         assigns(:vagrantbox).should be_persisted
       end
 
       it "redirects to the created vagrantbox" do
-        post :create, {:vagrantbox => valid_attributes}, valid_session
+        post :create, {:vagrantbox => FactoryGirl.create(:bentobox)}, valid_session
         response.should redirect_to(Vagrantbox.last)
       end
     end
@@ -105,7 +105,7 @@ describe VagrantboxesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested vagrantbox" do
-        vagrantbox = Vagrantbox.create! valid_attributes
+        vagrantbox = FactoryGirl.create(:vagrantbox)
         # Assuming there are no other vagrantboxes in the database, this
         # specifies that the Vagrantbox created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,13 +115,13 @@ describe VagrantboxesController do
       end
 
       it "assigns the requested vagrantbox as @vagrantbox" do
-        vagrantbox = Vagrantbox.create! valid_attributes
+        vagrantbox = FactoryGirl.create(:vagrantbox)
         put :update, {:id => vagrantbox.to_param, :vagrantbox => valid_attributes}, valid_session
         assigns(:vagrantbox).should eq(vagrantbox)
       end
 
       it "redirects to the vagrantbox" do
-        vagrantbox = Vagrantbox.create! valid_attributes
+        vagrantbox = FactoryGirl.create(:vagrantbox)
         put :update, {:id => vagrantbox.to_param, :vagrantbox => valid_attributes}, valid_session
         response.should redirect_to(vagrantbox)
       end
@@ -129,7 +129,7 @@ describe VagrantboxesController do
 
     describe "with invalid params" do
       it "assigns the vagrantbox as @vagrantbox" do
-        vagrantbox = Vagrantbox.create! valid_attributes
+        vagrantbox = FactoryGirl.create(:vagrantbox)
         # Trigger the behavior that occurs when invalid params are submitted
         Vagrantbox.any_instance.stub(:save).and_return(false)
         put :update, {:id => vagrantbox.to_param, :vagrantbox => {}}, valid_session
@@ -137,7 +137,7 @@ describe VagrantboxesController do
       end
 
       it "re-renders the 'edit' template" do
-        vagrantbox = Vagrantbox.create! valid_attributes
+        vagrantbox = FactoryGirl.create(:vagrantbox)
         # Trigger the behavior that occurs when invalid params are submitted
         Vagrantbox.any_instance.stub(:save).and_return(false)
         put :update, {:id => vagrantbox.to_param, :vagrantbox => {}}, valid_session
@@ -148,14 +148,14 @@ describe VagrantboxesController do
 
   describe "DELETE destroy" do
     it "destroys the requested vagrantbox" do
-      vagrantbox = Vagrantbox.create! valid_attributes
+      vagrantbox = FactoryGirl.create(:vagrantbox)
       expect {
         delete :destroy, {:id => vagrantbox.to_param}, valid_session
       }.to change(Vagrantbox, :count).by(-1)
     end
 
     it "redirects to the vagrantboxes list" do
-      vagrantbox = Vagrantbox.create! valid_attributes
+      vagrantbox = FactoryGirl.create(:vagrantbox)
       delete :destroy, {:id => vagrantbox.to_param}, valid_session
       response.should redirect_to(vagrantboxes_url)
     end

@@ -10,8 +10,16 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :snippet
-    = f.text_field :snippet
+    = f.label :cookbooks
+    = f.text_field :cookbooks
+
+  .field
+    = f.label :share_folder
+    = f.text_field :share_folder, :value => '"foo", "/guest/path", "/host/path"'
+
+  .field
+    = f.label :network_config
+    = f.text_field :network_config, :value => ':hostonly, "33.33.33.10"'
 
   .field
     = f.label :category
@@ -19,8 +27,8 @@
 
   .fieldset
     = f.fields_for :portmappings do |map|
-      = map.label :port
-      = map.text_field :port
+      = map.label :mapping
+      = map.text_field :mapping
 
 
   .actions

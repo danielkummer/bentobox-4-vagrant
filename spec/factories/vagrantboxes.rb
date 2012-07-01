@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :vagrantbox do
-    name "MyString"
+    name "MyVagrantbox"
     path "MyString"
   end
 end

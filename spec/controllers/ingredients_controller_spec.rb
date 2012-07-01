@@ -24,7 +24,7 @@ describe IngredientsController do
   # Ingredient. As you add validations to Ingredient, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {name: "testingredient"}
   end
   
   # This should return the minimal set of values that should be in the session
@@ -36,7 +36,7 @@ describe IngredientsController do
 
   describe "GET index" do
     it "assigns all ingredients as @ingredients" do
-      ingredient = Ingredient.create! valid_attributes
+      ingredient = FactoryGirl.create(:ingredient)
       get :index, {}, valid_session
       assigns(:ingredients).should eq([ingredient])
     end
@@ -44,7 +44,7 @@ describe IngredientsController do
 
   describe "GET show" do
     it "assigns the requested ingredient as @ingredient" do
-      ingredient = Ingredient.create! valid_attributes
+      ingredient = FactoryGirl.create(:ingredient)
       get :show, {:id => ingredient.to_param}, valid_session
       assigns(:ingredient).should eq(ingredient)
     end
@@ -59,7 +59,7 @@ describe IngredientsController do
 
   describe "GET edit" do
     it "assigns the requested ingredient as @ingredient" do
-      ingredient = Ingredient.create! valid_attributes
+      ingredient = FactoryGirl.create(:ingredient)
       get :edit, {:id => ingredient.to_param}, valid_session
       assigns(:ingredient).should eq(ingredient)
     end
@@ -105,7 +105,7 @@ describe IngredientsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested ingredient" do
-        ingredient = Ingredient.create! valid_attributes
+        ingredient = FactoryGirl.create(:ingredient)
         # Assuming there are no other ingredients in the database, this
         # specifies that the Ingredient created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,13 +115,13 @@ describe IngredientsController do
       end
 
       it "assigns the requested ingredient as @ingredient" do
-        ingredient = Ingredient.create! valid_attributes
+        ingredient = FactoryGirl.create(:ingredient)
         put :update, {:id => ingredient.to_param, :ingredient => valid_attributes}, valid_session
         assigns(:ingredient).should eq(ingredient)
       end
 
       it "redirects to the ingredient" do
-        ingredient = Ingredient.create! valid_attributes
+        ingredient = FactoryGirl.create(:ingredient)
         put :update, {:id => ingredient.to_param, :ingredient => valid_attributes}, valid_session
         response.should redirect_to(ingredient)
       end
@@ -129,7 +129,7 @@ describe IngredientsController do
 
     describe "with invalid params" do
       it "assigns the ingredient as @ingredient" do
-        ingredient = Ingredient.create! valid_attributes
+        ingredient = FactoryGirl.create(:ingredient)
         # Trigger the behavior that occurs when invalid params are submitted
         Ingredient.any_instance.stub(:save).and_return(false)
         put :update, {:id => ingredient.to_param, :ingredient => {}}, valid_session
@@ -137,7 +137,7 @@ describe IngredientsController do
       end
 
       it "re-renders the 'edit' template" do
-        ingredient = Ingredient.create! valid_attributes
+        ingredient = FactoryGirl.create(:ingredient)
         # Trigger the behavior that occurs when invalid params are submitted
         Ingredient.any_instance.stub(:save).and_return(false)
         put :update, {:id => ingredient.to_param, :ingredient => {}}, valid_session
@@ -148,14 +148,14 @@ describe IngredientsController do
 
   describe "DELETE destroy" do
     it "destroys the requested ingredient" do
-      ingredient = Ingredient.create! valid_attributes
+      ingredient = FactoryGirl.create(:ingredient)
       expect {
         delete :destroy, {:id => ingredient.to_param}, valid_session
       }.to change(Ingredient, :count).by(-1)
     end
 
     it "redirects to the ingredients list" do
-      ingredient = Ingredient.create! valid_attributes
+      ingredient = FactoryGirl.create(:ingredient)
       delete :destroy, {:id => ingredient.to_param}, valid_session
       response.should redirect_to(ingredients_url)
     end

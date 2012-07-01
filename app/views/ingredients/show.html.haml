@@ -4,8 +4,14 @@
   %b Name:
   = @ingredient.name
 %p
-  %b Snippet:
-  = @ingredient.snippet
+  %b Cookbooks:
+  = @ingredient.cookbooks
+%p
+  %b Network Config:
+  = @ingredient.network_config
+%p
+  %b Share Folder:
+  = @ingredient.share_folder
 %p
   %b Category:
   = @ingredient.category.name
@@ -13,13 +19,13 @@
 - if @ingredient.portmappings.size > 0
   %p Portmappings:
   - for mapping in @ingredient.portmappings
-    %p= mapping.port
+    %p= mapping.mapping
 
 %p new portmapping
 
 = form_for [@ingredient, Portmapping.new ] do |f|
-  = f.label :port
-  = f.text_field :port
+  = f.label :mapping
+  = f.text_field :mapping
   = f.submit
 
 = link_to 'Edit', edit_ingredient_path(@ingredient)

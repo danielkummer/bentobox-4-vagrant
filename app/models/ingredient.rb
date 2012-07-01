@@ -6,9 +6,12 @@ class Ingredient
   has_and_belongs_to_many :bentoboxes, :inverse_of => :ingredients
 
   field :name
-  field :snippet
+  field :cookbooks
+  field :share_folder
+  field :network_config
 
-  validates :name, :snippet, :presence => true
+
+  validates :name, :presence => true
   validates :name, :uniqueness => true
 
   accepts_nested_attributes_for :portmappings

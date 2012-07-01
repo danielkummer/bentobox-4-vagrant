@@ -2,8 +2,10 @@
 
 FactoryGirl.define do
   factory :bentobox do
-    name "MyString"
+    name "MyBentobox"
     description "MyString"
     public false
+    association :vagrantbox_id, :factory => :vagrantbox
+
   end
 end

@@ -2,7 +2,9 @@
 
 FactoryGirl.define do
   factory :ingredient do
-    name "MyString"
-    snippet "MyString"
+    name "test"
+    cookbooks "test"
+    share_folder "test"
+    network_config ':hostonly, "33.33.33.10"'
   end
 end

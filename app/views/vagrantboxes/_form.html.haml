@@ -5,6 +5,11 @@
       %ul
         - @vagrantbox.errors.full_messages.each do |msg|
           %li= msg
+  .field
+    = label_tag :boxes
+    = select_tag(:boxes,  options_for_select(@boxes))
+
+
 
   .field
     = f.label :name

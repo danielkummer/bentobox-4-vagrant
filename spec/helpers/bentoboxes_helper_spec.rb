@@ -11,5 +11,17 @@ require 'spec_helper'
 #   end
 # end
 describe BentoboxesHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+
+  describe "generate vm box name" do
+    it "returns a vm box name based on username and vm box name" do
+      helper.vm_box_name(FactoryGirl.create(:bentobox)).should == "MyVagrantbox"
+    end
+  end
+
+  describe "generate network coonfig" do
+    it "returns the network config from a bentobox" do
+      network_config(FactoryGirl.create(:bentobox)).should == ':hostonly, "33.33.33.10"'
+    end
+  end
 end
