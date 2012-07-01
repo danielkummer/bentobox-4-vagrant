@@ -7,27 +7,12 @@
           %li= msg
 
   %fieldset
-    %legend Pick your stuff
-    .control-group
-      = f.label :name, class: "control-label"
-      .controls
-        = f.text_field :name, class: "input-xlarge"
-
-
-    .control-group
-      = f.label :description, class: "control-label"
-      .controls
-        = f.text_area :description, class: "input-xlarge", rows: 3
-    .control-group
-      = f.label :public, class: "control-label"
-      .controls
-        = f.check_box :public
-
+    %legend pick your box
     .control-group
       = f.label :vagrantbox, class: "control-label"
       .controls
         = f.collection_select( :vagrantbox, Vagrantbox.all, :id, :name, :prompt => true )
-
+    %legend put some stuff in it...
     .control-group
       = f.label :ingredient_ids, "Choose your ingredients", class: "control-label"
       /= f.grouped_collection_select(:ingredient_ids, Category.all, :ingredients, :name, :id, :name, {}, {multiple: true})
@@ -41,8 +26,20 @@
                 = label_tag dom_id(ingredient), class: "checkbox" do
                   = check_box_tag "bentobox[ingredient_ids][]", ingredient.id, @bentobox.ingredient_ids.include?(ingredient.id), id: dom_id(ingredient)
                   = ingredient.name
-
+    %legend customize it!
+    .control-group
+      = f.label :name, class: "control-label"
+      .controls
+        = f.text_field :name, class: "input-xlarge"
+    .control-group
+      = f.label :description, class: "control-label"
+      .controls
+        = f.text_area :description, class: "input-xlarge", rows: 3
+    .control-group
+      = f.label :public, "Share your box?", class: "control-label"
+      .controls
+        = f.check_box :public
     .form-actions
-      = f.submit 'Save', class: "btn btn-primary
+      = f.submit 'Save', class: "btn btn-primary"
       = link_to 'Back', bentoboxes_path, class: "btn"
 
