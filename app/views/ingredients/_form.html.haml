@@ -32,6 +32,7 @@
     .controls
       = f.collection_select(:category, Category.all, :id, :name, :prompt => true)
 
+#todo these are missing!!
   .control-group
     .controls
       .fieldset
@@ -39,6 +40,19 @@
           = map.label :mapping
           = map.text_field :mapping
 
+  .control-group
+    .controls
+      .fieldset
+        = f.fields_for :share_folders do |sf|
+          = sf.label :logical_name
+          = sf.text_field :logical_name
+          = sf.label :host_path
+          = sf.text_field :host_path
+          = sf.label :guest_path
+          = sf.text_field :guest_path
+          = sf.label :additional_attributes
+          = sf.text_field :additional_attributes
+          = sf.actions
 
   .form-actions
     = f.submit 'Save', class: "btn btn-success"
