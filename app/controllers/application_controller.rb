@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout "fluid"
-  before_filter :dummy_authentication
 
-  def dummy_authentication
-    current_user = User.first
+  rescue_from DeviseLdapAuthenticatable::LdapException do |exception|
+    render :text => exception, :status => 500
   end
+
+  before_filter :authenticate_user!
+
 end
