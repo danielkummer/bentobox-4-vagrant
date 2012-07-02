@@ -4,8 +4,8 @@
   %b Name:
   = @vagrantbox.name
 %p
-  %b Path:
-  = @vagrantbox.path
+  %b File:
+  =link_to @vagrantbox.box_filename, @vagrantbox.box.url
 
 = link_to 'Edit', edit_vagrantbox_path(@vagrantbox)
 \|

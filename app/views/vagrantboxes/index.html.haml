@@ -3,7 +3,7 @@
 %table{class: 'table table-striped'}
   %tr
     %th Name
-    %th Path
+    %th Box
     %th
     %th
     %th
@@ -11,7 +11,7 @@
   - @vagrantboxes.each do |vagrantbox|
     %tr
       %td= vagrantbox.name
-      %td= vagrantbox.path
+      %td= vagrantbox.box_filename
       %td= link_to 'Show', vagrantbox, class: "btn btn-info"
       %td= link_to 'Edit', edit_vagrantbox_path(vagrantbox), class: "btn btn-success"
       %td= link_to 'Destroy', vagrantbox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"

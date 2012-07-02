@@ -6,7 +6,7 @@ describe Vagrantbox do
   end
 
   it { should validate_presence_of :name }
-  it { should validate_presence_of :path }
+  it { should validate_presence_of :box }
   it { should validate_uniqueness_of :name }
   it { should have_many :bentoboxes }
 

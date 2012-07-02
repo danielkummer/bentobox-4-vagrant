@@ -7,39 +7,62 @@
           %li= msg
 
   .fieldset
-    %legend Ingredient
-  .control-group
-    = f.label :name, class: "control-label"
-    .controls
-      = f.text_field :name
-  .control-group
-    = f.label :cookbooks, class: "control-label"
-    .controls
-      = f.text_field :cookbooks
+    %legend overall information
+    .control-group
+      = f.label :name, class: "control-label"
+      .controls
+        = f.text_field :name, class: "input-medium"
+    .control-group
+      = f.label :category, class: "control-label"
+      .controls
+        = f.collection_select(:category, Category.all, :id, :name, :prompt => true)
+  .fieldset
+    %legend recepies and cookbooks
+    .control-group
+      = f.label :cookbooks, class: "control-label"
+      .controls
+        = f.text_field :cookbooks, class: "input-xlarge", placeholder: "apache22, mysql, ..."
 
-  .control-group
-    = f.label :network_config, class: "control-label"
-    .controls
-      = f.text_field :network_config, :value => ':hostonly, "33.33.33.10"'
+  .fieldset
+    %legend network configuration
+    = f.fields_for :network_config, @ingredient.network_config do |ff|
+      %fieldset
+        .control-group
+          = ff.label :type, class: "control-label"
+          .controls
+            = ff.select(:type,  options_for_select(["hostonly", "bridged"], selected: "hostonly"))
+        .control-group
+          = ff.label :second_param, "IP (hostonly) or 2nd parameter (bridged)", class: "control-label"
+          .controls
+            = ff.text_field :second_param, class: "input-medium", :placeholder => "33.33.33.10"
+        .control-group
+          = ff.label :third_param, class: "control-label"
+          .controls
+            = ff.text_field :third_param, class: "input-medium", :placeholder => "additional options"
+        .control-group
+          .controls
+            = link_to 'See doc', 'http://vagrantup.com/v1/docs/config/vm/network.html', target: '_blank', class: "btn btn-small"
+        /.control-group
+        /= f.label :network_config, class: "control-label"
+        /.controls
+        /= f.text_field :network_config, :value => ':hostonly, "33.33.33.10"', class: "input-medium"
 
-  .control-group
-    = f.label :category, class: "control-label"
-    .controls
-      = f.collection_select(:category, Category.all, :id, :name, :prompt => true)
 
+  .fieldset
+    %legend portmappings
+    = f.fields_for :portmappings, html: {class: "form-inline"} do |builder|
+      = render 'portmapping_fields', f: builder
+    .control-group
+      .controls
+        = link_to_add_fields "new portmapping", f, :portmappings, "btn"
 
-  .control-group
-    .controls
-      = f.fields_for :portmappings do |builder|
-        = render 'portmapping_fields', f: builder
-      = link_to_add_fields "add portmapping", f, :portmappings
-
-
-  .control-group
-    .controls
-      = f.fields_for :share_folders do |builder|
-        = render 'share_folder_fields', f: builder
-      = link_to_add_fields "add share folder path", f, :share_folders
+  .fieldset
+    %legend share folders
+    = f.fields_for :share_folders do |builder|
+      = render 'share_folder_fields', f: builder
+    .control-group
+      .controls
+        = link_to_add_fields "add share folder", f, :share_folders, "btn"
 
   .form-actions
     = f.submit 'Save', class: "btn btn-success"

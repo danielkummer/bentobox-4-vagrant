@@ -1,6 +1,4 @@
 class VagrantboxesController < ApplicationController
-  before_filter :search_vagrant_boxes, only: [:new, :edit]
-
   def index
     @vagrantboxes = Vagrantbox.all
 
@@ -68,12 +66,5 @@ class VagrantboxesController < ApplicationController
       format.html { redirect_to vagrantboxes_url }
       format.json { head :no_content }
     end
-  end
-
-  private
-  def search_vagrant_boxes
-    select_extensions = [".box"]
-    box_paths = Dir["#{Rails.root}/public/**/*"].select {|e| select_extensions.include?(File.extname(e))}
-    @boxes = box_paths.collect { |path| [File.basename(path, '.box'), path]}
   end
 end
