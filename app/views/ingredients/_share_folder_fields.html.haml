@@ -1,22 +1,22 @@
-.form.form-inline
-  .fieldset
-    .control-group
-      = f.label :logical_name
-      .controls
-        = f.text_field :logical_name
-    .control-group
-      = f.label :host_path
-      .controls
-        = f.text_field :host_path
-    .control-group
-      = f.label :guest_path
-      .controls
-        = f.text_field :guest_path
-    .control-group
-      = f.label :additional_options
-      .controls
-        = f.text_field :additional_options
-    .control-group
-      = f.label :_destroy, "delete"
-      .controls
-        = link_to 'remove', '#', class: "remove_fields"
+%fieldset.well.form-inline
+  .control-group
+    = f.label :logical_name, class: "control-label"
+    .controls
+      = f.text_field :logical_name, class: "input-small"
+  .control-group
+    = f.label :host_path, class: "control-label"
+    .controls
+      = f.text_field :host_path, class: "input-medium"
+  .control-group
+    = f.label :guest_path, class: "control-label"
+    .controls
+      = f.text_field :guest_path, class: "input-medium"
+  .control-group
+    = f.label :additional_options, class: "control-label"
+    .controls
+      = f.text_field :additional_options, class: "input-large", visible: false
+  .control-group
+    = f.label :_destroy, "delete", class: "control-label"
+    .controls
+      = f.hidden_field :_destroy
+      = link_to 'remove', '#', class: "remove_fields  btn btn-small btn-danger"

@@ -1,10 +1,11 @@
 class Vagrantbox
   include Mongoid::Document
-  field :name, type: String
-  field :path, type: String
-
   has_many :bentoboxes
 
-  validates :name, :path, :presence => true
+  field :name, type: String
+  mount_uploader :box, VagrantboxUploader
+
+  validates :name, :path, :box, :presence => true
   validates :name, :uniqueness => true
+
 end

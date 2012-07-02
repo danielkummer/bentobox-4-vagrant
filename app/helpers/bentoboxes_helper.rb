@@ -4,7 +4,7 @@ module BentoboxesHelper
   end
 
   def network_config(bentobox)
-    bentobox.ingredients.excludes(:network_config => nil).first.network_config.html_safe
+    bentobox.ingredients.excludes(:network_config => nil).first.network_config
   end
 
   def port_config(bentobox)
