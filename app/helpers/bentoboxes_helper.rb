@@ -1,14 +1,18 @@
 module BentoboxesHelper
-  def vm_box_name(bentobox)
-    bentobox.vagrantbox.name.gsub(' ', '_')
+  def config_vm_box_name
+    ("config.vm.box = \"" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + random_hash + "\"").html_safe
   end
 
-  def network_config(bentobox)
-    bentobox.ingredients.excludes(:network_config => nil).first.network_config
+  def config_vm_box_url
+    ("config.vm.box_url = \"" + root_url.chop + @bentobox.vagrantbox.box.url + "\"").html_safe
   end
 
-  def port_config(bentobox)
-    ingredients = bentobox.ingredients
+  def config_network
+    "config.vm.network = " + @bentobox.ingredients.excludes(:network_config => nil).first.network_config.to_s
+  end
+
+  def config_portmapping
+    ingredients = @bentobox.ingredients
     result = ""
 
     ingredients.each do |ingredient|
@@ -19,21 +23,31 @@ module BentoboxesHelper
     result
   end
 
-  def share_folder_config(bentobox)
+  def config_share_folders
     result = ""
-    bentobox.ingredients.where(:share_folder.ne => "", :share_folder.exists => true).each do |ingredient|
-      result << "config.vm.share_folder #{ingredient.share_folder}\n  "
+    @bentobox.ingredients.where(:share_folders.ne => "", :share_folders.exists => true).each do |ingredient|
+      ingredient.share_folders.each do |sf|
+        result << "config.vm.share_folder #{sf.logical_name}, #{sf.host_path}, #{sf.guest_path}"
+        result << ", #{sf.additional_options}" unless sf.additional_options.empty?
+        result << "\n  "
+      end
     end
     result.html_safe
   end
 
-  def recepies_config(bentobox)
+  def config_recepies
     result = ""
-    bentobox.ingredients.where(:cookbooks.ne => "", :cookbooks.exists => true).each do |ingredient|
+    @bentobox.ingredients.where(:cookbooks.ne => "", :cookbooks.exists => true).each do |ingredient|
       ingredient.cookbooks.split(',').each do |cookbook|
         result << "chef.add_recipe(\"#{cookbook.strip}\")\n    "
       end
     end
     result.html_safe
+  end
+
+  private
+  def random_hash
+    #todo
+    "DEADBEEF"
   end
 end

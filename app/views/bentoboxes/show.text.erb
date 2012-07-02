@@ -1,22 +1,22 @@
 Vagrant::Config.run do |config|
-  config.vm.box = "<%= vm_box_name(@bentobox) %>"
-  config.vm.box_url = "<%= @bentobox.vagrantbox.box.url %>"
-
+  <%= config_vm_box_name %>
+  <%= config_vm_box_url %>
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
 
   #config.vm.customize ["modifyvm", :id, "--memory", 1024]
 
-  config.vm.network <%= network_config(@bentobox) %>
+  <%= config_network %>
 
-  <%=  port_config(@bentobox) %>
+  <%= config_portmapping %>
 
-  <%=  share_folder_config(@bentobox) %>
+  <%= config_share_folders %>
 
   config.vm.provision :chef_client do |chef|
+    #todo configure chef server url an pem file dynamically via app configuration!
     chef.chef_server_url = "https://api.opscode.com/organizations/ORGNAME"
     chef.validation_key_path = "ORGNAME-validator.pem"
-    <%= recepies_config(@bentobox) %>
+    <%= config_recepies %>
   end
 
 end

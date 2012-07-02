@@ -1,6 +1,10 @@
 class NetworkConfig
+  include Mongoid::Validations
 
   attr_reader :type, :second_param, :third_param
+
+  validates :second_param, :format => { :if => :type_is_hostonly?, :with => /[HERE IS VALID IP]/}
+
 
   def initialize(type, second_param, third_param)
     @type, @second_param, @third_param = type, second_param, third_param
@@ -9,8 +13,8 @@ class NetworkConfig
   def to_s
     result = ""
     result << ":#{type}" unless type.nil?
-    result << ", #{second_param}" unless second_param.nil?
-    result << ", #{third_param}" unless third_param.nil?
+    result << ", #{second_param}" unless second_param.empty?
+    result << ", #{third_param}" unless third_param.empty?
     result
   end
 
@@ -38,5 +42,10 @@ class NetworkConfig
         object
       end
     end
+  end
+
+  private
+  def type_is_hostonly?
+    type == "hostonly"
   end
 end

@@ -1,8 +1,6 @@
 VagrantCook::Application.routes.draw do
 
-  resources :ingredients do
-    resources :portmappings
-  end
+  resources :ingredients
   resources :categories
   resources :vagrantboxes
   resources :bentoboxes
