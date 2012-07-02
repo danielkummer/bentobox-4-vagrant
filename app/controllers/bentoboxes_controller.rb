@@ -27,7 +27,7 @@ class BentoboxesController < ApplicationController
   end
 
   def create
-    @bentobox = Bentobox.new(params[:bentobox])
+    @bentobox = current_user.bentoboxes.new(params[:bentobox])
 
     respond_to do |format|
       if @bentobox.save
@@ -41,7 +41,7 @@ class BentoboxesController < ApplicationController
   end
 
   def update
-    @bentobox = Bentobox.find(params[:id])
+    @bentobox = current_user.bentoboxes.find(params[:id])
 
     respond_to do |format|
       if @bentobox.update_attributes(params[:bentobox])
@@ -55,7 +55,7 @@ class BentoboxesController < ApplicationController
   end
 
   def destroy
-    @bentobox = Bentobox.find(params[:id])
+    @bentobox = current_user.bentoboxes.find(params[:id])
     @bentobox.destroy
 
     respond_to do |format|
@@ -65,16 +65,11 @@ class BentoboxesController < ApplicationController
   end
 
   private
-
   def authenticate_owner!
-    #todo!!!!
-    true
-=begin
-    if user_signed_in? && current_user.id.to_s == params[:id]
+    if user_signed_in? && current_user.id.to_s == params[:user_id]
       return true
     end
     redirect_to user_path(current_user), :notice => "You can only edit your own bentoboxes."
     return false
-=end
   end
 end
