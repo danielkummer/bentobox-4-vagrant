@@ -2,8 +2,11 @@ class BentoboxesController < ApplicationController
   respond_to :html
   respond_to :text, only: [:show]
 
+  before_filter :authenticate_owner!, :only => [:edit, :update, :destroy]
+
   def index
     @bentoboxes = Bentobox.all
+    #todo show where user = current user or public = true
     respond_with @bentoboxes
   end
 
@@ -59,5 +62,19 @@ class BentoboxesController < ApplicationController
       format.html { redirect_to bentoboxes_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def authenticate_owner!
+    #todo!!!!
+    true
+=begin
+    if user_signed_in? && current_user.id.to_s == params[:id]
+      return true
+    end
+    redirect_to user_path(current_user), :notice => "You can only edit your own bentoboxes."
+    return false
+=end
   end
 end
