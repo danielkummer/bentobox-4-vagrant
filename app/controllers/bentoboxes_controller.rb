@@ -4,7 +4,6 @@ class BentoboxesController < ApplicationController
 
   def index
     @bentoboxes = Bentobox.all
-
     respond_with @bentoboxes
   end
 
