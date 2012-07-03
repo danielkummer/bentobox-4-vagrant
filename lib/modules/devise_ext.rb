@@ -5,12 +5,8 @@ module DeviseExt
 
   end
 
-  module InstanceMethods
-
-  end
 
   def self.included(base)
-    base.send :include, InstanceMethods
     base.send :extend, ClassMethods
 
     base.send :devise, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable #:confirmable,

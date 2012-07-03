@@ -11,10 +11,6 @@ describe CategoriesController do
       get("/categories/new").should route_to("categories#new")
     end
 
-    it "routes to #show" do
-      get("/categories/1").should route_to("categories#show", :id => "1")
-    end
-
     it "routes to #edit" do
       get("/categories/1/edit").should route_to("categories#edit", :id => "1")
     end

@@ -7,7 +7,6 @@
   %tr
     %th Name
     %th Description
-    %th Public
     %th
     %th
     %th
@@ -17,7 +16,6 @@
     %tr
       %td= bentobox.name
       %td= bentobox.description
-      %td= bentobox.public
       %td=link_to "Vagrantconfig", params.merge(:format => :text), :class => "btn btn-success"
       %td
         = link_to bentobox, class: "btn btn-info" do
