@@ -10,6 +10,6 @@
   -for box in @user.bentoboxes
     %li= box.name
 
-= link_to 'Edit', edit_user_path(@user)
+= link_to 'show my boxes', user_bentoboxes_path(current_user)
 \|
 = link_to 'Back', users_path

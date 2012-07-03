@@ -6,8 +6,9 @@ VagrantCook::Application.routes.draw do
   resources :ingredients
   resources :categories
   resources :vagrantboxes
-  resources :users do
-    resources :bentoboxes, except: [:index, :show]
+
+  resources :users, only: [:index, :show] do
+    resources :bentoboxes
   end
 
   root :to => 'welcome#index'

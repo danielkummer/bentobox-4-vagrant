@@ -3,31 +3,32 @@ class BentoboxesController < ApplicationController
   respond_to :text, only: [:show]
 
   before_filter :authenticate_owner!, :only => [:edit, :update, :destroy]
+  before_filter :grab_user_from_user_id
+
 
   def index
-    @bentoboxes = Bentobox.all
+    @bentoboxes = bentoboxes.all
     #todo show where user = current user or public = true
     respond_with @bentoboxes
   end
 
   def show
-    @bentobox = Bentobox.find(params[:id])
+    @bentobox = bentoboxes.find(params[:id])
     respond_with @bentobox
   end
 
   def new
-    @bentobox = Bentobox.new
-    @ingredients = Ingredient.all
+    @bentobox = bentoboxes.new
     respond_with @bentobox
   end
 
   def edit
-    @bentobox = Bentobox.find(params[:id])
-    @ingredients = Ingredient.all
+    @bentobox = bentoboxes.find(params[:id])
+    respond_with @bentobox
   end
 
   def create
-    @bentobox = current_user.bentoboxes.new(params[:bentobox])
+    @bentobox = bentoboxes.new(params[:bentobox])
 
     respond_to do |format|
       if @bentobox.save
@@ -41,7 +42,7 @@ class BentoboxesController < ApplicationController
   end
 
   def update
-    @bentobox = current_user.bentoboxes.find(params[:id])
+    @bentobox = bentoboxes.find(params[:id])
 
     respond_to do |format|
       if @bentobox.update_attributes(params[:bentobox])
@@ -55,7 +56,7 @@ class BentoboxesController < ApplicationController
   end
 
   def destroy
-    @bentobox = current_user.bentoboxes.find(params[:id])
+    @bentobox = bentoboxes.find(params[:id])
     @bentobox.destroy
 
     respond_to do |format|
@@ -65,6 +66,15 @@ class BentoboxesController < ApplicationController
   end
 
   private
+  def grab_user_from_user_id
+    @user = User.find(params[:user_id]) if params[:user_id]
+  end
+
+  def bentoboxes
+    @user ? @user.bentoboxes : Bentobox
+  end
+
+
   def authenticate_owner!
     if user_signed_in? && current_user.id.to_s == params[:user_id]
       return true
@@ -72,4 +82,6 @@ class BentoboxesController < ApplicationController
     redirect_to user_path(current_user), :notice => "You can only edit your own bentoboxes."
     return false
   end
+
+
 end
