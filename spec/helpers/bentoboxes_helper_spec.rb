@@ -15,13 +15,14 @@ describe BentoboxesHelper do
 
   describe "generate vm box name" do
     it "returns a vm box name based on username and vm box name" do
-      helper.vm_box_name(FactoryGirl.create(:bentobox)).should == "MyVagrantbox"
+      current_user = FactoryGirt.create(:user)
+      helper.config_vm_box_name.should == "MyVagrantbox"
     end
   end
 
   describe "generate network coonfig" do
     it "returns the network config from a bentobox" do
-      network_config(FactoryGirl.create(:bentobox)).should == ':hostonly, "33.33.33.10"'
+      helper.config_network_config(FactoryGirl.create(:bentobox)).should == ':hostonly, "33.33.33.10"'
     end
   end
 end
