@@ -1,0 +1,14 @@
+%h2 Login
+
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: "well form-inline"}) do |f|
+  = f.text_field :email, placeholder: "Email"
+  = f.password_field :password, placeholder: "Password", class: "input-small"
+
+  - if devise_mapping.rememberable?
+    = f.label :remember_me do
+      = f.check_box :remember_me
+      Remember me
+
+  = f.submit "Login", class: "btn"
+
+= render "devise/shared/links"
