@@ -1,4 +1,4 @@
-= form_for @bentobox, html:{class: "form-horizontal"} do |f|
+= form_for [@user, @bentobox], html:{class: "form-horizontal"} do |f|
   -if @bentobox.errors.any?
     #error_explanation
       %h2= "#{pluralize(@bentobox.errors.count, "error")} prohibited this bentobox from being saved:"

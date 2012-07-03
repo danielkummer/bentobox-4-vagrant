@@ -240,3 +240,30 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
 end
+
+# monkeypatch
+module Devise
+  module LdapAdapter
+    class LdapConnect
+      def ldap_param_value(param)
+        filter = Net::LDAP::Filter.eq(@attribute.to_s, @login.to_s)
+        ldap_entry = nil
+        @ldap.search(:filter => filter) {|entry| ldap_entry = entry}
+
+        if ldap_entry
+          if ldap_entry[param]
+            DeviseLdapAuthenticatable::Logger.send("Requested param #{param} has value #{ldap_entry.send(param)}")
+            value = ldap_entry.send(param)
+          else
+            DeviseLdapAuthenticatable::Logger.send("Requested param #{param} does not exist")
+            #changes here
+            value = nil
+          end
+        else
+          DeviseLdapAuthenticatable::Logger.send("Requested ldap entry does not exist")
+          value = nil
+        end
+      end
+    end
+  end
+end

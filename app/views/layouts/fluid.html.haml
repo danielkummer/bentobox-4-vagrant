@@ -26,14 +26,14 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") Bentobox 4 Vagrant
+          = link_to 'Bentobox 4 Vagrant', root_path, class: "brand"
           .container.nav-collapse
             %ul.nav
-              %li= link_to 'users', users_path
               %li= link_to 'bendoboxes', bentoboxes_path
               %li= link_to 'ingredients', ingredients_path
               %li= link_to 'vagrant boxes', vagrantboxes_path
               %li= link_to 'categories', categories_path
+              %li= link_to 'users', users_path
 
 
     .container

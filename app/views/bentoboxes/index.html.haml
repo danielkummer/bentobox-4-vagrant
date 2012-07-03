@@ -15,9 +15,9 @@
       %td= bentobox.description
       %td= bentobox.public
       %td= link_to 'Show', bentobox, class: "btn btn-info"
-      %td= link_to 'Edit', edit_bentobox_path(bentobox), class: "btn btn-success"
-      %td= link_to 'Destroy', bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"
+      %td= link_to 'Edit', edit_user_bentobox_path(current_user, bentobox), class: "btn btn-success" if bentobox.user == current_user
+      %td= link_to 'Destroy', bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" if bentobox.user == current_user
 
 %br
 
-= link_to 'New Bentobox', new_bentobox_path, class: "btn btn-large btn-success"
+= link_to 'New Bentobox', new_user_bentobox_path(current_user), class: "btn btn-large btn-success"

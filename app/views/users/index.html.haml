@@ -4,16 +4,10 @@
   %tr
     %th Name
     %th
-    %th
-    %th
 
   - @users.each do |user|
     %tr
       %td= user.name
       %td= link_to 'Show', user, class: "btn btn-info"
-      %td= link_to 'Edit', edit_user_path(user), class: "btn btn-success"
-      %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"
 
 %br
-
-= link_to 'New User', new_user_path, class: "btn btn-large btn-success"
