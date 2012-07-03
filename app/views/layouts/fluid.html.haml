@@ -18,10 +18,6 @@
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          - flash.each do |name, msg|
-            = ".alert.alert-" + (name == :notice ? "success" : "error")
-            %a.close{ 'data-dismiss' => 'alert'} x
-            = msg
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
             %span.icon-bar
             %span.icon-bar
@@ -49,15 +45,25 @@
                 = link_to users_path do
                   %i.icon-user
                   users
-            .nav-collapse
-              %ul.nav.pull-right
-                %li
-                  = link_to current_user.name ,user_path(current_user)
-                %li
-                  = link_to destroy_user_session_path, 'data-method' => 'delete', rel: 'nofollow' do
-                    %span.label.label-important Log out
+            - unless current_user.blank?
+              .nav-collapse
+                %ul.nav.pull-right
+                  %li
+                    = link_to current_user.name ,user_path(current_user)
+                  %li
+                    = link_to destroy_user_session_path, 'data-method' => 'delete', rel: 'nofollow' do
+                      %span.label.label-important Log out
 
     .container
+      - flash.each do |name, msg|
+        - if name == :notice
+          .alert.alert-success
+            %a.close{ 'data-dismiss' => 'alert'} x
+            = msg
+        - else
+          .alert.alert-error
+            %a.close{ 'data-dismiss' => 'alert'} x
+            = msg
       .content
         .row
           .span9

@@ -13,14 +13,19 @@ module DeviseExt
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
 
-    base.send :devise, :ldap_authenticatable, :rememberable, :trackable
+    base.send :devise, :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable
 
+    #:ldap_authenticatable,
     ## Ldap authenticable
-    base.send :field, :login, :type => String, :default => ""
+    #base.send :field, :login, :type => String, :default => ""
+    #base.send :field, :encrypted_password, :type => String, :default => ""
+
+    ## Database authenticatable
+    base.send :field, :email,              :type => String, :default => ""
     base.send :field, :encrypted_password, :type => String, :default => ""
 
-    base.send :validates_presence_of, :login
-    #base.send :validates_presence_of, :encrypted_password
+    base.send :validates_presence_of, :email
+    base.send :validates_presence_of, :encrypted_password
 
     ## Recoverable
     base.send :field, :reset_password_token, :type => String
@@ -38,7 +43,7 @@ module DeviseExt
 
     base.send :index, {login: 1}, {unique: true, name: "login_index"}
 
-    base.send :attr_accessible, :login, :remember_me
+    base.send :attr_accessible, :email, :password, :password_confirmation, :remember_me
   end
 
 end
