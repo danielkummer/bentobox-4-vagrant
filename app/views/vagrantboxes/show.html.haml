@@ -7,6 +7,8 @@
   %b File:
   =link_to @vagrantbox.box_filename, @vagrantbox.box.url
 
-= link_to 'Edit', edit_vagrantbox_path(@vagrantbox)
+= link_to edit_vagrantbox_path(@vagrantbox) do
+  %i.icon-edit
+  Edit
 \|
 = link_to 'Back', vagrantboxes_path

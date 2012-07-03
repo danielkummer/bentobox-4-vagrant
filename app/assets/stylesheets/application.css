@@ -12,3 +12,8 @@
  *= require chosen
  *= require_tree .
  */
+
+.brand small {
+    color: #479d2f;
+    font-weight: bold;
+}

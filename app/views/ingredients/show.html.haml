@@ -37,6 +37,8 @@
   - for mapping in @ingredient.portmappings
     %p= mapping.mapping
 
-= link_to 'Edit', edit_ingredient_path(@ingredient)
+= link_to edit_ingredient_path(@ingredient), class: "btn" do
+  %i.icon-edit
+  Edit
 \|
 = link_to 'Back', ingredients_path

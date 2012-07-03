@@ -13,12 +13,7 @@ module DeviseExt
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
 
-    base.send :devise, :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable
-
-    #:ldap_authenticatable,
-    ## Ldap authenticable
-    #base.send :field, :login, :type => String, :default => ""
-    #base.send :field, :encrypted_password, :type => String, :default => ""
+    base.send :devise, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable #:confirmable,
 
     ## Database authenticatable
     base.send :field, :email,              :type => String, :default => ""
