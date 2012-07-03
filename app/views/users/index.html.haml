@@ -8,7 +8,10 @@
 
   - @users.each do |user|
     %tr
-      %td= user.name
-      %td= link_to 'Show', user, class: "btn btn-info"
+      %td= user.email
+      %td
+        = link_to user, class: "btn btn-info" do
+          %i.icon-eye-open
+          Show
 
 %br

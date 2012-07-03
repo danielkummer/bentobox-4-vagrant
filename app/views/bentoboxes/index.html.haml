@@ -18,11 +18,19 @@
       %td= bentobox.name
       %td= bentobox.description
       %td= bentobox.public
-      %td= link_to 'Show', bentobox, class: "btn btn-info"
       %td=link_to "Vagrantconfig", params.merge(:format => :text), :class => "btn btn-success"
       %td
-        =link_to 'Edit', edit_user_bentobox_path(current_user, bentobox), class: "btn" if bentobox.user == current_user
-        =link_to 'Destroy', bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" if bentobox.user == current_user
+        = link_to bentobox, class: "btn btn-info" do
+          %i.icon-eye-open
+          Show
+      %td
+        - if bentobox.user == current_user
+          =link_to edit_user_bentobox_path(current_user, bentobox), class: "btn" do
+            %i.icon-edit
+            Edit
+          =link_to bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do
+            %i.icon-remove
+            Delete
 
 %br
 

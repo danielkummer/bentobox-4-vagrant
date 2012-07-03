@@ -4,7 +4,7 @@ VagrantCook::Application.routes.draw do
 
   resources :bentoboxes, only: [:index, :show]
   resources :ingredients
-  resources :categories
+  resources :categories, except: [:show]
   resources :vagrantboxes
 
   resources :users, only: [:index, :show] do
