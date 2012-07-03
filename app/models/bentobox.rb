@@ -11,13 +11,10 @@ class Bentobox
   field :public, type: Boolean
 
   validates :name, presence: true
-  #validate :has_vagrantbox?
   validates :vagrantbox, :has_one => true
 
-=begin
-  def has_vagrantbox?
-    errors.add(:vagrantbox_id, "Bento must have a vagrantbox") if self.vagrantbox.blank?
-  end
-=end
+  scope :visible_to_user, lambda { |user|
+    any_of({:public => true}, {:user_id => user.id})
+  }
 
 end

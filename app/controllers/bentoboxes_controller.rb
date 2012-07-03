@@ -72,7 +72,7 @@ class BentoboxesController < ApplicationController
   end
 
   def bentoboxes
-    @user ? @user.bentoboxes : Bentobox
+    @user ? @user.bentoboxes : Bentobox.visible_to_user(current_user)
   end
 
 
