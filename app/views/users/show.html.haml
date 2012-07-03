@@ -1,15 +1,5 @@
-%p#notice= notice
+.page-header
+  %h1= @user.name
 
-%p
-  %b Name:
-  = @user.name
-
-
-%p your bentos'
-%ul
-  -for box in @user.bentoboxes
-    %li= box.name
-
-= link_to 'show my boxes', user_bentoboxes_path(current_user)
-\|
-= link_to 'Back', users_path
+= link_to 'bentoboxes', user_bentoboxes_path(current_user), class: "btn"
+= link_to 'back', users_path, class: "btn"
