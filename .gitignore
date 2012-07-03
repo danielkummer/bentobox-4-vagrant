@@ -35,3 +35,4 @@ capybara-*.html
 /spec/tmp/*
 **.orig
 /public/uploads/*
+/spec/coverage/*
