@@ -241,7 +241,7 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = "/my_engine/users/auth"
 end
 
-# monkeypatch
+# monkeypatch if ldap is used...
 module Devise
   module LdapAdapter
     class LdapConnect
