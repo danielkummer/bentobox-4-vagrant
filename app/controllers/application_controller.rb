@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
     render :text => exception, :status => 500
   end
 
-  before_filter :authenticate_user!, except: [:show]
+  before_filter :authenticate_user!
 
 end
