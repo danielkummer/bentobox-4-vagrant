@@ -20,6 +20,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'spork'
   gem 'capistrano'
   gem 'rspec-rails'
   gem 'mongoid-rspec'
