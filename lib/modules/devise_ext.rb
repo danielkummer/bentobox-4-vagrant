@@ -18,6 +18,7 @@ module DeviseExt
     base.send :validates_presence_of, :email
     base.send :validates_presence_of, :encrypted_password
 
+
     ## Recoverable
     base.send :field, :reset_password_token, :type => String
     base.send :field, :reset_password_sent_at, :type => Time

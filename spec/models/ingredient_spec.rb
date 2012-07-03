@@ -14,5 +14,7 @@ describe Ingredient do
   it { should belong_to(:category).of_type(Category) }
   it { should have_and_belong_to_many :bentoboxes }
 
+  it { should be_multiparameted_document }
+
 end
 
