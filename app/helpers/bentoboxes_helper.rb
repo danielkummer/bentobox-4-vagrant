@@ -35,7 +35,7 @@ module BentoboxesHelper
     result.html_safe
   end
 
-  def config_recepies
+  def config_recipes
     result = ""
     @bentobox.ingredients.where(:cookbooks.ne => "", :cookbooks.exists => true).each do |ingredient|
       ingredient.cookbooks.split(',').each do |cookbook|
@@ -45,9 +45,4 @@ module BentoboxesHelper
     result.html_safe
   end
 
-  private
-  def random_hash
-    #todo
-    "DEADBEEF"
-  end
 end
