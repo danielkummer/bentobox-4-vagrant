@@ -16,7 +16,7 @@
     %tr
       %td= bentobox.name
       %td= bentobox.description
-      %td=link_to "Vagrantconfig", params.merge(:format => :text), :class => "btn btn-success"
+      %td=link_to "Vagrantconfig", bentobox_url(bentobox, params.merge(:format => :text)), :class => "btn btn-success"
       %td
         = link_to bentobox, class: "btn btn-info" do
           %i.icon-eye-open

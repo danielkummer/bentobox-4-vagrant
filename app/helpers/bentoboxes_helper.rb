@@ -1,6 +1,6 @@
 module BentoboxesHelper
   def config_vm_box_name
-    ("config.vm.box = \"" + current_user.email + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + ActiveSupport::SecureRandom.hex(4) + "\"").html_safe
+    ("config.vm.box = \"" + current_user.email + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4) + "\"").html_safe
   end
 
   def config_vm_box_url
@@ -8,18 +8,25 @@ module BentoboxesHelper
   end
 
   def config_network
-    "config.vm.network = " + @bentobox.ingredients.excludes(:network_config => nil).first.network_config.to_s
+    result = ""
+    first_record = true
+    @bentobox.ingredients.excludes(:networkconfig => nil).each do |box_with_config|
+      result << "#" if !first_record
+      result << "config.vm.network = " + box_with_config.networkconfig.to_s
+      first_record = false
+    end
+    result << "# No vm.network configuration found - check your ingredients for one..."
+    result
   end
 
   def config_portmapping
-    ingredients = @bentobox.ingredients
     result = ""
-
-    ingredients.each do |ingredient|
+    @bentobox.ingredients.each do |ingredient|
       ingredient.portmappings.each do |map|
         result << "config.vm.forward_port #{map.mapping}\n  "
       end
     end
+    result << "# No vm.forward_port configuration found - check your ingredients for one..."
     result
   end
 
