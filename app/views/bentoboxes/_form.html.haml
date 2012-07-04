@@ -19,7 +19,7 @@
         .control-group
           = f.label :vagrantbox, class: "control-label"
           .controls
-            = f.collection_select( :vagrantbox, Vagrantbox.all, :id, :name, :prompt => true )
+            = f.collection_select( :vagrantbox, Vagrantbox.all, :id, :name)
 
     %legend put some stuff in it...
     .row
