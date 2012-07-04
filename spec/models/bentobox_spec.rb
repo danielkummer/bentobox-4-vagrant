@@ -14,8 +14,7 @@ describe Bentobox do
   it { should belong_to :vagrantbox }
   it { should have_and_belong_to_many(:ingredients).as_inverse_of(:bentoboxes) }
 
-   it { should be_timestamped_document }
-  #howtodoit
-  # test has scope...
+  it { should be_timestamped_document }
+
 end
 

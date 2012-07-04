@@ -1,0 +1,16 @@
+%fieldset
+  .control-group
+    = f.label :type, class: "control-label"
+    .controls
+      = f.select(:type,  options_for_select(["hostonly", "bridged"], selected: "hostonly"))
+  .control-group
+    = f.label :second_parameter, "IP (hostonly) or 2nd parameter (bridged)", class: "control-label"
+    .controls
+      = f.text_field :second_parameter, class: "input-medium", :placeholder => "33.33.33.10"
+  .control-group
+    = f.label :third_parameter, class: "control-label"
+    .controls
+      = f.text_field :third_parameter, class: "input-medium", :placeholder => "additional options"
+  .control-group
+    .controls
+      = link_to 'See doc', 'http://vagrantup.com/v1/docs/config/vm/network.html', target: '_blank', class: "btn btn-small"

@@ -6,5 +6,7 @@ module ApplicationHelper
       render(association.to_s.singularize + "_fields", f: builder)
     end
     link_to(name, '#', class: "add_fields #{html_class}", data: {id: id, fields: fields.gsub("\n", "")})
-    end
   end
+end
+
+
