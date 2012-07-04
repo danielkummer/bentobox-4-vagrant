@@ -4,5 +4,5 @@ Fabricator(:ingredient) do
   category
   share_folders
   portmappings
-  network_config
+  networkconfig { Fabricate(:networkconfig) }
 end

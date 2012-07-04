@@ -11,5 +11,6 @@ describe ShareFolder do
   it { should validate_presence_of :host_path }
   it { should validate_presence_of :guest_path }
   it { should validate_uniqueness_of :logical_name }
+  it { should be_embedded_in(:ingredient).as_inverse_of(:share_folders) }
 
 end

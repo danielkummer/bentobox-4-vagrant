@@ -4,6 +4,7 @@ class ShareFolder
   field :host_path, type: String
   field :guest_path, type: String
   field :additional_options, type: String
+
   embedded_in :ingredient, :inverse_of => :share_folders
 
   validates :host_path, :guest_path, presence: true

@@ -15,6 +15,8 @@ class Bentobox
   validates :name, presence: true
   validates :vagrantbox, :has_one => true
 
+  field :_id, type: String, default: ->{ name }
+
   scope :visible_to_user, lambda { |user|
     any_of({:public => true}, {:user_id => user.id})
   }

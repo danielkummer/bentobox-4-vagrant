@@ -27,6 +27,7 @@ group :development, :test do
   gem 'ffaker'
   gem 'capybara'
   gem 'guard-rspec'
+  gem 'guard-spork'
   gem 'growl'
 end
 

@@ -86,6 +86,9 @@ GEM
       thor (>= 0.14.6)
     guard-rspec (1.1.0)
       guard (>= 1.1)
+    guard-spork (1.1.0)
+      guard (>= 1.1)
+      spork (>= 0.8.4)
     haml (3.1.6)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -241,6 +244,7 @@ DEPENDENCIES
   ffaker
   growl
   guard-rspec
+  guard-spork
   haml-rails
   jquery-rails
   mongoid (~> 3.0.0.rc)

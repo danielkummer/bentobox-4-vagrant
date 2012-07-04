@@ -4,6 +4,13 @@ require 'spork'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
+
+  #Rubymine fix http://devblog.avdi.org/2011/04/17/rubymine-spork-rspec-cucumber/
+  if ENV["RUBYMINE_HOME"]
+      $:.unshift(File.expand_path("rb/testing/patch/common", ENV["RUBYMINE_HOME"]))
+      $:.unshift(File.expand_path("rb/testing/patch/bdd", ENV["RUBYMINE_HOME"]))
+  end
+
   require 'simplecov'
   SimpleCov.start 'rails'
   # This file is copied to spec/ when you run 'rails generate rspec:install'
@@ -23,7 +30,6 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.include Mongoid::Matchers
-    config.include HelperMethods
 
     # Clean up the database
     require 'database_cleaner'
