@@ -5,7 +5,7 @@ describe VagrantboxUploader do
   include CarrierWave::Test::Matchers
 
   before do
-    @vagrantbox = FactoryGirl.create(:vagrantbox)
+    @vagrantbox = Fabricate(:vagrantbox)
     VagrantboxUploader.enable_processing = true
     @uploader = VagrantboxUploader.new(@vagrantbox, :box)
     @uploader.store!(File.open(File.join(Rails.root, 'spec', 'support', 'files', 'example.box')))
@@ -21,3 +21,5 @@ describe VagrantboxUploader do
     @uploader.should have_permissions(0777)
   end
 end
+
+

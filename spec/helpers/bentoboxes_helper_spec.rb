@@ -3,12 +3,12 @@ require 'spec_helper'
 describe BentoboxesHelper do
 
   before :all do
-    assign(:bentobox, FactoryGirl.create(:bentobox))
+    assign(:bentobox, Fabricate.build(:bentobox))
   end
 
   describe "generate vm box name" do
     it "returns a vm box name based on username and vm box name" do
-      current_user = FactoryGirl.create(:user)
+      current_user = Fabricate(:user)
       helper.config_vm_box_name.should include('"test@test.com_MyVagrantbox_')
     end
   end
@@ -21,7 +21,7 @@ describe BentoboxesHelper do
 
   describe "generate network coonfig" do
     it "returns the network config from a bentobox" do
-      helper.config_network(FactoryGirl.create(:bentobox)).should == ':hostonly, "33.33.33.10"'
+      helper.config_network(Fabricate(:bentobox)).should == ':hostonly, "33.33.33.10"'
     end
   end
 end

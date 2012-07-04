@@ -10,6 +10,8 @@ class Bentobox
   field :description
   field :public, type: Boolean
 
+  attr_accessible :name, :description, :public
+
   validates :name, presence: true
   validates :vagrantbox, :has_one => true
 

@@ -10,7 +10,6 @@ gem 'devise'
 gem 'devise_ldap_authenticatable'
 
 
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -24,7 +23,8 @@ group :development, :test do
   gem 'capistrano'
   gem 'rspec-rails'
   gem 'mongoid-rspec'
-  gem 'factory_girl_rails'
+  gem 'fabrication'
+  gem 'ffaker'
   gem 'capybara'
   gem 'guard-rspec'
   gem 'growl'

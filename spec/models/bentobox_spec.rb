@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Bentobox do
   it "should have a valid factory" do
-    FactoryGirl.build(:bentobox).should be_valid
+    Fabricate.build(:bentobox).should be_valid
   end
 
   it { should have_fields(:name, :description, :public) }
