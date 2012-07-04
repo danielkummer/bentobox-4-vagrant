@@ -1,6 +1,6 @@
-class HasOneValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    record.errors[attribute] << (options[:message] || "is not set") if value.blank?
+class HasOneValidator < ActiveModel::Validator
+  def validate(record)
+    record.errors[attribute] << (options[:message] || "is not set") unless value.nil?
   end
 
   def self.kind() :custom end #for mongoid-rspec

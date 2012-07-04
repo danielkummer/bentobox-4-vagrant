@@ -18,7 +18,7 @@
       %td= ingredient.name
       %td= ingredient.cookbooks
       %td= ingredient.share_folders.exists?
-      %td= ingredient.network_config.to_s unless ingredient.network_config.nil?
+      %td= ingredient.networkconfig.to_s unless ingredient.networkconfig.nil?
       %td
         = link_to ingredient, class: "btn btn-info" do
           %i.icon-eye-open
