@@ -77,11 +77,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    factory_girl (3.5.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (3.5.0)
-      factory_girl (~> 3.5.0)
-      railties (>= 3.0.0)
+    fabrication (2.0.3)
+    ffaker (1.15.0)
     ffi (1.0.11)
     growl (1.0.3)
     guard (1.2.1)
@@ -240,7 +237,8 @@ DEPENDENCIES
   database_cleaner
   devise
   devise_ldap_authenticatable
-  factory_girl_rails
+  fabrication
+  ffaker
   growl
   guard-rspec
   haml-rails

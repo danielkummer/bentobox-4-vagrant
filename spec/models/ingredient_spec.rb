@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Ingredient do
   it "should have a valid factory" do
-    FactoryGirl.build(:ingredient).should be_valid
+    Fabricate.build(:ingredient).should be_valid
   end
 
   it { should have_fields :name, :cookbooks, :network_config }

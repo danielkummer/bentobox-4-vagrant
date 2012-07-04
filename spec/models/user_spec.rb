@@ -2,14 +2,18 @@ require 'spec_helper'
 
 describe User do
 
+  it "should have a valid factory" do
+    Fabricate.build(:user).should be_valid
+  end
+
   it { should have_many :bentoboxes }
 
   before(:each) do
     @attr = {
-        :name => "Example User",
-        :email => "user@example.com",
-        :password => "foobar",
-        :password_confirmation => "foobar"
+      :name => "Example User",
+      :email => "user@example.com",
+      :password => "foobar",
+      :password_confirmation => "foobar"
     }
   end
 
@@ -70,11 +74,11 @@ describe User do
 
     it "should require a password" do
       User.new(@attr.merge(:password => "", :password_confirmation => "")).
-          should_not be_valid
+        should_not be_valid
     end
 
     it "should reject short passwords" do
-      short = "a" * 5
+      short = "12345"
       hash = @attr.merge(:password => short, :password_confirmation => short)
       User.new(hash).should_not be_valid
     end
