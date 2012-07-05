@@ -7,6 +7,16 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_fields #{html_class}", data: {id: id, fields: fields.gsub("\n", "")})
   end
+
+  def true_false_label(bool)
+    case bool
+      when true
+
+      when false
+    end
+    icon-ok-sign
+    icon-remove-sign
+  end
 end
 
 

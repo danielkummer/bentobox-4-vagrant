@@ -2,11 +2,17 @@
   %h1
     Ingredients
     %small what goes in the box?
+    .pull-right
+    = link_to new_ingredient_path, class: "btn btn-large" do
+      %i.icon-leaf
+      New Ingredient
 
 %table{class: 'table table-striped'}
   %tr
     %th Name
+    %td Category
     %th Cookbooks
+    %th Portmappings
     %th Share Folder
     %th Network Config
     %th
@@ -16,9 +22,11 @@
   - @ingredients.each do |ingredient|
     %tr
       %td= ingredient.name
-      %td= ingredient.cookbooks
+      %td= ingredient.category.name
+      %td= !ingredient.cookbooks.empty?
+      %td= ingredient.portmappings.exists?
       %td= ingredient.share_folders.exists?
-      %td= ingredient.networkconfig.to_s unless ingredient.networkconfig.nil?
+      %td= ingredient.networkconfig.nil?
       %td
         = link_to ingredient, class: "btn btn-info" do
           %i.icon-eye-open
@@ -29,7 +37,7 @@
           Edit
       %td
         = link_to ingredient, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do
-          %i.icon-remove
+          %i.icon-trash
           Delete
 
 

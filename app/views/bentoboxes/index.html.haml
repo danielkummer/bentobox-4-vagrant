@@ -2,11 +2,17 @@
   %h1
     Bentoboxes
     %small choose your ready-to-go box
+    .pull-right
+      = link_to new_user_bentobox_path(current_user), class: "btn btn-large" do
+        %i.icon-gift
+        New Bentobox
+
 
 %table{class: 'table table-striped'}
   %tr
     %th Name
     %th Description
+    %th
     %th
     %th
     %th
@@ -16,9 +22,12 @@
     %tr
       %td= bentobox.name
       %td= bentobox.description
-      %td=link_to "Vagrantconfig", bentobox_url(bentobox, params.merge(:format => :text)), :class => "btn btn-success"
       %td
-        = link_to bentobox, class: "btn btn-info" do
+        =link_to bentobox_url(bentobox, params.merge(:format => :text)), :class => "btn btn-success" do
+          %i.icon-file
+          Vagrantconfig
+      %td
+        = link_to bentobox, class: "btn btn-primary" do
           %i.icon-eye-open
           Show
       %td
@@ -26,10 +35,12 @@
           =link_to edit_user_bentobox_path(current_user, bentobox), class: "btn" do
             %i.icon-edit
             Edit
+      %td
+        - if bentobox.user == current_user
           =link_to bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do
-            %i.icon-remove
+            %i.icon-trash
             Delete
 
 %br
 
-= link_to 'New Bentobox', new_user_bentobox_path(current_user), class: "btn btn-large btn-success"
+

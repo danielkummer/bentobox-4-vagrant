@@ -11,7 +11,6 @@ describe VagrantboxUploader do
     @uploader.store!(File.open(File.join(Rails.root, 'spec', 'support', 'files', 'example.box')))
   end
 
-
   after do
     VagrantboxUploader.enable_processing = false
     @uploader.remove!

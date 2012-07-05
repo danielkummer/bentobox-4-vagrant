@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe BentoboxesHelper do
-  include Devise::TestHelpers
+  login_user
 
-  before :all do
-    assign(:bentobox, Fabricate.build(:bentobox))
-    user = Fabricate(:user)
-    sign_in user
+  before :each do
+    assign(:bentobox, Fabricate(:bentobox))
   end
+
 
   describe "generate vm box name" do
     it "returns a vm box name based on username and vm box name" do
@@ -23,7 +22,7 @@ describe BentoboxesHelper do
 
   describe "generate network coonfig" do
     it "returns the network config from a bentobox" do
-      helper.config_network(Fabricate(:bentobox)).should == ':hostonly, "33.33.33.10"'
+      helper.config_network.should == ':hostonly, "33.33.33.10"'
     end
   end
 end

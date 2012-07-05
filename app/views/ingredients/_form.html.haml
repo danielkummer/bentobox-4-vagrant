@@ -25,6 +25,15 @@
 
   .fieldset
     %legend network configuration
+    .btn-group
+      %a.btn.btn-info.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        Defaults
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a{'data-type' => 'hostonly', 'data-second-parameter' => '33.33.33.10'} hostonly, 33.33.33.10
+
+
     = f.fields_for :networkconfig, @ingredient.networkconfig do |builder|
       = render 'networkconfig_fields', f: builder
 
