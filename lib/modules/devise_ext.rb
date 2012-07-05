@@ -5,7 +5,6 @@ module DeviseExt
 
   end
 
-
   def self.included(base)
     base.send :extend, ClassMethods
 

@@ -9,7 +9,7 @@ describe Networkconfig do
   it { should be_embedded_in(:ingredient).as_inverse_of(:networkconfig) }
 
   it "should return a valid networkconfig string" do
-    config = Fabricate(:ingredient)
+    config = Fabricate(:networkconfig)
     config.networkconfig.to_s.should == ":hostonly, 123.123.123.123"
   end
 end

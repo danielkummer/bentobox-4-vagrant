@@ -3,5 +3,5 @@ Fabricator(:networkconfig) do
   second_parameter "123.123.123.123"
   third_parameter ""
 
-  ingredient { Fabricate(:ingredient) }
+  #ingredient { Fabricate(:ingredient) }
 end

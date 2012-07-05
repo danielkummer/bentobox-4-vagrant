@@ -2,22 +2,20 @@ class Bentobox
   include ActiveModel::Validations
   include Mongoid::Document
   include Mongoid::Timestamps
+
   belongs_to :user
   belongs_to :vagrantbox
   has_and_belongs_to_many :ingredients, :inverse_of => :bentoboxes
 
+  field :_id, type: String, default: -> { name }
   field :name
   field :description
   field :public, type: Boolean
 
-  attr_accessible :name, :description, :public, :vagrantbox, :ingredients
-
   validates :name, presence: true
-  #validates :vagrantbox, :has_one => true
   validates :vagrantbox, presence: true
 
-
-  field :_id, type: String, default: ->{ name }
+  attr_accessible :name, :description, :public, :vagrantbox, :ingredients
 
   scope :visible_to_user, lambda { |user|
     any_of({:public => true}, {:user_id => user.id})

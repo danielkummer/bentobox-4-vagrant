@@ -4,5 +4,5 @@ Fabricator(:bentobox) do
   public false
   user
   vagrantbox
-  ingredients
+  #ingredients
 end
