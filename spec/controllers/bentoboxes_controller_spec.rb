@@ -26,7 +26,7 @@ describe BentoboxesController do
 
   describe "GET new" do
     it "assigns a new bentobox as @bentobox" do
-      get :new
+      get :new, {:user_id = subject.current_user}
       assigns(:bentobox).should be_a_new(Bentobox)
     end
   end
