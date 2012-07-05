@@ -1,33 +1,19 @@
 class VagrantboxesController < ApplicationController
+  respond_to :html
+
   def index
     @vagrantboxes = Vagrantbox.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @vagrantboxes }
-    end
-  end
-
-  def show
-    @vagrantbox = Vagrantbox.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @vagrantbox }
-    end
+    respond_with @vagrantboxes
   end
 
   def new
     @vagrantbox = Vagrantbox.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @vagrantbox }
-    end
+    respond_with @vagrantbox
   end
 
   def edit
     @vagrantbox = Vagrantbox.find(params[:id])
+    respond_with @vagrantbox
   end
 
   def create

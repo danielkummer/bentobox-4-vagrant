@@ -3,9 +3,9 @@
     Ingredients
     %small what goes in the box?
     .pull-right
-    = link_to new_ingredient_path, class: "btn btn-large" do
-      %i.icon-leaf
-      New Ingredient
+      = link_to new_ingredient_path, class: "btn btn-large" do
+        %i.icon-leaf
+        New Ingredient
 
 %table{class: 'table table-striped'}
   %tr
@@ -23,10 +23,10 @@
     %tr
       %td= ingredient.name
       %td= ingredient.category.name
-      %td= !ingredient.cookbooks.empty?
-      %td= ingredient.portmappings.exists?
-      %td= ingredient.share_folders.exists?
-      %td= ingredient.networkconfig.nil?
+      %td= true_false_label(ingredient.cookbooks.empty?)
+      %td= true_false_label(ingredient.portmappings.exists?)
+      %td= true_false_label(ingredient.share_folders.exists?)
+      %td= true_false_label(ingredient.networkconfig.nil?)
       %td
         = link_to ingredient, class: "btn btn-info" do
           %i.icon-eye-open
@@ -39,8 +39,3 @@
         = link_to ingredient, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do
           %i.icon-trash
           Delete
-
-
-%br
-
-= link_to 'New Ingredient', new_ingredient_path, class: "btn btn-large btn-success"

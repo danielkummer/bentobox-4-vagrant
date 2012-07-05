@@ -1,7 +1,12 @@
 .page-header
   %h1
-    Vagrantboxes
-    %small available base boxes
+    Baseboxes
+    %small available vmware base box images
+    .pull-right
+      = link_to new_vagrantbox_path, class: "btn btn-large" do
+        %i.icon-inbox
+        New Basebox
+
 
 %table{class: 'table table-striped'}
   %tr
@@ -9,16 +14,11 @@
     %th Box
     %th
     %th
-    %th
 
   - @vagrantboxes.each do |vagrantbox|
     %tr
       %td= vagrantbox.name
       %td= vagrantbox.box_filename
-      %td
-        = link_to vagrantbox, class: "btn btn-info" do
-          %i.icon-eye-open
-          Show
       %td
         = link_to edit_vagrantbox_path(vagrantbox), class: "btn" do
           %i.icon-edit
@@ -28,6 +28,3 @@
           %i.icon-trash
           Delete
 
-%br
-
-= link_to 'New Vagrantbox', new_vagrantbox_path, class: "btn btn-large btn-success"

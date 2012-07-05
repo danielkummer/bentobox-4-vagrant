@@ -31,23 +31,19 @@
               %li
                 = link_to bentoboxes_path do
                   %i.icon-gift
-                  bentoboxes
+                  Bentoboxes
               %li
                 = link_to ingredients_path do
                   %i.icon-leaf
-                  ingredients
+                  Ingredients
               %li
                 = link_to vagrantboxes_path do
                   %i.icon-inbox
-                  vagrant boxes
+                  Base boxes
               %li
                 = link_to categories_path do
                   %i.icon-tags
-                  categories
-              %li
-                = link_to users_path do
-                  %i.icon-user
-                  users
+                  Categories
             - unless current_user.blank?
               .nav-collapse
                 %ul.nav.pull-right

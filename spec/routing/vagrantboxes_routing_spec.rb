@@ -11,10 +11,6 @@ describe VagrantboxesController do
       get("/vagrantboxes/new").should route_to("vagrantboxes#new")
     end
 
-    it "routes to #show" do
-      get("/vagrantboxes/1").should route_to("vagrantboxes#show", :id => "1")
-    end
-
     it "routes to #edit" do
       get("/vagrantboxes/1/edit").should route_to("vagrantboxes#edit", :id => "1")
     end

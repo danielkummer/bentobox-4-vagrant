@@ -11,11 +11,10 @@ module ApplicationHelper
   def true_false_label(bool)
     case bool
       when true
-
+        content_tag :span, content_tag(:i, "", :class => "icon-ok-sign"), :class => "badge badge-success"
       when false
+        content_tag :span, content_tag(:i, "", :class => "icon-remove-sign"), :class => "badge badge-important"
     end
-    icon-ok-sign
-    icon-remove-sign
   end
 end
 
