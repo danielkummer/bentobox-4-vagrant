@@ -16,7 +16,8 @@
     .controls
       = f.text_field :additional_options, class: "input-large", visible: false
   .control-group
-    = f.label :_destroy, "delete", class: "control-label"
     .controls
       = f.hidden_field :_destroy
-      = link_to 'remove', '#', class: "remove_fields  btn btn-small btn-danger"
+      = link_to '#', class: "remove_fields  btn btn-small btn-danger" do
+        %i.icon-trash
+        Delete

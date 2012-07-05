@@ -15,9 +15,9 @@ VagrantCook::Application.routes.draw do
   resources :bentoboxes, only: [:index, :show]
   resources :ingredients
   resources :categories, except: [:show]
-  resources :vagrantboxes
+  resources :vagrantboxes, except: [:show]
 
-  resources :users, only: [:index, :show] do
+  resources :users, only: [] do
     resources :bentoboxes
   end
 
