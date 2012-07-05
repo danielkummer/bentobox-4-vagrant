@@ -9,15 +9,12 @@
 
 webserver = Category.create!(name: "Webserver")
 wcms = Category.create!(name: "WCMS")
-tools = Category.create!(name: "Tools")
+db = Category.create!(name: "Databases")
 
-ubuntu = Vagrantbox.create!(name: "ubuntu 11.10 server amd64", path: "/usr/public/ubuntu.box")
-centos = Vagrantbox.create!(name: "centos 5.5", path: "/usr/public/centos.box")
+ubuntu = Vagrantbox.create!(name: "ubuntu 11.10 server amd64", :box => File.open(File.join(Rails.root, 'spec', 'support', 'files', 'example.box')))
 
-Ingredient.create!(name: "Apache22", category: webserver, cookbooks: "some snippet")
-Ingredient.create!(name: "Day Communique 5.4", category: wcms, cookbooks: "some snippet")
+Ingredient.create!(name: "Apache2", category: webserver, cookbooks: "apache2")
+Ingredient.create!(name: "MySQL", category: db, cookbooks: "mysql5")
 Ingredient.create!(name: "Day Communique 5.5", category: wcms, cookbooks: "some snippet")
 Ingredient.create!(name: "Magnolia 4.5", category: wcms, cookbooks: "some snippet")
 
-User.create!(name: "Bob")
-User.create!(name: "Ryan")

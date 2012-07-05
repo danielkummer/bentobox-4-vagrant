@@ -20,5 +20,5 @@ class Ingredient
                                 :networkconfig,
                                 allow_destroy: true
 
-  attr_accessible :name, :cookbooks, :portmapping_attributes, :share_folders_attributes, :networkconfig_attributes
+  attr_accessible :name, :category, :cookbooks, :portmapping_attributes, :share_folders_attributes, :networkconfig_attributes
 end
