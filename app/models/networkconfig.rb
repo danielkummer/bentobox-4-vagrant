@@ -9,6 +9,8 @@ class Networkconfig
   validates :type, :second_parameter, presence: true
   validates :type, :inclusion => %w(hostonly bridged)
 
+  attr_accessible :type, :second_parameter, :third_parameter
+
   def to_s
     result = ""
     result << ":#{type}" unless type.nil?

@@ -7,8 +7,8 @@ Spork.prefork do
 
   #Rubymine fix http://devblog.avdi.org/2011/04/17/rubymine-spork-rspec-cucumber/
   if ENV["RUBYMINE_HOME"]
-      $:.unshift(File.expand_path("rb/testing/patch/common", ENV["RUBYMINE_HOME"]))
-      $:.unshift(File.expand_path("rb/testing/patch/bdd", ENV["RUBYMINE_HOME"]))
+    $:.unshift(File.expand_path("rb/testing/patch/common", ENV["RUBYMINE_HOME"]))
+    $:.unshift(File.expand_path("rb/testing/patch/bdd", ENV["RUBYMINE_HOME"]))
   end
 
   require 'simplecov'
@@ -30,6 +30,9 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.include Mongoid::Matchers
+
+    config.include Devise::TestHelpers, :type => :controller
+    config.extend ControllerMacros, :type => :controller
 
     # Clean up the database
     require 'database_cleaner'

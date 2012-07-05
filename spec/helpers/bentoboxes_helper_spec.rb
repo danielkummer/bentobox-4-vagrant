@@ -1,14 +1,16 @@
 require 'spec_helper'
 
 describe BentoboxesHelper do
+  include Devise::TestHelpers
 
   before :all do
     assign(:bentobox, Fabricate.build(:bentobox))
+    user = Fabricate(:user)
+    sign_in user
   end
 
   describe "generate vm box name" do
     it "returns a vm box name based on username and vm box name" do
-      current_user = Fabricate(:user)
       helper.config_vm_box_name.should include('"test@test.com_MyVagrantbox_')
     end
   end

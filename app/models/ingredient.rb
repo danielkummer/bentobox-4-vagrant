@@ -1,14 +1,11 @@
 class Ingredient
   include Mongoid::Document
 
-  embeds_one :networkconfig
+  belongs_to :category
   #http://stackoverflow.com/questions/5078661/field-for-and-nested-form-with-mongoid
-
+  embeds_one :networkconfig
   embeds_many :portmappings
   embeds_many :share_folders
-
-  belongs_to :category
-
   has_and_belongs_to_many :bentoboxes, :inverse_of => :ingredients
 
   field :name
@@ -23,4 +20,5 @@ class Ingredient
                                 :networkconfig,
                                 allow_destroy: true
 
+  attr_accessible :name, :cookbooks, :portmapping_attributes, :share_folders_attributes, :networkconfig_attributes
 end

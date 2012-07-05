@@ -9,4 +9,6 @@ class ShareFolder
 
   validates :host_path, :guest_path, presence: true
   validates :logical_name, presence: true, uniqueness: true
+
+  attr_accessible :logical_name, :host_path, :guest_path, :additional_options
 end
