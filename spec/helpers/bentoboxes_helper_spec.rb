@@ -5,8 +5,10 @@ describe BentoboxesHelper do
   login_user
 
   before :all do
+    Ingredient.all.delete!
     @bentobox = Fabricate(:bentobox)
   end
+
 
   describe "generate vm box name" do
     it "returns a vm box name based on username and vm box name" do
