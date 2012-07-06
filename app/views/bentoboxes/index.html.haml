@@ -23,21 +23,17 @@
       %td= bentobox.name
       %td= bentobox.description
       %td
-        = link_to bentobox_url(bentobox, params.merge(:format => :text)), :class => "btn btn-success" do
-          %i.icon-file
-          Vagrantconfig
+        = link_to bentobox_url(bentobox, params.merge(:format => :text, :download => true)), :class => "btn btn-info", title: "Download Vagrantconfig" do
+          %i.icon-download-alt
       %td
-        = link_to bentobox, class: "btn btn-primary" do
+        = link_to bentobox, class: "btn", title: "Show" do
           %i.icon-eye-open
-          Show
       %td
-        =link_to_if bentobox.user == current_user, edit_user_bentobox_path(current_user, bentobox), class: "btn" do
+        =link_to_if bentobox.user == current_user, edit_user_bentobox_path(current_user, bentobox), class: "btn", title: "Edit" do
           %i.icon-edit
-          Edit
       %td
-        =link_to_if bentobox.user == current_user, bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do
+        =link_to_if bentobox.user == current_user, bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger", title: "Delete" do
           %i.icon-trash
-          Delete
 
 %br
 
