@@ -4,6 +4,6 @@ Fabricator(:bentobox) do
   public false
   user { Fabricate(:user) }
   vagrantbox { Fabricate(:vagrantbox) }
-  ingredients(count:1) { |parent, i| Fabricate(:ingredient, parent: parent) }
+  ingredients(count:1) { |parent| Fabricate(:ingredient, bentobox: parent) }
   #  children(count: 3) { |parent, i| Fabricate(:person, parent: parent) }
 end

@@ -1,20 +1,10 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  # ==> LDAP Configuration 
-  # config.ldap_logger = true
-  # config.ldap_create_user = true
-  # config.ldap_update_password = false
-  # config.ldap_config = "#{Rails.root}/config/ldap.yml"
-  # config.ldap_check_group_membership = false
-  # config.ldap_check_attributes = false
-  # config.ldap_use_admin_to_bind = true
-  # config.ldap_ad_group_check = false
-  
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "info@bentobox-4-vagrant.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -33,7 +23,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [ :login ]
+  # config.authentication_keys = [ :email ]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -45,12 +35,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :login ]
+  config.case_insensitive_keys = [ :email ]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :login ]
+  config.strip_whitespace_keys = [ :email ]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -92,7 +82,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "d4af6aee557983c148fc823bb0190c311ca9f5c1dfd085c88f60b1c601e4012534ec3c9d5558da543119348b24630eb9be6b6ab925c2f172b89284f9833c0972"
+  # config.pepper = "a0853c14cfae1afab56cbf48fa139d8a5c0439a495270b6826896b04754e6d2e263615d29f5cb006ec41ecb1a6642c50c289d124014e0db81bfbbb67cfa8e4ff"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -239,31 +229,4 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
-end
-
-# monkeypatch if ldap is used...
-module Devise
-  module LdapAdapter
-    class LdapConnect
-      def ldap_param_value(param)
-        filter = Net::LDAP::Filter.eq(@attribute.to_s, @login.to_s)
-        ldap_entry = nil
-        @ldap.search(:filter => filter) {|entry| ldap_entry = entry}
-
-        if ldap_entry
-          if ldap_entry[param]
-            DeviseLdapAuthenticatable::Logger.send("Requested param #{param} has value #{ldap_entry.send(param)}")
-            value = ldap_entry.send(param)
-          else
-            DeviseLdapAuthenticatable::Logger.send("Requested param #{param} does not exist")
-            #changes here
-            value = nil
-          end
-        else
-          DeviseLdapAuthenticatable::Logger.send("Requested ldap entry does not exist")
-          value = nil
-        end
-      end
-    end
-  end
 end

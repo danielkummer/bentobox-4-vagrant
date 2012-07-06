@@ -7,7 +7,7 @@ gem 'mongoid', '~> 3.0.0.rc'
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'devise'
-gem 'devise_ldap_authenticatable'
+#gem 'devise_ldap_authenticatable'
 
 
 group :assets do
