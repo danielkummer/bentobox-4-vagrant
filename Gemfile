@@ -7,6 +7,8 @@ gem 'mongoid', '~> 3.0.0.rc'
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'devise'
+gem 'simple_form'
+
 #gem 'devise_ldap_authenticatable'
 
 

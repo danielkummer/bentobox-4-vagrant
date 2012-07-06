@@ -1,8 +1,5 @@
-%fieldset
-  .control-group
-    = f.label :mapping, class: "control-label"
-    .controls
-      = f.text_field :mapping, class: "input-small", :placeholder => "[guest port]:[host port]"
+%fieldset.well
+  = f.input :mapping, :placeholder => "[guest port]:[host port]"
   .control-group
     .controls
       = f.hidden_field :_destroy

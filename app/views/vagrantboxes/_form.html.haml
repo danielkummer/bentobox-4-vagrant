@@ -1,22 +1,8 @@
-= form_for @vagrantbox, html:{class: "form-horizontal"} do |f|
-  -if @vagrantbox.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@vagrantbox.errors.count, "error")} prohibited this vagrantbox from being saved:"
-      %ul
-        - @vagrantbox.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for @vagrantbox, html:{class: "form-horizontal"} do |f|
   %fieldset
     %legend Configure vagrantbox
-    .control-group
-      = f.label :name, class: "control-label"
-      .controls
-        = f.text_field :name, class: "input-xlarge"
-
-    .control-group
-      = f.label :box, class: "control-label"
-      .controls
-        = @vagrantbox.box_filename if @vagrantbox.box?
-        = f.file_field :box, class: "input-file"
+    = f.input :name
+    = f.input :box
     .control-group
       = f.label :remove_box, "Remove box?", class: "control-label"
       .controls
