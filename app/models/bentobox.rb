@@ -7,7 +7,8 @@ class Bentobox
   belongs_to :vagrantbox
   has_and_belongs_to_many :ingredients, :inverse_of => :bentoboxes
 
-  field :_id, type: String, default: -> { name }
+  #problems with point in name - generate slug later...
+  #field :_id, type: String, default: -> { name }
   field :name
   field :description
   field :public, type: Boolean
