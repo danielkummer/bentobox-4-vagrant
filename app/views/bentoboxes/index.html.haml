@@ -12,11 +12,7 @@
   %tr
     %th Name
     %th Description
-    %th
-    %th
-    %th
-    %th
-
+    %th Actions
 
   - @bentoboxes.each do |bentobox|
     %tr
@@ -25,13 +21,10 @@
       %td
         = link_to bentobox_url(bentobox, params.merge(:format => :text, :download => true)), :class => "btn btn-info", title: "Download Vagrantconfig" do
           %i.icon-download-alt
-      %td
         = link_to bentobox, class: "btn", title: "Show" do
           %i.icon-eye-open
-      %td
         =link_to_if bentobox.user == current_user, edit_user_bentobox_path(current_user, bentobox), class: "btn", title: "Edit" do
           %i.icon-edit
-      %td
         =link_to_if bentobox.user == current_user, bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger", title: "Delete" do
           %i.icon-trash
 
