@@ -1,5 +1,6 @@
 Fabricator(:ingredient) do
-  name { Faker::Product.brand }
+  #name { Faker::Product.brand }
+  name { sequence(:name) { |i| "ingredient #{i}" } }
   #name { sequence(:name) { |i| "ingredient#{i}" } }
   cookbooks "apache22, mysql5"
   category { Fabricate(:category) }
