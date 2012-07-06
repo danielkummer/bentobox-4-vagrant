@@ -15,9 +15,7 @@
     %th Portmappings
     %th Share Folder
     %th Network Config
-    %th
-    %th
-    %th
+    %th Actions
 
   - @ingredients.each do |ingredient|
     %tr
@@ -28,14 +26,9 @@
       %td= true_false_label(ingredient.share_folders.exists?)
       %td= true_false_label(ingredient.networkconfig.nil?)
       %td
-        = link_to ingredient, class: "btn btn-info" do
+        = link_to ingredient, class: "btn btn-info", title: "Show" do
           %i.icon-eye-open
-          Show
-      %td
-        = link_to edit_ingredient_path(ingredient), class: "btn" do
+        = link_to edit_ingredient_path(ingredient), class: "btn", title: "Edit" do
           %i.icon-edit
-          Edit
-      %td
-        = link_to ingredient, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do
+        = link_to ingredient, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger", title: "Delete" do
           %i.icon-trash
-          Delete

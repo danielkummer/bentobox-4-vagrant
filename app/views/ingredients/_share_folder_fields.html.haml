@@ -1,20 +1,8 @@
 %fieldset.well.form-inline
-  .control-group
-    = f.label :logical_name, class: "control-label"
-    .controls
-      = f.text_field :logical_name, class: "input-small"
-  .control-group
-    = f.label :host_path, class: "control-label"
-    .controls
-      = f.text_field :host_path, class: "input-medium"
-  .control-group
-    = f.label :guest_path, class: "control-label"
-    .controls
-      = f.text_field :guest_path, class: "input-medium"
-  .control-group
-    = f.label :additional_options, class: "control-label"
-    .controls
-      = f.text_field :additional_options, class: "input-large", visible: false
+  = f.input :logical_name
+  = f.input :host_path
+  = f.input :guest_path
+  = f.input :additional_options
   .control-group
     .controls
       = f.hidden_field :_destroy
