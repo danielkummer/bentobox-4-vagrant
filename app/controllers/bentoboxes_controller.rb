@@ -15,7 +15,12 @@ class BentoboxesController < ApplicationController
 
   def show
     @bentobox = bentoboxes.find(params[:id])
-    respond_with @bentobox
+
+    if params[:download]
+      send_data(render_to_string, :filename => "Vagrantconfig", :type => "text/plain")
+    else
+      respond_with @bentobox
+    end
   end
 
   def new

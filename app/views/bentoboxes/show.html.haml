@@ -23,10 +23,10 @@
 
 %p Get the Vagrantconfig file via wget:
 %pre
-  ="wget " + bentobox_url(@bentobox, :format => :text) + " -OVagrantconfig"
+  ="wget " + bentobox_url(@bentobox, :format => :text, :download => true) + " -OVagrantconfig"
   vagrant up
 
-= link_to "Vagrantconfig", params.merge(:format => :text), :class => "btn btn-success btn-large"
+= link_to "Vagrantconfig", params.merge(:format => :text, :download => true), :class => "btn btn-success btn-large"
 - if @bentobox.user == current_user
   = link_to edit_user_bentobox_path(current_user, @bentobox), class: "btn" do
     %i.icon-edit
