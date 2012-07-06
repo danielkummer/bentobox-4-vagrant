@@ -1,3 +1,3 @@
 Fabricator(:category) do
-  name "my category"
+  name { Faker::Product.brand }
 end

@@ -11,14 +11,11 @@ class Ingredient
   field :name
   field :cookbooks
 
-  validates :name, :presence => true
-  validates :name, :uniqueness => true
+  validates :name, :presence => true, :uniqueness => true
 
 
-  accepts_nested_attributes_for :portmappings,
-                                :share_folders,
-                                :networkconfig,
+  accepts_nested_attributes_for :networkconfig,
                                 allow_destroy: true
 
-  attr_accessible :name, :category, :cookbooks, :portmapping_attributes, :share_folders_attributes, :networkconfig_attributes
+  attr_accessible :name, :category, :cookbooks, :portmappings, :share_folders, :networkconfig_attributes
 end

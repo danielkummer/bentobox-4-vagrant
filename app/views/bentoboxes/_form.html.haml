@@ -7,13 +7,13 @@
           %li= msg
 
   %fieldset
-    %legend pick your box
+    %legend pick your base box
     .row
       .span2
         %ul.thumbnails
           %li.span2
             .thumbnail
-              = image_tag 'http://placehold.it/180x180'
+              = image_tag 'vagrant_box.png'
 
       .span6
         .control-group
@@ -21,13 +21,13 @@
           .controls
             = f.collection_select( :vagrantbox, Vagrantbox.all, :id, :name)
 
-    %legend put some stuff in it...
+    %legend stuff some ingredients in
     .row
       .span2
         %ul.thumbnails
           %li.span2
             .thumbnail
-              = image_tag 'http://placehold.it/180x180'
+              = image_tag 'vagrant_add.png'
       .span6
         .control-group
           = f.label :ingredient_ids, "Choose your ingredients", class: "control-label"
@@ -43,13 +43,13 @@
                       = check_box_tag "bentobox[ingredient_ids][]", ingredient.id, @bentobox.ingredient_ids.include?(ingredient.id), id: dom_id(ingredient)
                       = ingredient.name
 
-    %legend customize it!
+    %legend describe it
     .row
       .span2
         %ul.thumbnails
           %li.span2
             .thumbnail
-              = image_tag 'http://placehold.it/180x180'
+              = image_tag 'vagrant_pack.png'
       .span6
         .control-group
           = f.label :name, class: "control-label"
@@ -62,7 +62,7 @@
         .control-group
           = f.label :public, "Share your box?", class: "control-label"
           .controls
-            = f.check_box :public
+            = f.check_box :public, checked: true
     .form-actions
       = f.submit 'Save', class: "btn btn-primary"
       = link_to 'Back', bentoboxes_path, class: "btn"
