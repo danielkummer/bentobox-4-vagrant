@@ -16,7 +16,7 @@ class Bentobox
   validates :name, presence: true
   validates :vagrantbox, presence: true
 
-  attr_accessible :name, :description, :public, :vagrantbox, :ingredients
+  attr_accessible :name, :description, :public, :vagrantbox, :ingredients, :ingredient_ids
 
   scope :visible_to_user, lambda { |user|
     any_of({:public => true}, {:user_id => user.id})
