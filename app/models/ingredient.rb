@@ -19,4 +19,28 @@ class Ingredient
   accepts_nested_attributes_for :networkconfig, allow_destroy: true
 
   attr_accessible :name, :category, :cookbooks, :portmappings, :share_folders, :networkconfig_attributes
+
+
+  after_save :rebuild_categories
+
+  protected
+
+  #todo
+  def rebuild_categories
+    Post.collection.map_reduce(
+        "function() { this.categories.forEach(function(c){ emit(c, c.ingredients); }); }",
+        "function(key,values) { var count = 0; values.forEach(function(v){ count += v; }); return count; }",
+        {:out => 'tags'}
+    )
+  end
+
+  def self.all_tags(limit = nil)
+    tags = Mongoid.master.collection('tags')
+    opts = {:sort => ["_id", :desc]}
+    opts[:limit] = limit unless limit.nil?
+
+    tags.find({}, opts).to_a \
+      .map! { |item| {:name => item['_id'], :post_count => item['value'].to_i} }
+  end
+
 end
