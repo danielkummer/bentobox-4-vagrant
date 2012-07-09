@@ -17,10 +17,14 @@ jQuery ->
 
 
   $('form').on 'click', '.network-config', (event) ->
-    type = $(this).data('type')
-    second_param = $(this).data('second-parameter')
-    third_param = $(this).data('third-parameter')
+    $.each $(this).data(), (key, value) ->
+      $("[id$="+key+"]:last").val(value)
 
-    $('#ingredient_networkconfig_attributes_type').val(type)
-    $('#ingredient_networkconfig_attributes_second_parameter').val(second_param)
-    $('#ingredient_networkconfig_attributes_third_parameter').val(third_param)
+
+
+
+  $('form').on 'click', '.share-folder-config', (event) ->
+    $.each $(this).data(), (key, value) ->
+      $("[id$="+key+"]:last").val(value)
+
+
