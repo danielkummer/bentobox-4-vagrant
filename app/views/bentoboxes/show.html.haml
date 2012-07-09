@@ -1,32 +1,53 @@
-%p#notice= notice
 
-%p
-  %b Name:
-  = @bentobox.name
-%p
-  %b Description:
-  = @bentobox.description
-%p
-  %b Public:
-  = @bentobox.public
+.page-header
+  %h1
+    = @bentobox.name
+    %small= @bentobox.description
+    .pull-right
+      = link_to params.merge(:format => :text, :download => true), :class => "btn btn-large btn-info" do
+        %i.icon-download-alt
+        Get Vagrantconfig
+.row
+  .span2
+    %ul.thumbnails
+      %li.span2
+        .thumbnail
+          = image_tag 'vagrant_box.png'
 
-%p
-  %b Vagrantbox:
-  = @bentobox.vagrantbox.name
+  .span6
+    %h2 Base box
+    = @bentobox.vagrantbox.name
 
-%p
-  %b Ingredients:
-  %ul
-  -for ingredient in @bentobox.ingredients
-    %li= ingredient.name
+.row
+  .span2
+    %ul.thumbnails
+      %li.span2
+        .thumbnail
+          = image_tag 'vagrant_add.png'
+  .span6
+    %h2 Ingredients
+    .control-group
+      %ul.unstyled
+        -for ingredient in @bentobox.ingredients
+          %li= ingredient.name
+
+.row
+  .span8
+    %dl.well
+      %dt Public box?
+      %dd=true_false_label(@bentobox.public).html_safe
+      %dt Network configuration?
+      %dd= true_false_label(@bentobox.ingredients.with_network_config.exists?)
+      %dt Share folders?
+      %dd= true_false_label(@bentobox.ingredients.with_share_folders.exists?)
+      %dt Portmappings?
+      %dd= true_false_label(@bentobox.ingredients.with_portmappings.exists?)
 
 
-%p Get the Vagrantconfig file via wget:
-%pre
-  ="wget " + bentobox_url(@bentobox, :format => :text, :download => true) + " -OVagrantconfig"
-  vagrant up
 
-= link_to "Vagrantconfig", params.merge(:format => :text, :download => true), :class => "btn btn-success btn-large"
+
+
+
 - if @bentobox.user == current_user
   = link_to edit_user_bentobox_path(current_user, @bentobox), class: "btn" do
     %i.icon-edit
