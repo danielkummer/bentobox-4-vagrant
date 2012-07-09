@@ -18,7 +18,6 @@ class IngredientsController < ApplicationController
 
   def new
     @ingredient = Ingredient.new
-    @ingredient.build_networkconfig
     respond_with @ingredient
   end
 
