@@ -35,7 +35,8 @@
               %span.caret
             %ul.dropdown-menu
               %li
-                %a.network-config{'data-type' => 'hostonly', 'data-second-parameter' => '33.33.33.10'} hostonly, 33.33.33.10
+                %a.network-config{'data-type' => 'hostonly', 'data-second_parameter' => '33.33.33.10'} hostonly, 33.33.33.10
+
 
 
 
@@ -71,8 +72,10 @@
               %span.caret
             %ul.dropdown-menu
               %li
-                %a.share-folder-config{} TODO
-
+                %a.share-folder-config{'data-logical_name' => 'test',
+                                       'data-host_path' => '123',
+                                       'data-guest_path' => '456',
+                                       'data-additional_options' => '789'} Testconfiguration
 
 
 
