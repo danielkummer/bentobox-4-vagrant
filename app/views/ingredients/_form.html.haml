@@ -26,6 +26,18 @@
       = render 'networkconfig_fields', f: builder
     = link_to_add_one_embedded "New network configuration", f, :networkconfig, "btn"
 
+    .fieldset
+      %legend portmappings
+      = f.simple_fields_for :portmappings, html: {class: "form-inline"} do |builder|
+        = render 'portmapping_fields', f: builder
+      = link_to_add_fields "New portmapping", f, :portmappings, "btn"
+
+    .fieldset
+      %legend share folders
+      = f.simple_fields_for :share_folders do |builder|
+        = render 'share_folder_fields', f: builder
+      = link_to_add_fields "New share folder", f, :share_folders, "btn"
+
 
   .form-actions
     = f.submit 'Save', class: "btn btn-success"

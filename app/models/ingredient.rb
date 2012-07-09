@@ -15,10 +15,19 @@ class Ingredient
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
 
-  validates_associated :networkconfig
-  accepts_nested_attributes_for :networkconfig, allow_destroy: true
+  #validates_associated :networkconfig
 
-  attr_accessible :name, :category, :cookbooks, :portmappings, :share_folders, :networkconfig_attributes
+  accepts_nested_attributes_for :networkconfig,
+                                :portmappings,
+                                :share_folders,
+                                allow_destroy: true
+
+  attr_accessible :name,
+                  :category,
+                  :cookbooks,
+                  :portmappings_attributes,
+                  :share_folders_attributes,
+                  :networkconfig_attributes
 
   scope :with_network_config, excludes(:networkconfig => nil)
   scope :with_share_folders, excludes(:share_folders => nil)
