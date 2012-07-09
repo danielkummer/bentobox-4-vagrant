@@ -18,6 +18,7 @@ class Bentobox
 
 
   #todo not working...
+=begin
   class ConfigurationValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)
       ingredients = Ingredient.includes(value)
@@ -26,9 +27,10 @@ class Bentobox
   end
 
   validates :ingredients, :configuration => true
+=end
 
 
-  attr_accessible :name, :description, :public, :vagrantbox, :ingredients
+  attr_accessible :name, :description, :public, :vagrantbox, :ingredient_ids
 
   scope :visible_to_user, lambda { |user|
     any_of({:public => true}, {:user_id => user.id})
