@@ -1,4 +1,8 @@
 require 'spork'
+require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
+require 'rspec/autorun'
+require 'capybara/rspec'
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
@@ -19,10 +23,6 @@ Spork.prefork do
 
   # This file is copied to spec/ when you run 'rails generate rspec:install'
 
-  require File.expand_path("../../config/environment", __FILE__)
-  require 'rspec/rails'
-  require 'rspec/autorun'
-  require 'capybara/rspec'
 
   Spork.trap_class_method(Rails::Mongoid, :load_models)
   Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
