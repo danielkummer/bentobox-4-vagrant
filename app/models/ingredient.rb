@@ -19,4 +19,7 @@ class Ingredient
   accepts_nested_attributes_for :networkconfig, allow_destroy: true
 
   attr_accessible :name, :category, :cookbooks, :portmappings, :share_folders, :networkconfig_attributes
+
+  scope :with_network_config, excludes(:networkconfig => nil)
+
 end

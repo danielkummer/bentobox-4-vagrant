@@ -16,6 +16,18 @@ class Bentobox
   validates :name, presence: true
   validates :vagrantbox, presence: true
 
+
+  #todo not working...
+  class ConfigurationValidator < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+      ingredients = Ingredient.includes(value)
+      record.errors.add attribute, "must have an ingredient with a network configration" unless ingredients.size > 0 and !ingredients.with_network_config.nil?
+    end
+  end
+
+  validates :ingredients, :configuration => true
+
+
   attr_accessible :name, :description, :public, :vagrantbox, :ingredients
 
   scope :visible_to_user, lambda { |user|

@@ -10,7 +10,7 @@ module BentoboxesHelper
   def config_network
     result = ""
     first_record = true
-    @bentobox.ingredients.excludes(:networkconfig => nil).each do |box_with_config|
+    @bentobox.ingredients.with_network_config.each do |box_with_config|
       result << "#" if !first_record
       result << "config.vm.network = " + box_with_config.networkconfig.to_s
       first_record = false
