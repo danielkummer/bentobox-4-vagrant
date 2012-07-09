@@ -10,7 +10,6 @@
 
       .span6
         = f.input :vagrantbox, :collection  => Vagrantbox.all, :prompt => "Choose a base box"
-
     %legend stuff some ingredients in
     .row
       .span2
@@ -19,21 +18,17 @@
             .thumbnail
               = image_tag 'vagrant_add.png'
       .span6
+        /= f.input :ingredients, :collection => Ingredient.all, :group , :prompt => "Choose a Category"
+        /= f.collection_check_boxes :ingredient_ids, Ingredient.all, :as => :grouped_select, :group_method => :category
+        /= f.association :roles,
         /todo this is not using simple_form
         .control-group
           = f.label :ingredient_ids, "Choose your ingredients", class: "control-label"
-          /= f.grouped_collection_select(:ingredient_ids, Category.all, :ingredients, :name, :id, :name, {}, {multiple: true})
           .controls
-            = hidden_field_tag "bentobox[ingredient_ids][]", nil
+            = f.collection_check_boxes(:ingredient_ids, Ingredient.all, :id, :name, {}, {multiple: true})
 
-            - for category in Category.asc(:name)
-              %fieldset
-                %legend= category.name
-                - for ingredient in category.ingredients.all
-                  .field
-                    = label_tag dom_id(ingredient), class: "checkbox" do
-                      = check_box_tag "bentobox[ingredient_ids][]", ingredient.id, @bentobox.ingredient_ids.include?(ingredient.id), id: dom_id(ingredient)
-                      = ingredient.name
+
+
 
     %legend describe it
     .row
@@ -44,10 +39,9 @@
               = image_tag 'vagrant_pack.png'
       .span6
         = f.input :name
-        = f.input :description, rows: 3
+        = f.input :description, as: :text,:input_html => { :rows => 20, :cols => 50}
         = f.input :public, as: :boolean, label: "Share your box?"
 
     .form-actions
       = f.submit 'Save', class: "btn btn-primary"
       = link_to 'Back', bentoboxes_path, class: "btn"
-
