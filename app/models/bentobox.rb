@@ -11,7 +11,7 @@ class Bentobox
   #field :_id, type: String, default: -> { name }
   field :name
   field :description
-  field :public, type: Boolean
+  field :public, type: Boolean, default: true
 
   validates :name, presence: true
   validates :vagrantbox, presence: true

@@ -18,19 +18,11 @@
             .thumbnail
               = image_tag 'vagrant_add.png'
       .span6
-        /= f.input :ingredients, :collection => Ingredient.all, :group , :prompt => "Choose a Category"
-        /= f.collection_check_boxes :ingredient_ids, Ingredient.all, :as => :grouped_select, :group_method => :category
-        /= f.association :roles,
-        /todo this is not using simple_form
         .control-group
-          = f.label :ingredient_ids, "Choose your ingredients", class: "control-label"
-          = f.collection_check_boxes(:ingredient_ids, Ingredient.all.sort(category: -1), :id, :name, {collection_wrapper_tag: 'div class="controls"', item_wrapper_tag: 'label class="checkbox"'}, {multiple: true})
-
-
-
-
-
-
+          /= f.label :ingredient_ids, "Choose your ingredients", class: "control-label"
+          - for c in Category.order_by(name: :asc)
+            %legend= c.name
+            = f.collection_check_boxes(:ingredient_ids, c.ingredients.order_by(name: :asc), :id, :name, {collection_wrapper_tag: 'div class="controls"', item_wrapper_tag: 'label class="checkbox"'}, {multiple: true})
     %legend describe it
     .row
       .span2
@@ -40,7 +32,7 @@
               = image_tag 'vagrant_pack.png'
       .span6
         = f.input :name
-        = f.input :description, as: :text,:input_html => { :rows => 20, :cols => 50}
+        = f.input :description, as: :text,:input_html => { :rows => 5, :cols => 50}
         = f.input :public, as: :boolean, label: "Share your box?"
 
     .form-actions

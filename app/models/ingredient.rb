@@ -21,6 +21,8 @@ class Ingredient
   attr_accessible :name, :category, :cookbooks, :portmappings, :share_folders, :networkconfig_attributes
 
   scope :with_network_config, excludes(:networkconfig => nil)
+  scope :with_share_folders, excludes(:share_folders => nil)
+  scope :with_portmappings, excludes(:portmappings => nil)
 
 =begin
   after_save :rebuild_categories
