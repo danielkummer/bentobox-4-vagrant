@@ -22,11 +22,13 @@ class Ingredient
 
   scope :with_network_config, excludes(:networkconfig => nil)
 
+=begin
   after_save :rebuild_categories
 
   protected
 
   #todo
+
   def rebuild_categories
     Post.collection.map_reduce(
         "function() { this.categories.forEach(function(c){ emit(c, c.ingredients); }); }",
@@ -43,5 +45,6 @@ class Ingredient
     tags.find({}, opts).to_a \
       .map! { |item| {:name => item['_id'], :post_count => item['value'].to_i} }
   end
+=end
 
 end

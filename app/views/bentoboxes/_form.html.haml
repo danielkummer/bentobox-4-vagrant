@@ -24,8 +24,9 @@
         /todo this is not using simple_form
         .control-group
           = f.label :ingredient_ids, "Choose your ingredients", class: "control-label"
-          .controls
-            = f.collection_check_boxes(:ingredient_ids, Ingredient.all, :id, :name, {}, {multiple: true})
+          = f.collection_check_boxes(:ingredient_ids, Ingredient.all.sort(category: -1), :id, :name, {collection_wrapper_tag: 'div class="controls"', item_wrapper_tag: 'label class="checkbox"'}, {multiple: true})
+
+
 
 
 
