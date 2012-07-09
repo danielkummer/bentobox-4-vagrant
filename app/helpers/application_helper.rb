@@ -1,7 +1,6 @@
 module ApplicationHelper
 
 
-
   def link_to_add_fields(name, f, association, html_class = "")
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
@@ -9,7 +8,9 @@ module ApplicationHelper
       render(association.to_s.singularize + "_fields", f: builder)
     end
     link_to('#', class: "add_fields #{html_class}", title: name, data: {id: id, fields: fields.gsub("\n", "")}) do
-      content_tag :i, '', class: "icon-plus-sign"
+      tag = content_tag(:i, nil, class: "icon-plus")
+      tag << " Add "
+      tag.html_safe
     end
   end
 
@@ -23,7 +24,9 @@ module ApplicationHelper
       render(field.to_s + "_fields", f: builder)
     end
     link_to('#', class: "add_fields #{html_class} embedd_one", title: name, data: {id: id, fields: fields.gsub("\n", "")}) do
-      content_tag :i, '', class: "icon-plus-sign"
+      tag = content_tag(:i, nil, class: "icon-plus")
+      tag << " Add "
+      tag.html_safe
     end
   end
 
@@ -36,5 +39,3 @@ module ApplicationHelper
     end
   end
 end
-
-

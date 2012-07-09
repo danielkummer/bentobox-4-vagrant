@@ -14,3 +14,13 @@ jQuery ->
     if $(this).hasClass("embedd_one")
       $(this).remove()
     event.preventDefault()
+
+
+  $('form').on 'click', '.network-config', (event) ->
+    type = $(this).data('type')
+    second_param = $(this).data('second-parameter')
+    third_param = $(this).data('third-parameter')
+
+    $('#ingredient_networkconfig_attributes_type').val(type)
+    $('#ingredient_networkconfig_attributes_second_parameter').val(second_param)
+    $('#ingredient_networkconfig_attributes_third_parameter').val(third_param)
