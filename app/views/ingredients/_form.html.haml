@@ -8,37 +8,201 @@
 
 
   .fieldset
-    %legend recepies and cookbooks
-    = f.input :cookbooks, placeholder: "apache22, mysql, ..."
+    %legend Recepies and cookbooks
+    .row
+      .span4
+        = f.input :cookbooks
+      .span4
+        .alert.alert-info
+          Enter recepies and cookbooks as comma seperated list; e.g "apache2, mysql"
 
   .fieldset
-    %legend network configuration
-    .btn-group
-      %a.btn.btn-info.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-        Defaults
-        %span.caret
-      %ul.dropdown-menu
-        %li
-          %a{'data-type' => 'hostonly', 'data-second-parameter' => '33.33.33.10'} hostonly, 33.33.33.10
+    %legend Network configuration
+    .row
+      .span4
+        = f.simple_fields_for :networkconfig, @ingredient.networkconfig do |builder|
+          = render 'networkconfig_fields', f: builder
+        = link_to_add_one_embedded "New network configuration", f, :networkconfig, "btn"
+
+      .span4
+        .btn-toolbar
+          .btn-group
+            %a.btn{'data-toggle' => "modal", href: "#networkConfigInfoModal" }
+              %i.icon-info-sign
+              Info
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Defaults
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a.network-config{'data-type' => 'hostonly', 'data-second-parameter' => '33.33.33.10'} hostonly, 33.33.33.10
 
 
-    = f.simple_fields_for :networkconfig, @ingredient.networkconfig do |builder|
-      = render 'networkconfig_fields', f: builder
-    = link_to_add_one_embedded "New network configuration", f, :networkconfig, "btn"
 
     .fieldset
-      %legend portmappings
-      = f.simple_fields_for :portmappings, html: {class: "form-inline"} do |builder|
-        = render 'portmapping_fields', f: builder
-      = link_to_add_fields "New portmapping", f, :portmappings, "btn"
+      %legend Portmappings
+      .row
+        .span4
+          = f.simple_fields_for :portmappings, html: {class: "form-inline"} do |builder|
+            = render 'portmapping_fields', f: builder
+          = link_to_add_fields "New portmapping", f, :portmappings, "btn"
+        .span4
+          .btn-toolbar
+            .btn-group
+              %a.btn{'data-toggle' => "modal", href: "#portmappingInfoModal" }
+                %i.icon-info-sign
+                Info
+
 
     .fieldset
-      %legend share folders
-      = f.simple_fields_for :share_folders do |builder|
-        = render 'share_folder_fields', f: builder
-      = link_to_add_fields "New share folder", f, :share_folders, "btn"
+      %legend Share folders
+      .row
+        .span4
+          = f.simple_fields_for :share_folders do |builder|
+            = render 'share_folder_fields', f: builder
+          = link_to_add_fields "New share folder", f, :share_folders, "btn"
+        .span4
+          .btn-group
+            %a.btn{'data-toggle' => "modal", href: "#sharefolderConfigModal" }
+              %i.icon-info-sign
+              Info
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Defaults
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a.share-folder-config{} TODO
+
+
+
+
 
 
   .form-actions
     = f.submit 'Save', class: "btn btn-success"
     = link_to 'Back', bentoboxes_path, class: "btn"
+
+
+#networkConfigInfoModal.modal.hide
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3 Network configuration
+  .modal-body
+    %h4 Host Only Networks
+    %p Host only networks can be defined by providing only a simple IP:
+    .highlight
+      %pre
+        %code.ruby
+          config.vm.network :hostonly, "10.11.12.13"
+
+    %p This will configure a host only network on the virtual machine that is assigned a static IP of “10.11.12.13.”
+    %p Other options are available for host only networks and may be passed in as an options hash for the 3rd parameter. The available options are:
+    %ul
+      %li
+        %code :adapter
+        \- The adapter number of the host only network to apply the network configuration to.
+      %li
+        %code :auto_config
+        \- If
+        = succeed "," do
+          %code false
+        then Vagrant will not attempt to automatically configure this network on the guest OS.
+      %li
+        %code :mac
+        \- The MAC address to assign to this network adapter.
+      %li
+        %code :netmask
+        \- The subnet mask for this network.
+    %h4 Bridged Networks
+    %p Bridged networks can be defined very easily:
+    .highlight
+      %pre
+        %code.ruby
+        = ":bridged"
+    %p This will enable a bridged network adapter and ask during the configuration process what network to bridge to.
+    %p Other options are available for bridged networking, and may be passed in as an options hash for the 2nd parameter. The available options are:
+    %ul
+      %li
+        %code :adapter
+        \- The adapter number of the host only network to apply the network configuration to.
+      %li
+        %code :bridge
+        \- The full name of the network to bridge to. If this is specified, then Vagrant will not ask the user.
+      %li
+        %code :mac
+        \- The MAC address to assign to this network adapter.
+
+#portmappingInfoModal.modal.hide
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3 Portmappings
+  .modal-body
+    %p This configuration directive is used to tell Vagrant to setup a forwarded port. Forwarded ports allow you to access ports within the virtual machine. This directive can be used multiple times within a Vagrantfile. The basic usage is:
+    .highlight
+      %pre
+        %code.ruby
+          config.vm.forward_port 80, 8080
+    %p This tells Vagrant to configure the VirtualBox networking such that network traffic sent to port 8080 on the host machine will be delivered to port 80 on the guest machine.
+    %p As an optional 3rd parameter, you may pass an options hash. Currently accepted options are:
+    %ul
+      %li
+        %code :adapter
+        \- This is the adpater number that the forwarded port definition should be attached to. Forwarded ports can only be attached to NAT devices.
+      %li
+        %code :auto
+        \- If this is set to
+        %code true
+        then Vagrant will automatically try to change the host port if it finds it would collide with any other forwarded port. If this is
+        %code false
+        (default) then an error will be shown instead.
+      %li
+        %code :protocol
+        \- This allows specifying the protocol that the forwarded port will use. The default protocol, if none is specified, is
+        = succeed "." do
+          %code :tcp
+
+#sharefolderConfigModal.modal.hide
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3 Share folders configuration
+  .modal-body
+    %p This directive is used to configure shared folders on the virtual machine and may be used multiple times in a Vagrantfile. Shared folders specify folders that are on the host machine that become available on the guest machine, so that edits on either side are immediately visible on both the host and the guest.
+    %p Shared folders are easy to configure:
+    .highlight
+      %pre
+        %code.ruby
+          config.vm.share_folder "foo", "/guest/path", "/host/path"
+    %p The above would create a shared folder mapping named “foo” (a logical name), from “/host/path” on the host to “/guest/path” on the guest. The host path can be a relative path, which is expanded relative to the directory where the main project Vagrantfile is.
+    %p Additional options may be passed in as an options hash for a 4th parameter. The support options are:
+    %ul
+      %li
+        %code :create
+        \- If set to
+        %code true
+        and the host path doesn’t exist, Vagrant will automatically attempt to create it. Default:
+        %code false
+      %li
+        %code :nfs
+        \- If set to
+        = succeed "," do
+          %code true
+        then the shared folder will be shared using NFS. For more information, read about
+        = succeed "." do
+          %a{:href => "/v1/docs/nfs.html"} NFS shared folders
+      %li
+        %code :transient
+        \- If set to
+        = succeed "," do
+          %code true
+        then the shared folder definition will not be persisted across restarts.
+    %p Additionally, there are certain options that have an effect only on NFS shared folders:
+    %ul
+      %li
+        %code :map_uid
+        \- The UID that modifications to the shared folder map to on the host machine. By default, Vagrant will use the UID of the owner of the folder.
+      %li
+        %code :map_gid
+        \- The GID that modifications to the shared folder map to on the host machine. By default, Vagrant will use the GID of the owner of the folder.
+      %li
+        %code :nfs_version
+        \- This is the NFS version that will be used as the format for the mount.
