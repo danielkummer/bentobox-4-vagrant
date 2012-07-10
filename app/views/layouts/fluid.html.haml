@@ -44,6 +44,24 @@
                 = link_to categories_path do
                   %i.icon-tags
                   Categories
+            - if current_user.blank?
+              %ul.nav.pull-right
+                %li= link_to 'Sign Up', new_user_registration_path
+                %li.divider-vertical
+                %li.dropdown
+                  %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown'}
+                    Sign In
+                    %strong.caret
+                  .dropdown-menu{style: "padding: 15px; padding-bottom:0px"}
+                    = form_for("user", :url => user_session_path) do |f|
+                      = f.text_field :email, placeholder: "Email"
+                      = f.password_field :password, placeholder: "Password"
+
+                      = f.label :remember_me do
+                        = f.check_box :remember_me
+                        Remember me
+
+                      = f.submit "Login", class: "btn", style: "width: 100%; height: 32px; font-size: 13px; margin-left: 0px; margin-right: 0px;"
             - unless current_user.blank?
               .nav-collapse
                 %ul.nav.pull-right
