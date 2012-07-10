@@ -50,7 +50,6 @@ Spork.prefork do
     end
 
     config.after(:suite) do
-      require 'FileUtils'
       FileUtils.rm_rf Dir[Rails.root.join("public/uploads/tmp")]
     end
 

@@ -35,19 +35,20 @@ describe VagrantboxesController do
     describe "with valid params" do
       it "creates a new Vagrantbox" do
         expect {
-          post :create, {:vagrantbox => Fabricate(:vagrantbox)}
+          post :create, {:vagrantbox => Fabricate.build(:vagrantbox)}
         }.to change(Vagrantbox, :count).by(1)
       end
 
+
       it "assigns a newly created vagrantbox as @vagrantbox" do
-        post :create, {:vagrantbox => Fabricate(:vagrantbox)}
+        post :create, {:vagrantbox => Fabricate.build(:vagrantbox)}
         assigns(:vagrantbox).should be_a(Vagrantbox)
         assigns(:vagrantbox).should be_persisted
       end
 
       it "redirects to the created vagrantbox" do
-        post :create, {:vagrantbox => Fabricate(:vagrantbox)}
-        response.should redirect_to(Vagrantbox.last)
+        post :create, {:vagrantbox => Fabricate.build(:vagrantbox)}
+        response.should be_success
       end
     end
 

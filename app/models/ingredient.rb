@@ -9,8 +9,8 @@ class Ingredient
   embeds_many :share_folders
   has_and_belongs_to_many :bentoboxes, :inverse_of => :ingredients
 
-  field :name
-  field :cookbooks
+  field :name, type: String
+  field :cookbooks, type: String
 
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true

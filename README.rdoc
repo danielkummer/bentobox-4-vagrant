@@ -8,7 +8,7 @@ An ingredient is simply a configuration which can include cookbooks, share folde
 
 
 Demo at:
-http://bentobox-4-vagrant.herokuapp.com/bentoboxes
+http://bentobox-4-vagrant.herokuapp.com
 
 == Getting Started
 

@@ -1,7 +1,7 @@
 class Category
   include Mongoid::Document
 
-  field :name
+  field :name, type: String
   has_many :ingredients
 
   validates :name, presence: true

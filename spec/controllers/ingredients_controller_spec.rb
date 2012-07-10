@@ -5,9 +5,12 @@ describe IngredientsController do
   login_user
 
   def valid_attributes
-    {name: "testingredient"}
+    {
+      name: "testingredient",
+      category: Fabricate(:category)
+    }
   end
-  
+
   describe "GET index" do
     it "assigns all ingredients as @ingredients" do
       ingredient = Fabricate(:ingredient)
@@ -55,8 +58,7 @@ describe IngredientsController do
 
       it "redirects to the created ingredient" do
         post :create, {:ingredient => valid_attributes}
-        response.should render_template("index")
-        response.should render_template("index")
+        response.should be_success
       end
     end
 
