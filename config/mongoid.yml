@@ -32,4 +32,5 @@ production:
   <<: *defaults
   sessions:
     default:
+      database: bentobox-4-vagrant_production
       uri: <%= ENV['MONGOHQ_URL'] %>
