@@ -4,10 +4,18 @@ require 'spec_helper'
 describe VagrantboxesController do
   login_user
 
-  def valid_attributes
-    {}
+  before(:each) do
+    @valid_box = Fabricate.build(:vagrantbox)
   end
-   
+
+
+  def valid_attributes
+    {
+      name: @valid_box.name,
+      box: @valid_box.box
+    }
+  end
+
   describe "GET index" do
     it "assigns all vagrantboxes as @vagrantboxes" do
       vagrantbox = Fabricate(:vagrantbox)
@@ -41,13 +49,13 @@ describe VagrantboxesController do
 
 
       it "assigns a newly created vagrantbox as @vagrantbox" do
-        post :create, {:vagrantbox => Fabricate.build(:vagrantbox)}
+        post :create, {:vagrantbox => valid_attributes}
         assigns(:vagrantbox).should be_a(Vagrantbox)
         assigns(:vagrantbox).should be_persisted
       end
 
       it "redirects to the created vagrantbox" do
-        post :create, {:vagrantbox => Fabricate.build(:vagrantbox)}
+        post :create, {:vagrantbox => valid_attributes}
         response.should be_success
       end
     end
@@ -63,6 +71,7 @@ describe VagrantboxesController do
         Vagrantbox.any_instance.stub(:save).and_return(false)
         post :create, {:vagrantbox => {}}
         response.should render_template("new")
+
       end
     end
   end

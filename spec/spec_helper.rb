@@ -9,6 +9,10 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 ENV["RAILS_ENV"] ||= 'test'
 
+def logger
+  Rails.logger
+end
+
 Spork.prefork do
   unless ENV['DRB']
     require 'simplecov'

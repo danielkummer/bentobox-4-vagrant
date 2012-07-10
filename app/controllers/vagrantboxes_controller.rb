@@ -2,7 +2,7 @@ class VagrantboxesController < ApplicationController
   respond_to :html
 
   def index
-    @vagrantboxes = Vagrantbox.all
+    @vagrantboxes = Vagrantbox.all.to_a
     respond_with @vagrantboxes
   end
 
