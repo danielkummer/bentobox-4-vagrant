@@ -1,5 +1,5 @@
 Fabricator(:vagrantbox) do
-  name {Faker::Product.brand }
+  name { Faker::Product.brand }
   box {
     ActionDispatch::Http::UploadedFile.new(
       :tempfile => File.new(Rails.root.join("spec/support/files/example.box")),
