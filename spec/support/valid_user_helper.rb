@@ -1,4 +1,4 @@
-module ControllerMacros
+module ValidUserHelper
   def login_admin
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:admin]
@@ -14,3 +14,4 @@ module ControllerMacros
     end
   end
 end
+

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "Categories" do
+  before(:each) { login_with :user }
   describe "GET /categories" do
     it "displays categories" do
       category = Fabricate(:category)
