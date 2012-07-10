@@ -37,8 +37,9 @@ Spork.prefork do
 
     config.include Devise::TestHelpers, :type => :controller
     config.include Devise::TestHelpers, :type => :helper
-    config.extend ControllerMacros, :type => :controller
-    config.extend ControllerMacros, :type => :helper
+    config.extend ValidUserHelper, :type => :controller
+    config.extend ValidUserHelper, :type => :helper
+    config.include ValidUserRequestHelper, :type => :request
 
     # Clean up the database
     require 'database_cleaner'
