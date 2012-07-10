@@ -9,7 +9,6 @@ describe BentoboxesController do
   end
 
 
-
   describe "GET index" do
     it "assigns all bentoboxes as @bentoboxes" do
       bentobox = Fabricate(:bentobox)
@@ -28,7 +27,7 @@ describe BentoboxesController do
 
   describe "GET new" do
     it "assigns a new bentobox as @bentobox" do
-      get :new
+      get :new, @current_user
       assigns(:bentobox).should be_a_new(Bentobox)
     end
   end
@@ -40,7 +39,6 @@ describe BentoboxesController do
       assigns(:bentobox).should eq(bentobox)
     end
   end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Bentobox" do
@@ -136,5 +134,6 @@ describe BentoboxesController do
       response.should redirect_to(bentoboxes_url)
     end
   end
+
 
 end
