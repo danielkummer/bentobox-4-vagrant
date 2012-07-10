@@ -76,4 +76,5 @@ VagrantCook::Application.configure do
     user_name: ENV["GMAIL_USERNAME"],
     password: ENV["GMAIL_PASSWORD"]
   }
+  #heroku config:add GMAIL_USERNAME=no-reply@example.com GMAIL_PASSWORD=please
 end
