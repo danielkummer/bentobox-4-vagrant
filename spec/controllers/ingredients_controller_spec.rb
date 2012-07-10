@@ -64,14 +64,12 @@ describe IngredientsController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved ingredient as @ingredient" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Ingredient.any_instance.stub(:save).and_return(false)
         post :create, {:ingredient => {}}
         assigns(:ingredient).should be_a_new(Ingredient)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Ingredient.any_instance.stub(:save).and_return(false)
         post :create, {:ingredient => {}}
         response.should render_template("new")
@@ -83,10 +81,6 @@ describe IngredientsController do
     describe "with valid params" do
       it "updates the requested ingredient" do
         ingredient = Fabricate(:ingredient)
-        # Assuming there are no other ingredients in the database, this
-        # specifies that the Ingredient created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         Ingredient.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, {:id => ingredient.to_param, :ingredient => {'these' => 'params'}}
       end
@@ -107,7 +101,6 @@ describe IngredientsController do
     describe "with invalid params" do
       it "assigns the ingredient as @ingredient" do
         ingredient = Fabricate(:ingredient)
-        # Trigger the behavior that occurs when invalid params are submitted
         Ingredient.any_instance.stub(:save).and_return(false)
         put :update, {:id => ingredient.to_param, :ingredient => {}}
         assigns(:ingredient).should eq(ingredient)
@@ -115,7 +108,6 @@ describe IngredientsController do
 
       it "re-renders the 'edit' template" do
         ingredient = Fabricate(:ingredient)
-        # Trigger the behavior that occurs when invalid params are submitted
         Ingredient.any_instance.stub(:save).and_return(false)
         put :update, {:id => ingredient.to_param, :ingredient => {}}
         response.should render_template("edit")
