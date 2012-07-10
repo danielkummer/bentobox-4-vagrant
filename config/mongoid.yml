@@ -9,8 +9,8 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  sessions: &default_session
-    default:
+  sessions:
+    default: &default_session
       database: vagrant_cook_development
       hosts:
         - localhost:27017
@@ -25,8 +25,8 @@ test:
       database: vagrant_cook_test
 
 
-<% if ENV['MONGOLAB_URI'] %>
-  <% uri = URI.parse(ENV['MONGOLAB_URI']) %>
+<% if ENV['MONGOHQ_URL'] %>
+  <% uri = URI.parse(ENV['MONGOHQ_URL']) %>
 production:
   <<: *defaults
   sessions:
