@@ -9,7 +9,7 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  sessions:
+  sessions: &default_session
     default:
       database: vagrant_cook_development
       hosts:
@@ -21,16 +21,20 @@ test:
   <<: *defaults
   sessions:
     default:
+      <<: *default_session
       database: vagrant_cook_test
-      hosts:
-        - localhost:27017
-      options:
-        consistency: :strong
-<<: *defaults
 
+
+<% if ENV['MONGOLAB_URI'] %>
+  <% uri = URI.parse(ENV['MONGOLAB_URI']) %>
 production:
   <<: *defaults
   sessions:
     default:
-      database: bentobox-4-vagrant_production
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      <<: *default_session
+      database: <%= uri.path.sub('/','') %>
+      username: <%= uri.user %>
+      password: <%= uri.password %>
+      hosts:
+        - <%= uri.host %>:<%= uri.port %>
+<% end %>

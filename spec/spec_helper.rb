@@ -49,6 +49,11 @@ Spork.prefork do
       DatabaseCleaner.clean
     end
 
+    config.after(:suite) do
+      require 'FileUtils'
+      FileUtils.rm_rf Dir[Rails.root.join("public/uploads/tmp")]
+    end
+
     config.mock_with :rspec
     config.infer_base_class_for_anonymous_controllers = false
 
