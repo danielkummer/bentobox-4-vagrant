@@ -15,3 +15,9 @@
 //= require twitter/bootstrap
 //= require chosen-jquery
 //= require_tree .
+
+jQuery ->
+  $('.dropdown-toggle').dropdown()
+  $('.dropdown input, .dropdown label').click (e) ->
+    e.stopPropagation()
+
