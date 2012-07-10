@@ -25,6 +25,7 @@ test:
       database: vagrant_cook_test
 
 
+
 <% if ENV['MONGOHQ_URL'] %>
   <% uri = URI.parse(ENV['MONGOHQ_URL']) %>
 production:
@@ -37,4 +38,7 @@ production:
       password: <%= uri.password %>
       hosts:
         - <%= uri.host %>:<%= uri.port %>
+      uri: <%= ENV['MONGOHQ_URL'] %>
 <% end %>
+
+#"MONGOHQ_URL"=>"mongodb://heroku:820d543aac57c58b7813e605126d047d@flame.mongohq.com:27108/app5790333"
