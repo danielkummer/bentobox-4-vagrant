@@ -54,14 +54,12 @@ describe VagrantboxesController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved vagrantbox as @vagrantbox" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Vagrantbox.any_instance.stub(:save).and_return(false)
         post :create, {:vagrantbox => {}}
         assigns(:vagrantbox).should be_a_new(Vagrantbox)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Vagrantbox.any_instance.stub(:save).and_return(false)
         post :create, {:vagrantbox => {}}
         response.should render_template("new")
@@ -73,10 +71,6 @@ describe VagrantboxesController do
     describe "with valid params" do
       it "updates the requested vagrantbox" do
         vagrantbox = Fabricate(:vagrantbox)
-        # Assuming there are no other vagrantboxes in the database, this
-        # specifies that the Vagrantbox created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         Vagrantbox.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, {:id => vagrantbox.to_param, :vagrantbox => {'these' => 'params'}}
       end
@@ -97,7 +91,6 @@ describe VagrantboxesController do
     describe "with invalid params" do
       it "assigns the vagrantbox as @vagrantbox" do
         vagrantbox = Fabricate(:vagrantbox)
-        # Trigger the behavior that occurs when invalid params are submitted
         Vagrantbox.any_instance.stub(:save).and_return(false)
         put :update, {:id => vagrantbox.to_param, :vagrantbox => {}}
         assigns(:vagrantbox).should eq(vagrantbox)
@@ -105,7 +98,6 @@ describe VagrantboxesController do
 
       it "re-renders the 'edit' template" do
         vagrantbox = Fabricate(:vagrantbox)
-        # Trigger the behavior that occurs when invalid params are submitted
         Vagrantbox.any_instance.stub(:save).and_return(false)
         put :update, {:id => vagrantbox.to_param, :vagrantbox => {}}
         response.should render_template("edit")
