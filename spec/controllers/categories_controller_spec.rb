@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe CategoriesController do
+  login_user
 
   def valid_attributes
     {name: "testcategory"}
@@ -84,10 +85,10 @@ describe CategoriesController do
         assigns(:category).should eq(category)
       end
 
-      it "redirects to the category" do
+      it "redirects to the category index" do
         category = Fabricate(:category)
         put :update, {:id => category.to_param, :category => valid_attributes}
-        response.should redirect_to(category)
+        response.should redirect_to(action: :index)
       end
     end
 
@@ -120,7 +121,7 @@ describe CategoriesController do
 
     it "redirects to the categories list" do
       category = Fabricate(:category)
-      delete :destroy, {:id => category.to_param}, valid_session
+      delete :destroy, {:id => category.to_param}
       response.should redirect_to(categories_url)
     end
   end
