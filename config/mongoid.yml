@@ -1,4 +1,14 @@
+defaults: &defaults
+  allow_dynamic_fields: true
+  parameterize_keys: true
+  persist_in_safe_mode: true
+  raise_not_found_error: true
+  reconnect_time: 3
+  use_object_ids: true
+
+
 development:
+  <<: *defaults
   sessions:
     default:
       database: vagrant_cook_development
@@ -8,6 +18,7 @@ development:
         consistency: :strong
 
 test:
+  <<: *defaults
   sessions:
     default:
       database: vagrant_cook_test
@@ -15,3 +26,7 @@ test:
         - localhost:27017
       options:
         consistency: :strong
+
+production:
+  <<: *defaults
+  uri: <%= ENV['MONGOHQ_URL'] %>
