@@ -4,11 +4,11 @@ Fabricator(:bentobox) do
   public false
   user { Fabricate(:user) }
   vagrantbox { Fabricate(:vagrantbox) }
-
 end
 
-
-
 Fabricator(:bentobox_with_ingredient, from: :bentobox) do
-  ingredients(count:2) { |parent| Fabricate(:ingredient, bentobox: parent) }
+  after_create do |bentobox|
+    bentobox.ingredients << Fabricate(:full_ingredient, bentobox: bentobox)
+  end
+  #ingredients(count:1) { |bentobox| Fabricate(:full_ingredient, bentobox: bentobox) }
 end

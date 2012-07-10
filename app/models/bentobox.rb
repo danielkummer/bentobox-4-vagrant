@@ -9,8 +9,8 @@ class Bentobox
 
   #problems with point in name - generate slug later...
   #field :_id, type: String, default: -> { name }
-  field :name
-  field :description
+  field :name, type: String
+  field :description, type: String
   field :public, type: Boolean, default: true
 
   validates :name, presence: true

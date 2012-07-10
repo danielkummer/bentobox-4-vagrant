@@ -10,7 +10,7 @@ describe Networkconfig do
 
   it "should return a valid networkconfig string" do
     config = Fabricate(:networkconfig_with_parent)
-    config.networkconfig.to_s.should == ":hostonly, 123.123.123.123"
+    config.to_s.should == ":hostonly, 123.123.123.123"
   end
 end
 
