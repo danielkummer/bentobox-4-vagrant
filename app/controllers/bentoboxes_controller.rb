@@ -8,8 +8,7 @@ class BentoboxesController < ApplicationController
 
 
   def index
-    @bentoboxes = bentoboxes.all
-    #todo show where user = current user or public = true
+    @bentoboxes = bentoboxes.all.to_a
     respond_with @bentoboxes
   end
 

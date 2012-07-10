@@ -55,7 +55,8 @@ describe IngredientsController do
 
       it "redirects to the created ingredient" do
         post :create, {:ingredient => valid_attributes}
-        response.should redirect_to(Ingredient.last)
+        response.should render_template("index")
+        response.should render_template("index")
       end
     end
 
