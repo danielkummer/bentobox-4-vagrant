@@ -37,4 +37,4 @@ capybara-*.html
 /public/uploads/*
 /spec/coverage/*
 
-/config/initializers/dev_environment.rb
+/config/heroku_env.rb

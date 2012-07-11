@@ -4,6 +4,8 @@ gem 'rails', '3.2.6'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'mongoid', '~> 3.0.0.rc'
+
+gem 'fog'
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'devise'
