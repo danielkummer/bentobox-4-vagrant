@@ -36,3 +36,5 @@ capybara-*.html
 **.orig
 /public/uploads/*
 /spec/coverage/*
+
+/config/initializers/dev_environment.rb
