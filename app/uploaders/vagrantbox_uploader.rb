@@ -2,19 +2,13 @@
 
 class VagrantboxUploader < CarrierWave::Uploader::Base
   permissions 0777
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
 
-  # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
-  # include Sprockets::Helpers::RailsHelper
-  # include Sprockets::Helpers::IsolatedHelper
+  if Rails.env.test? or Rails.env.cucumber?
+    storage :file
+  else
+    storage :fog
+  end
 
-  # Choose what kind of storage to use for this uploader:
-  #storage :file
-  #not supported with mongoid 3 at the moment
-  #storage :grid_fs
-  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:

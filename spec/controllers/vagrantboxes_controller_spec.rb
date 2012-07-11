@@ -4,12 +4,8 @@ require 'spec_helper'
 describe VagrantboxesController do
   login_user
 
-  before(:each) do
-    @valid_box = Fabricate.build(:vagrantbox)
-  end
-
-
   def valid_attributes
+    @valid_box = Fabricate.build(:vagrantbox)
     {
       name: @valid_box.name,
       box: @valid_box.box

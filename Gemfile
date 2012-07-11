@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3' # for heroku
+ruby '1.9.3' # for heroku , needs bundler ~> 1.2.0pre
 gem 'rails', '3.2.6'
 gem 'haml-rails'
 gem 'jquery-rails'
@@ -11,9 +11,6 @@ gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'devise'
 gem 'simple_form'
-
-#gem 'devise_ldap_authenticatable'
-
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
