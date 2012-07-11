@@ -8,6 +8,6 @@ class Vagrantbox
   validates :name, :box, :presence => true
   validates :name, :uniqueness => true
 
-  attr_accessible :name, :box
+  attr_accessible :name, :box, :box_cache
 
 end

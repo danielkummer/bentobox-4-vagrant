@@ -27,6 +27,9 @@ If you'd like some example data use
 * Categorized ingredients
 * Vagrantbox upload
 
+== Known Issues
+
+* The carrierwave-mongoid gem currently isn't working in conjunction with the mongoid 3 gem. Because of this there is no gridFs support for carrierwave!
 
 
 

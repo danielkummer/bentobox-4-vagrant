@@ -54,9 +54,16 @@ Spork.prefork do
       DatabaseCleaner.clean
     end
 
-    config.after(:suite) do
-      FileUtils.rm_rf Dir[Rails.root.join("public/uploads/tmp")]
-    end
+    config.after(:all) do
+        # Get rid of the linked images
+        if Rails.env.test? || Rails.env.cucumber?
+          tmp = Factory(:vagrantbox)
+          store_path = File.dirname(File.dirname(tmp.box.url))
+          temp_path = tmp.box.cache_dir
+          FileUtils.rm_rf(Dir["#{Rails.root}/public/#{store_path}/[^.]*"])
+          FileUtils.rm_rf(Dir["#{temp_path}/[^.]*"])
+        end
+      end
 
     config.mock_with :rspec
     config.infer_base_class_for_anonymous_controllers = false

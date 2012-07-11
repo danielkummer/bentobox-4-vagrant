@@ -12,6 +12,8 @@ class VagrantboxUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   storage :file
+  #not supported with mongoid 3 at the moment
+  #storage :grid_fs
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
