@@ -57,7 +57,7 @@ Spork.prefork do
     config.after(:all) do
         # Get rid of the linked images
         if Rails.env.test? || Rails.env.cucumber?
-          tmp = Factory(:vagrantbox)
+          tmp = Fabricate(:vagrantbox)
           store_path = File.dirname(File.dirname(tmp.box.url))
           temp_path = tmp.box.cache_dir
           FileUtils.rm_rf(Dir["#{Rails.root}/public/#{store_path}/[^.]*"])
