@@ -17,23 +17,16 @@ class Bentobox
   validates :vagrantbox, presence: true
 
 
-  #todo not working...
-=begin
-  class ConfigurationValidator < ActiveModel::EachValidator
-    def validate_each(record, attribute, value)
-      ingredients = Ingredient.includes(value)
-      record.errors.add attribute, "must have an ingredient with a network configration" unless ingredients.size > 0 and !ingredients.with_network_config.nil?
-    end
-  end
-
-  validates :ingredients, :configuration => true
-=end
-
-
   attr_accessible :name, :description, :public, :vagrantbox, :ingredient_ids
 
-  scope :visible_to_user, lambda { |user|
-    any_of({:public => true}, {:user_id => user.id})
+  scope :visible_to_user, ->(user = nil) {
+    if user.present?
+      any_of({public: true}, {user_id: user.id})
+    else
+      where(public: true)
+    end
   }
+
+  scope :recent, ->(limit) { desc(:created_at).limit(limit) }
 
 end
