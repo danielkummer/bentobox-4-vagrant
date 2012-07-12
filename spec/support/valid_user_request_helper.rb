@@ -17,6 +17,6 @@ module ValidUserRequestHelper
     visit new_user_session_url
     fill_in "user_email", :with => @current_user.email
     fill_in "user_password", :with => @current_user.password
-    click_button "Sign in"
+    click_button "Login"
     end
 end
