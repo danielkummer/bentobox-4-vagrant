@@ -21,7 +21,7 @@
       %td
         = link_to edit_vagrantbox_path(vagrantbox), class: "btn", title: "Edit" do
           %i.icon-edit
-        = link_to vagrantbox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger", title: "Delete" do
+        = link_to vagrantbox, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger", title: "Delete" do
           %i.icon-trash
 
 

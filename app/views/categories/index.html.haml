@@ -19,5 +19,5 @@
       %td
         = link_to edit_category_path(category), class: "btn", title: "Edit" do
           %i.icon-edit
-        = link_to category, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger", title: "Delete" do
+        = link_to category, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger", title: "Delete" do
           %i.icon-trash
