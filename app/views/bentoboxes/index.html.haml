@@ -26,7 +26,7 @@
         -if bentobox.user == current_user
           =link_to edit_user_bentobox_path(current_user, bentobox), class: "btn", title: "Edit" do
             %i.icon-edit
-          =link_to bentobox, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger", title: "Delete" do
+          =link_to bentobox, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger", title: "Delete" do
             %i.icon-trash
 
 

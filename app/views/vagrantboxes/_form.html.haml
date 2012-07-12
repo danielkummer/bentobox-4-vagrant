@@ -3,10 +3,12 @@
     %legend Configure vagrantbox
     = f.input :name
     = f.input :box
-    .control-group
-      = f.label :remove_box, "Remove box?", class: "control-label"
-      .controls
-        = f.check_box :remove_box
+    - unless @vagrantbox.box.empty?
+      %p= "Box: #{@vagrantbox.box.identifier}"
+      .control-group
+        = f.label :remove_box, "Remove box?", class: "control-label"
+        .controls
+          = f.check_box :remove_box
 
     .form-actions
       = f.submit 'Save', class: "btn btn-success"
