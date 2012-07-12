@@ -16,7 +16,7 @@ describe VagrantboxesController do
     it "assigns all vagrantboxes as @vagrantboxes" do
       vagrantbox = Fabricate(:vagrantbox)
       get :index
-      assigns(:vagrantboxes).should eq([vagrantbox])
+      assigns(:vagrantboxes).should include( vagrantbox)
     end
   end
 
@@ -39,7 +39,7 @@ describe VagrantboxesController do
     describe "with valid params" do
       it "creates a new Vagrantbox" do
         expect {
-          post :create, {:vagrantbox => Fabricate.build(:vagrantbox)}
+         post :create, {:vagrantbox => valid_attributes}
         }.to change(Vagrantbox, :count).by(1)
       end
 
