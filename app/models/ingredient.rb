@@ -10,12 +10,12 @@ class Ingredient
   has_and_belongs_to_many :bentoboxes, :inverse_of => :ingredients
 
   field :name, type: String
-  field :cookbooks, type: String
+  field :cookbooks, type: Array
+
 
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
 
-  #validates_associated :networkconfig
 
   accepts_nested_attributes_for :networkconfig,
                                 :portmappings,
@@ -33,29 +33,9 @@ class Ingredient
   scope :with_share_folders, excludes(:share_folders => nil)
   scope :with_portmappings, excludes(:portmappings => nil)
 
-=begin
-  after_save :rebuild_categories
 
-  protected
-
-  #todo
-
-  def rebuild_categories
-    Post.collection.map_reduce(
-        "function() { this.categories.forEach(function(c){ emit(c, c.ingredients); }); }",
-        "function(key,values) { var count = 0; values.forEach(function(v){ count += v; }); return count; }",
-        {:out => 'tags'}
-    )
+  before_validation do |model|
+    model.cookbooks.reject!(&:blank?) if model.cookbooks
   end
-
-  def self.all_tags(limit = nil)
-    tags = Mongoid.master.collection('tags')
-    opts = {:sort => ["_id", :desc]}
-    opts[:limit] = limit unless limit.nil?
-
-    tags.find({}, opts).to_a \
-      .map! { |item| {:name => item['_id'], :post_count => item['value'].to_i} }
-  end
-=end
 
 end
