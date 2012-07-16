@@ -8,13 +8,8 @@
 
 
   .fieldset
-    %legend Recepies and cookbooks
-    .row
-      .span4
-        = f.input :cookbooks
-      .span4
-        .alert.alert-info
-          Enter recepies and cookbooks as comma seperated list; e.g "apache2, mysql"
+    %legend Recipes and cookbooks
+    = f.input :cookbooks, :collection => ChefClient.cookbooks_list, :selected => @ingredient.cookbooks, :input_html => { multiple: true }, :include_blank => false
 
   .fieldset
     %legend Network configuration

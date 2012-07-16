@@ -20,6 +20,7 @@ jQuery ->
     $.each $(this).data(), (key, value) ->
       $("[id$="+key+"]:last").val(value)
 
+  $('#ingredient_cookbooks').chosen()
 
 
 

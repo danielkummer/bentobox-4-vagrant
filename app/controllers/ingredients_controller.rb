@@ -1,6 +1,5 @@
 class IngredientsController < ApplicationController
   respond_to :html
-
   def initialize
     super()
     @network = [:hostonly, :bridged]
@@ -57,4 +56,5 @@ class IngredientsController < ApplicationController
       format.html { redirect_to ingredients_url }
     end
   end
+
 end
