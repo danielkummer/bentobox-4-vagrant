@@ -45,7 +45,7 @@ module BentoboxesHelper
   def config_recipes
     result = ""
     @bentobox.ingredients.where(:cookbooks.ne => "", :cookbooks.exists => true).each do |ingredient|
-      ingredient.cookbooks.split(',').each do |cookbook|
+      ingredient.cookbooks.each do |cookbook|
         result << "chef.add_recipe(\"#{cookbook.strip}\")\n    "
       end
     end

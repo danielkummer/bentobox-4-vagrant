@@ -1,44 +1,50 @@
-%p#notice= notice
+.hero-unit
+  %p#notice= notice
 
-%p
-  %b Name:
-  = @ingredient.name
-%p
-  %b Cookbooks:
-  = @ingredient.cookbooks
-%p
-  %b Network Config:
-  = @ingredient.networkconfig
+  %h1= @ingredient.name
 
-- if @ingredient.share_folders.size > 0
-  %p Share Folder:
-  %table{class: "table table-striped"}
-    %thead
-      %tr
-        %td logical name
-        %td host path
-        %td guest path
-        %td additional options
+  %p
+    %b Category:
+    = @ingredient.category.name
+
+  - if @ingredient.cookbooks
+    %p
+      %b Cookbooks:
+      %ul.unstyled
+        - @ingredient.cookbooks.each do |cookbook|
+          %li= cookbook
+
+  - if @ingredient.networkconfig
+    %p
+      %b Network Config:
+      = @ingredient.networkconfig
+
+  - if @ingredient.share_folders.size > 0
+    %p Share Folder:
+    %table{class: "table table-striped"}
+      %thead
+        %tr
+          %td logical name
+          %td host path
+          %td guest path
+          %td additional options
 
 
-    - for sf in @ingredient.share_folders
-      %tr
-        %td= sf.logical_name
-        %td= sf.host_path
-        %td= sf.guest_path
-        %td= sf.additional_options
+      - for sf in @ingredient.share_folders
+        %tr
+          %td= sf.logical_name
+          %td= sf.host_path
+          %td= sf.guest_path
+          %td= sf.additional_options
 
-%p
-  %b Category:
-  = @ingredient.category.name
 
-- if @ingredient.portmappings.size > 0
-  %p Portmappings:
-  - for mapping in @ingredient.portmappings
-    %p= mapping.mapping
+  - if @ingredient.portmappings.size > 0
+    %p Portmappings:
+    - for mapping in @ingredient.portmappings
+      %p= mapping.mapping
 
-= link_to edit_ingredient_path(@ingredient), class: "btn" do
-  %i.icon-edit
-  Edit
-\|
-= link_to 'Back', ingredients_path
+  = link_to edit_ingredient_path(@ingredient), class: "btn" do
+    %i.icon-edit
+    Edit
+  \|
+  = link_to 'Back', ingredients_path
