@@ -4,3 +4,14 @@
 
 jQuery ->
   $('#bentobox_ingredient_ids').chosen()
+  $('#bentobox_additional_configurations').chosen()
+  $('#toggle_additional_configuration')
+  $('form').on 'click', '#toggle_additional_configuration', (event) ->
+    $('#additional_configuration').toggle()
+    $('#toggle_additional_configuration').children(":first").toggleClass("icon-eye-open").toggleClass("icon-eye-close")
+    if ( $('#additional_configuration').css('display') == 'block' )
+      #$(this).html($(this).html().replace(/Show/, "Hide"));
+    else
+      #$(this).html($(this).html().replace(/Hide/, "Show"));
+    event.preventDefault()
+

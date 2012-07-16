@@ -6,6 +6,7 @@ class Bentobox
   belongs_to :user
   belongs_to :vagrantbox
   has_and_belongs_to_many :ingredients, :inverse_of => :bentoboxes
+  has_and_belongs_to_many :additional_configurations, :inverse_of => :bentoboxes, dependent: :restrict
 
   #problems with point in name - generate slug later...
   #field :_id, type: String, default: -> { name }

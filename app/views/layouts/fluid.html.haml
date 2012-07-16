@@ -37,14 +37,24 @@
                 = link_to ingredients_path do
                   %i.icon-leaf
                   Ingredients
-              %li
-                = link_to vagrantboxes_path do
-                  %i.icon-inbox
-                  Base boxes
-              %li
-                = link_to categories_path do
-                  %i.icon-tags
-                  Categories
+              %li.dropdown
+                %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+                  Advanced
+                  %b.caret
+                %ul.dropdown-menu
+
+                  %li
+                    = link_to vagrantboxes_path do
+                      %i.icon-inbox
+                      Base boxes
+                  %li
+                    = link_to categories_path do
+                      %i.icon-tags
+                      Categories
+                  %li
+                    = link_to additional_configurations_path do
+                      %i.icon-tags
+                      Additional Options
             - if current_user.blank?
               %ul.nav.pull-right
                 %li= link_to 'Sign Up', new_user_registration_path
