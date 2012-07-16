@@ -15,7 +15,7 @@ module BentoboxesHelper
       result << "config.vm.network = " + box_with_config.networkconfig.to_s
       first_record = false
     end
-    result << "# No vm.network configuration found - check your ingredients for one..."
+    result << "# No vm.network configuration found - check your ingredients for one..." if result.empty?
     result
   end
 
@@ -26,7 +26,7 @@ module BentoboxesHelper
         result << "config.vm.forward_port #{map.mapping}\n  "
       end
     end
-    result << "# No vm.forward_port configuration found - check your ingredients for one..."
+    result << "# No vm.forward_port configuration found - check your ingredients for one..." if result.empty?
     result
   end
 
@@ -35,7 +35,7 @@ module BentoboxesHelper
     @bentobox.ingredients.where(:share_folders.ne => "", :share_folders.exists => true).each do |ingredient|
       ingredient.share_folders.each do |sf|
         result << "config.vm.share_folder #{sf.logical_name}, #{sf.host_path}, #{sf.guest_path}"
-        result << ", #{sf.additional_options}" unless sf.additional_options.empty?
+        result << ", #{sf.additional_options}" unless sf.additional_options.blank?
         result << "\n  "
       end
     end

@@ -21,10 +21,10 @@
     %tr
       %td= ingredient.name
       %td= ingredient.category.name
-      %td= true_false_label(ingredient.cookbooks.empty?)
-      %td= true_false_label(ingredient.portmappings.exists?)
-      %td= true_false_label(ingredient.share_folders.exists?)
-      %td= true_false_label(ingredient.networkconfig.nil?)
+      %td= true_false_label(!ingredient.cookbooks.blank?)
+      %td= true_false_label(!ingredient.portmappings.blank?)
+      %td= true_false_label(!ingredient.share_folders.blank?)
+      %td= true_false_label(!ingredient.networkconfig.blank?)
       %td
         = link_to ingredient, class: "btn btn-info", title: "Show" do
           %i.icon-eye-open
