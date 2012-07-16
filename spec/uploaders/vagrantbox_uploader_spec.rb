@@ -20,5 +20,3 @@ describe VagrantboxUploader do
     @uploader.should have_permissions(0777)
   end
 end
-
-
