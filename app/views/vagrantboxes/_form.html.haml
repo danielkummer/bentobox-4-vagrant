@@ -3,8 +3,10 @@
     %legend Configure vagrantbox
     = f.input :name
     = f.input :box
-    - unless @vagrantbox.box.empty?
-      %p= "Box: #{@vagrantbox.box.identifier}"
+    - unless @vagrantbox.box.blank?
+      .control-group
+        .controls
+          = "Box: #{File.basename(@vagrantbox.box.to_s)}"
       .control-group
         = f.label :remove_box, "Remove box?", class: "control-label"
         .controls
