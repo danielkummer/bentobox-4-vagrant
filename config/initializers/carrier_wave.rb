@@ -6,9 +6,12 @@ CarrierWave.configure do |config|
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.]/
 
   if Rails.env.test? or Rails.env.cucumber?
-    config.storage = :file
     config.enable_processing = false
-  else
+  end
+  config.storage = :file
+
+=begin
+  # amazon S3 config for heroku deployment
     config.storage = :fog
     config.fog_credentials = {
       :provider => 'AWS',
@@ -19,6 +22,7 @@ CarrierWave.configure do |config|
     config.fog_directory = ENV['S3_BUCKET']
     config.fog_public = false
     config.fog_attributes = {'Cache-Control' => 'max-age=315576000'} # optional, defaults to {}
-  end
+=end
+
 
 end
