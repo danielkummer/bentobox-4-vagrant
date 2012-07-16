@@ -9,7 +9,7 @@
 
   .fieldset
     %legend Recipes and cookbooks
-    = f.input :cookbooks, :collection => ChefClient.cookbooks_list, :selected => @ingredient.cookbooks, :input_html => { multiple: true }, :include_blank => false
+    = f.input :cookbooks, :collection => @available_cookbooks, :selected => @ingredient.cookbooks, :input_html => { multiple: true }, :include_blank => false
 
   .fieldset
     %legend Network configuration

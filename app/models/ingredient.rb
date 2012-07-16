@@ -34,6 +34,7 @@ class Ingredient
   scope :with_portmappings, excludes(:portmappings => nil)
 
 
+  #remove stupid empty array content form form
   before_validation do |model|
     model.cookbooks.reject!(&:blank?) if model.cookbooks
   end

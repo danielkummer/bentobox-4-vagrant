@@ -5,16 +5,18 @@ class ChefClient
     def rest
       @rest ||= begin
         require 'chef/rest'
-        Chef::Config[:node_name]= APP_CONFIG[:node_name]
-        Chef::Config[:client_key]= APP_CONFIG[:client_key]
-        Chef::Config[:chef_server_url]= APP_CONFIG[:chef_server_url]
+        Chef::Config[:node_name]= APP_CONFIG[:chef][:node_name]
+        Chef::Config[:client_key]= APP_CONFIG[:chef][:client_key]
+        Chef::Config[:chef_server_url]= APP_CONFIG[:chef][:chef_server_url]
         Chef::REST.new(Chef::Config[:chef_server_url])
       end
     end
 
     def cookbooks_list
-      env = APP_CONFIG[:environment] || nil
-      num_versions = APP_CONFIG[:all_versions] ? "num_versions=all" : "num_versions=1"
+      return config_cookbooks if bypass_chef_server?
+
+      env = APP_CONFIG[:chef][:environment] || nil
+      num_versions = APP_CONFIG[:chef][:all_versions] ? "num_versions=all" : "num_versions=1"
       api_endpoint = env ? "/environments/#{env}/cookbooks?#{num_versions}" : "/cookbooks?#{num_versions}"
       cookbook_versions = rest.get_rest(api_endpoint)
       format_cookbook_list(cookbook_versions)
@@ -22,22 +24,23 @@ class ChefClient
 
     private
     def format_cookbook_list(item)
-      result = item.inject({}) do |cookbooks, (cookbook, versions)|
+      item.inject({}) do |cookbooks, (cookbook, versions)|
         cookbooks[cookbook] = cookbook
         cookbooks
       end
     end
-=begin
-      versions_by_cookbook = item.inject({}) do |collected, (cookbook, versions)|
-        collected[cookbook] = versions["versions"].map { |v| v['version'] }
-        collected
-      end
-      key_length = versions_by_cookbook.empty? ? 0 : versions_by_cookbook.keys.map { |name| name.size }.max + 2
-      versions_by_cookbook.sort.map do |cookbook, versions|
-        "#{cookbook.ljust(key_length)} #{versions.join('  ')}"
 
+    def bypass_chef_server?
+      APP_CONFIG[:chef][:cookbooks].nil?
+    end
+
+    def config_cookbooks
+      APP_CONFIG[:chef][:cookbooks].split(',').inject({}) do |result, cookbook|
+        cookbook = cookbook.strip
+        result[cookbook] = cookbook
+        result
       end
-  end
-=end
+    end
+
   end
 end
