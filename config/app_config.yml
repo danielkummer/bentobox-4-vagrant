@@ -1,0 +1,10 @@
+development: &defaults
+  node_name: test
+  client_key: <%= File.join(Rails.root, "config", "test.pem")) %>
+  chef_server_url: http://localhost:4000
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

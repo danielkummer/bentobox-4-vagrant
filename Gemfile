@@ -11,6 +11,7 @@ gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'devise'
 gem 'simple_form'
+gem 'chef', '~> 10.12.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -21,6 +22,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'nifty-generators'
   gem 'spork'
   gem 'capistrano'
   gem 'rspec-rails'
