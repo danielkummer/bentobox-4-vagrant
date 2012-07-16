@@ -1,7 +1,9 @@
 development: &defaults
   node_name: test
-  client_key: <%= File.join(Rails.root, "config", "test.pem")) %>
+  client_key: config/test.pem
   chef_server_url: http://localhost:4000
+  #environment: _default
+  all_versions: false
 
 test:
   <<: *defaults
