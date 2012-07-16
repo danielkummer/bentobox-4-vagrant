@@ -21,6 +21,7 @@ test:
       <<: *default_session
       database: vagrant_cook_test
 
+# for heroku environment
 <% if ENV['MONGOHQ_URL'] %>
   <% uri = URI.parse(ENV['MONGOHQ_URL']) %>
 production:
