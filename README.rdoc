@@ -20,17 +20,31 @@ If you'd like some example data use
 
     rake db:seed
 
-You need to configure bentobox-4-vagrant as a chef client in order to list the available cookbooks when creating or editing
+* app_config.yml: You need to configure bentobox-4-vagrant as a chef client in order to list the available cookbooks when creating or editing
 ingredients. To do this simple edit app_config.yml to your needs and place the private key generated from the chef-server in
 the _config_ directory or the path supplied in the config file.
-
 
 == Features
 
 * Private and public bentoboxes
 * Categorized ingredients
-* Recepies from a chef server
+* Cookbooks list gathered from a chef server (or static configuration)
 * Vagrantbox upload
+
+== Heroku support
+
+Although the demo application is running on heroku, there are some additional steps needed for production.
+Heroku only supports carrierwave (file upload) in conjunction with an amazon S3 (or another cloud storage service).
+You need to adjust the following files to support file upload on heroku (the affected lines are commented)
+
+* config/initializers/carrier_wave.rb
+* app/uploaders/vagrantbox_uploader.rb
+
+Additionally, the following environment variables must be set (replace the bracket values with the correct ones):
+
+    heroku config:add S3_KEY=[YOUR_KEY]
+    heroku config:add S3_SECRET=[YOUR_SECRET]
+    heroku config:add S3_BUCKET=[THE_BUCKET]
 
 == Known Issues
 
