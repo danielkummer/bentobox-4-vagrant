@@ -20,11 +20,16 @@ If you'd like some example data use
 
     rake db:seed
 
+You need to configure bentobox-4-vagrant as a chef client in order to list the available cookbooks when creating or editing
+ingredients. To do this simple edit app_config.yml to your needs and place the private key generated from the chef-server in
+the _config_ directory or the path supplied in the config file.
+
 
 == Features
 
 * Private and public bentoboxes
 * Categorized ingredients
+* Recepies from a chef server
 * Vagrantbox upload
 
 == Known Issues
