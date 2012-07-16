@@ -31,7 +31,7 @@ class ChefClient
     end
 
     def bypass_chef_server?
-      APP_CONFIG[:chef][:cookbooks].nil?
+      !APP_CONFIG[:chef][:cookbooks].nil?
     end
 
     def config_cookbooks
