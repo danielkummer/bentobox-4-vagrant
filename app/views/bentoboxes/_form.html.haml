@@ -23,6 +23,19 @@
           - for c in Category.order_by(name: :asc)
             %legend= c.name
             = f.collection_check_boxes(:ingredient_ids, c.ingredients.order_by(name: :asc), :id, :name, {collection_wrapper_tag: 'div class="controls"', item_wrapper_tag: 'label class="checkbox"'}, {multiple: true})
+
+
+
+    %legend
+      spice it!
+      %a.btn#toggle_additional_configuration{'data-toggle'=>"button"}
+        %i.icon-eye-open
+
+    .row#additional_configuration.hide
+
+      .span6.offset2
+        = f.input :additional_configurations, :collection => AdditionalConfiguration.all, :selected => @bentobox.additional_configurations, :input_html => { multiple: true }, :include_blank => false
+
     %legend describe it
     .row
       .span2

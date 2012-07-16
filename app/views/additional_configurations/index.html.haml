@@ -1,0 +1,21 @@
+%h1 Listing additional_configurations
+
+%table
+  %tr
+    %th Name
+    %th Configuration
+    %th
+    %th
+    %th
+
+  - @additional_configurations.each do |additional_configuration|
+    %tr
+      %td=additional_configuration.name
+      %td=additional_configuration.value
+      %td= link_to 'Show', additional_configuration
+      %td= link_to 'Edit', edit_additional_configuration_path(additional_configuration)
+      %td= link_to 'Destroy', additional_configuration, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Additional configuration', new_additional_configuration_path

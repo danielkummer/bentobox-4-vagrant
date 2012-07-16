@@ -1,0 +1,11 @@
+= simple_form_for @additional_configuration, html:{class: "form-horizontal"} do |f|
+  = f.error_notification
+  .fieldset
+    %legend additional configuration (Vagrantconfig)
+    = f.input :name
+    = f.input :value
+
+    .form-actions
+      = f.submit 'Save', class: "btn btn-primary"
+      = link_to 'Back', bentoboxes_path, class: "btn"
+
