@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AdditionalConfiguration do
   it "should have a valid factory" do
-    Fabricate.build(:additional_configuation).should be_valid
+    Fabricate.build(:additional_configuration).should be_valid
   end
 
   it { should have_field(:value).of_type(String) }
@@ -10,6 +10,6 @@ describe AdditionalConfiguration do
   it { should validate_presence_of :value }
   it { should validate_presence_of :name }
   it { should validate_format_of(:value).to_allow("config.ok").not_to_allow("screwedconfig") }
-  it { should be_embedded_in(:bentobox).as_inverse_of(:additional_configuations) }
+  it { should have_and_belong_to_many :bentoboxes }
 
 end
