@@ -9,12 +9,10 @@ development: &defaults
 
 
 test:
-  <<: *defaults
   chef:
     cookbooks: apache2, mysql, third
 
 production:
-  <<: *defaults
   chef:
     #only supplied because the heroku demo doesn't have a chef-server attached
     cookbooks: apache2, mysql, third
