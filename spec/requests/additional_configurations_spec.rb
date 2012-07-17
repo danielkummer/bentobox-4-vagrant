@@ -1,11 +1,15 @@
 require 'spec_helper'
 
 describe "AdditionalConfigurations" do
+
+  before(:each) { login_with :user }
+
   describe "GET /additional_configurations" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get additional_configurations_path
-      response.status.should be(200)
+    it "displays additional configurations" do
+      config = Fabricate(:additional_configuration)
+      visit additional_configurations_path
+      page.should have_content(config.name)
     end
+
   end
 end
