@@ -1,21 +1,26 @@
-%h1 Listing additional_configurations
+.page-header
+  %h1
+    Spices
+    %small additional options for Vagrantconfig file
+    .pull-right
+      = link_to new_additional_configuration_path, class: "btn btn-large" do
+        %i.icon-asterisk
+        New spice
 
-%table
+
+%table{class: 'table table-striped'}
   %tr
     %th Name
-    %th Configuration
-    %th
-    %th
-    %th
+    %th Value
+    %th Actions
 
   - @additional_configurations.each do |additional_configuration|
     %tr
       %td=additional_configuration.name
       %td=additional_configuration.value
-      %td= link_to 'Show', additional_configuration
-      %td= link_to 'Edit', edit_additional_configuration_path(additional_configuration)
-      %td= link_to 'Destroy', additional_configuration, :confirm => 'Are you sure?', :method => :delete
+      %td
+        =link_to edit_additional_configuration_path(additional_configuration), class: "btn", title: "Edit" do
+          %i.icon-edit
+        =link_to additional_configuration, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger", title: "Delete" do
+          %i.icon-trash
 
-%br
-
-= link_to 'New Additional configuration', new_additional_configuration_path

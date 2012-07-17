@@ -52,4 +52,12 @@ module BentoboxesHelper
     result.html_safe
   end
 
+  def config_additional_configurations
+    result = ""
+    @bentobox.additional_configurations.each do |option|
+      result << "#{option.value}\n  "
+    end
+    result
+  end
+
 end

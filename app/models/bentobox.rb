@@ -18,7 +18,7 @@ class Bentobox
   validates :vagrantbox, presence: true
 
 
-  attr_accessible :name, :description, :public, :vagrantbox, :ingredient_ids
+  attr_accessible :name, :description, :public, :vagrantbox, :ingredient_ids, :additional_configuration_ids
 
   scope :visible_to_user, ->(user = nil) {
     if user.present?
