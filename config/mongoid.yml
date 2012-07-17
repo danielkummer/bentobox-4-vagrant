@@ -22,16 +22,14 @@ test:
       database: vagrant_cook_test
 
 # for heroku environment
-<% if ENV['MONGOHQ_URL'] %>
-  <% uri = URI.parse(ENV['MONGOHQ_URL']) %>
 production:
   <<: *defaults
   sessions:
     default:
       <<: *default_session
-      database: <%= uri.path.sub('/','') %>
-      username: <%= uri.user %>
-      password: <%= uri.password %>
+      database: app5790333
+      username: heroku
+      password: 820d543aac57c58b7813e605126d047d
       hosts:
-        - <%= uri.host %>:<%= uri.port %>
-<% end %>
+        - flame.mongohq.com:27108
+
