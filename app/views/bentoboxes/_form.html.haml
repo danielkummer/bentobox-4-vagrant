@@ -30,11 +30,9 @@
       spice it!
       %a.btn#toggle_additional_configuration{'data-toggle'=>"button"}
         %i.icon-eye-open
-
-    .row#additional_configuration.hide
-
-      .span6.offset2
-        = f.input :additional_configurations, :collection => AdditionalConfiguration.all, :selected => @bentobox.additional_configurations, :input_html => { multiple: true }, :include_blank => false
+    .row
+      .span6.offset2#additional_configuration.hide
+        = f.input :additional_configuration_ids, :collection => AdditionalConfiguration.all, :input_html => { multiple: true }, label: "Additional configurations"
 
     %legend describe it
     .row

@@ -37,11 +37,13 @@
       %dt Public box?
       %dd=true_false_label(@bentobox.public).html_safe
       %dt Network configuration?
-      %dd= true_false_label(@bentobox.ingredients.with_network_config.exists?)
+      %dd= true_false_label(!@bentobox.ingredients.with_network_config.blank?)
       %dt Share folders?
-      %dd= true_false_label(@bentobox.ingredients.with_share_folders.exists?)
+      %dd= true_false_label(!@bentobox.ingredients.with_share_folders.blank?)
       %dt Portmappings?
-      %dd= true_false_label(@bentobox.ingredients.with_portmappings.exists?)
+      %dd= true_false_label(!@bentobox.ingredients.with_portmappings.blank?)
+      %dt Additional configurations?
+      %dd= true_false_label(!@bentobox.additional_configurations.blank?)
 
 
 

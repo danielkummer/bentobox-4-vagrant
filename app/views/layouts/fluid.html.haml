@@ -40,6 +40,7 @@
               %li.dropdown
                 %a.dropdown-toggle{'data-toggle' => 'dropdown'}
                   Advanced
+                  %i.icon-cog
                   %b.caret
                 %ul.dropdown-menu
 
@@ -53,8 +54,8 @@
                       Categories
                   %li
                     = link_to additional_configurations_path do
-                      %i.icon-tags
-                      Additional Options
+                      %i.icon-asterisk
+                      Spices
             - if current_user.blank?
               %ul.nav.pull-right
                 %li= link_to 'Sign Up', new_user_registration_path
