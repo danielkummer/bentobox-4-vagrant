@@ -24,7 +24,7 @@ VagrantCook::Application.routes.draw do
   end
 
 
-    post '/create_client' => 'chef#create_client'
+    get '/create_client' => 'chef#create_client'
 
    # post "create_client/:user_id", action: "create_client"
 
