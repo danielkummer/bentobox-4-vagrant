@@ -8,6 +8,7 @@ describe User do
 
   it { should have_many :bentoboxes }
 
+
   before(:each) do
     @attr = {
       :email => "user@example.com",
