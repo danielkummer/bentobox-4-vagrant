@@ -22,6 +22,21 @@ class ChefClient
       format_cookbook_list(cookbook_versions)
     end
 
+    def create_client(user)
+
+     begin
+       rest.post_rest("clients", {:name => user.client_name})
+     rescue Net::HTTPServerException => e
+       # If that fails, go ahead and try and update it
+       if e.response.code == "409"
+         rest.put_rest("clients/#{user.client_name}", {:name => user.client_name})
+         #r.put_rest("clients/#{user.client_name}", { :name => user.client_name, :private_key => new_key })
+       else
+         raise e
+       end
+     end
+    end
+
     private
     def format_cookbook_list(item)
       item.inject({}) do |cookbooks, (cookbook, versions)|

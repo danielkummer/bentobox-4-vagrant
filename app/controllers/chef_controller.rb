@@ -4,18 +4,7 @@ class ChefController < ApplicationController
     #must use reset-api directly when not using couchdb
     user = current_user
 
-    r = Chef::REST.new(Chef::Config[:chef_server_url])
-    begin
-      r.post_rest("clients", {:name => user.client_name})
-    rescue Net::HTTPServerException => e
-      # If that fails, go ahead and try and update it
-      if e.response.code == "409"
-        r.put_rest("clients/#{user.client_name}", {:name => user.client_name})
-        #r.put_rest("clients/#{user.client_name}", { :name => user.client_name, :private_key => new_key })
-      else
-        raise e
-      end
-    end
+   client = ChefClient.create_client(user)
 
     #client = Chef::REST.new(Chef::Config[:chef_server_url]).post_rest("clients", {name: user.client_name})
 
