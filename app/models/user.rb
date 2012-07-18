@@ -10,17 +10,17 @@ class User
   validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/,
                              message: "Invalid email"}
 
-  #validates :password, :length => 6..128 #should be handled by devise config - check!!
-
-  #attr_accessor :password
-
   field :client_name, type: String
+  validates :client_name, uniqueness: true
+  validates :client_name, format: {with: /\w*_*-*/,
+                                   message: "Invalid client name, only aphanumerical - and _ allowed"}
 
-  has_many :bentoboxes
+  field :private_key, type: String
 
+  has_many :bentoboxes, dependent: :destroy
 
   after_create :generate_client_name
-  after_create :create_chef_client
+  #after_create :create_chef_client
 
   def generate_client_name(record)
     result = record.email.gsub /@/, '_a_'
@@ -47,4 +47,4 @@ class User
       record.private_key = client['private_key']
     end
   end
-
+end

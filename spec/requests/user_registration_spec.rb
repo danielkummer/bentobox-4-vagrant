@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "user registration" do
+describe "users registration" do
 
   it "allows new users to register with an email address and password" do
     visit "/users/register"
