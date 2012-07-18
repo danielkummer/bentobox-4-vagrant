@@ -14,20 +14,20 @@ describe BentoboxesController do
 
   describe "GET index" do
     it "assigns all bentoboxes as @bentoboxes" do
-      bentobox = Fabricate(:bentobox, :user => @user)
+      bentobox = Fabricate(:bentobox, :users => @user)
       get :index
       assigns(:bentoboxes).should eq([bentobox])
     end
   end
 
   describe "GET show" do
-    it "assigns the requested bentobox as @bentobox for the user who created it..." do
-      bentobox = Fabricate(:bentobox, user: @user)
+    it "assigns the requested bentobox as @bentobox for the users who created it..." do
+      bentobox = Fabricate(:bentobox, users: @user)
       get :show, {:id => bentobox.to_param}
       assigns(:bentobox).should eq(bentobox)
     end
 
-    it "assigns no bentobox because the user didn't create it" do
+    it "assigns no bentobox because the users didn't create it" do
       bentobox = Fabricate(:bentobox)
       expect { get :show, :id => bentobox.to_param}.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
@@ -42,7 +42,7 @@ describe BentoboxesController do
 
   describe "GET edit" do
     it "assigns the requested bentobox as @bentobox" do
-      bentobox = Fabricate(:bentobox, user: @user)
+      bentobox = Fabricate(:bentobox, users: @user)
       get :edit, {:user_id => @user.to_param, :id => bentobox.to_param}
       assigns(:bentobox).should eq(bentobox)
     end
@@ -51,18 +51,18 @@ describe BentoboxesController do
     describe "with valid params" do
       it "creates a new Bentobox" do
         expect {
-          post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, user: @user)}
+          post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, users: @user)}
         }.to change(Bentobox, :count).by(1)
       end
 
       it "assigns a newly created bentobox as @bentobox" do
-        post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, user: @user)}
+        post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, users: @user)}
         assigns(:bentobox).should be_a(Bentobox)
         assigns(:bentobox).should be_persisted
       end
 
       it "redirects to the created bentobox" do
-        post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, user: @user)}
+        post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, users: @user)}
         response.should redirect_to(Bentobox.last)
       end
     end
@@ -85,19 +85,19 @@ describe BentoboxesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested bentobox" do
-        bentobox = Fabricate(:bentobox, user: @user)
+        bentobox = Fabricate(:bentobox, users: @user)
         Bentobox.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, {:user_id => @user.to_param, :id => bentobox.to_param, :bentobox => {'these' => 'params'}}
       end
 
       it "assigns the requested bentobox as @bentobox" do
-        bentobox = Fabricate(:bentobox, user: @user)
+        bentobox = Fabricate(:bentobox, users: @user)
         put :update, {:user_id => @user.to_param, :id => bentobox.to_param, :bentobox => valid_attributes}
         assigns(:bentobox).should eq(bentobox)
       end
 
       it "redirects to the bentobox" do
-        bentobox = Fabricate(:bentobox, user: @user)
+        bentobox = Fabricate(:bentobox, users: @user)
         put :update, {:user_id => @user.to_param, :id => bentobox.to_param, :bentobox => valid_attributes}
         response.should redirect_to(bentobox)
       end
@@ -105,14 +105,14 @@ describe BentoboxesController do
 
     describe "with invalid params" do
       it "assigns the bentobox as @bentobox" do
-        bentobox = Fabricate(:bentobox, user: @user)
+        bentobox = Fabricate(:bentobox, users: @user)
         Bentobox.any_instance.stub(:save).and_return(false)
         put :update, {:user_id => @user.to_param, :id => bentobox.to_param, :bentobox => {}}
         assigns(:bentobox).should eq(bentobox)
       end
 
       it "re-renders the 'edit' template" do
-        bentobox = Fabricate(:bentobox, user: @user)
+        bentobox = Fabricate(:bentobox, users: @user)
         Bentobox.any_instance.stub(:save).and_return(false)
         put :update, {:user_id => @user.to_param, :id => bentobox.to_param, :bentobox => {}}
         response.should render_template("edit")
@@ -122,14 +122,14 @@ describe BentoboxesController do
 
   describe "DELETE destroy" do
     it "destroys the requested bentobox" do
-      bentobox = Fabricate(:bentobox, user: @user)
+      bentobox = Fabricate(:bentobox, users: @user)
       expect {
         delete :destroy, {:user_id => @user.to_param, :id => bentobox.to_param}
       }.to change(Bentobox, :count).by(-1)
     end
 
     it "redirects to the bentoboxes list" do
-      bentobox = Fabricate(:bentobox, user: @user)
+      bentobox = Fabricate(:bentobox, users: @user)
       delete :destroy, {:user_id => @user.to_param, :id => bentobox.to_param}
       response.should redirect_to(bentoboxes_url)
     end

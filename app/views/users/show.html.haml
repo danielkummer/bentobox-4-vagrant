@@ -1,0 +1,21 @@
+%p#notice= notice
+.page-header
+  %h1
+    = @user.email
+    %small= @user.client_name
+    .pull-right
+      = link_to edit_user_path(@user), :class => "btn btn-large btn-info" do
+        %i.icon-edit
+        Edit
+
+- if @user.private_key.nil?
+  = link_to "Register at chef server #{APP_CONFIG['chef_server_url']}", create_client_path
+- else
+  %p= current_user.private_key
+  =link_to download_private_key, "Download .pem file"
+
+.row
+  .span2
+    %ul.thumbnails
+      %li.span2
+        .thumbnail

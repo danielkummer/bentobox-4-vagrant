@@ -2,7 +2,7 @@ Fabricator(:bentobox) do
   name "Bentobox"
   description "Description"
   public false
-  user { Fabricate(:user) }
+  user { Fabricate(:users) }
   vagrantbox { Fabricate(:vagrantbox) }
 end
 

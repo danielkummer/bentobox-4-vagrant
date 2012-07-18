@@ -8,8 +8,8 @@ module ValidUserHelper
 
   def login_user
     before(:each) do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      @user = Fabricate(:user)
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      @user = Fabricate(:users)
       sign_in @user
     end
   end

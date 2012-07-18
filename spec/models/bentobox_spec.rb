@@ -10,7 +10,7 @@ describe Bentobox do
   it { should validate_presence_of :name }
   it { should validate_presence_of :vagrantbox }
 
-  it { should belong_to :user }
+  it { should belong_to :users }
   it { should belong_to :vagrantbox }
   it { should have_and_belong_to_many(:ingredients).as_inverse_of(:bentoboxes) }
 
