@@ -10,6 +10,9 @@ An ingredient is simply a configuration which can include cookbooks, share folde
 Demo at:
 http://bentobox-4-vagrant.herokuapp.com
 
+User: test@test.com
+Password: 123456
+
 == Getting Started
 
 You need

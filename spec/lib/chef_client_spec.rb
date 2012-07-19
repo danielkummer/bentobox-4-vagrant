@@ -4,7 +4,7 @@ require 'spec_helper'
 describe ChefClient do
 
   before :each do
-    APP_CONFIG[:chef]['cookbooks'] ||= "apache2, mysql, third"
+    APP_CONFIG[:cookbooks] ||= "apache2, mysql, third"
   end
 
   it "should bypass the chef server" do
@@ -16,8 +16,8 @@ describe ChefClient do
   end
 
   it "should throw an exception when trying to connecto to a chef server" do
-    APP_CONFIG[:chef]['chef_server_url'] = nil
-    APP_CONFIG[:chef]['cookbooks'] = nil
+    APP_CONFIG[:chef_server_url] = nil
+    APP_CONFIG[:cookbooks] = nil
 
     expect {
       ChefClient.cookbooks_list

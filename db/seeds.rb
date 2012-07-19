@@ -31,6 +31,9 @@ ports = Ingredient.create!(name: "Something with portmappings", category: webser
 ports.portmappings.push(Portmapping.new(mapping: "80:8080"))
 ports.save!
 
+AdditionalConfiguration.create!(name: "1024MB RAM",value: 'config.vm.customize ["modifyvm", :id, "--memory", 1024]')
+AdditionalConfiguration.create!(name: "2048MB RAM",value: 'config.vm.customize ["modifyvm", :id, "--memory", 2048]')
+
 User.create!(email: "test@test.com", password: "123456", password_confirmation: "123456")
 
 

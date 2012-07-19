@@ -3,7 +3,7 @@ module ValidUserRequestHelper
   # for use in request specs
   def sign_in_as_a_valid_user
     @user ||= Fabricate :user
-    post user_session_path, 'user[email]' => @user.email, 'user[password]' => @user.password
+    post user_session_path, 'users[email]' => @user.email, 'users[password]' => @user.password
   end
 
   def logout_user(user = @current_user)
