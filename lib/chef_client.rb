@@ -10,16 +10,17 @@ class ChefClient
     def rest
       @rest ||= begin
         require 'chef/rest'
-        Chef::Config[:node_name]= APP_CONFIG[:chef]['node_name']
-        Chef::Config[:client_key]= APP_CONFIG[:chef]['client_key']
-        Chef::Config[:chef_server_url]= APP_CONFIG[:chef]['chef_server_url']
+        Chef::Config[:node_name]= APP_CONFIG[:chef_node_name]
+        Chef::Config[:client_key]= APP_CONFIG[:chef_client_key]
+        Chef::Config[:chef_server_url]= APP_CONFIG[:chef_server_url]
+
         Chef::REST.new(Chef::Config[:chef_server_url])
       end
     end
 
     def connected?
       begin
-        rest.get_rest("/clients/#{APP_CONFIG[:chef]['node_name']}")
+        rest.get_rest("/clients/#{APP_CONFIG[:chef_node_name]}")
       rescue Exception
         return false
       end
@@ -28,8 +29,9 @@ class ChefClient
 
     def cookbooks_list
       return config_cookbooks if bypass_chef_server?
-      env = APP_CONFIG[:chef]['environment'] || nil
-      num_versions = APP_CONFIG[:chef]['all_versions'] ? "num_versions=all" : "num_versions=1"
+
+      env = APP_CONFIG[:chef_environment] || nil
+      num_versions = APP_CONFIG[:chef_cookbook_all_versions] ? "num_versions=all" : "num_versions=1"
       api_endpoint = env ? "/environments/#{env}/cookbooks?#{num_versions}" : "/cookbooks?#{num_versions}"
 
       begin
@@ -81,11 +83,11 @@ class ChefClient
 
     #deprecated #todo remove
     def bypass_chef_server?
-      APP_CONFIG[:chef].has_key?('cookbooks')
+      APP_CONFIG.has_key?('cookbooks')
     end
 
     def config_cookbooks
-      APP_CONFIG[:chef]['cookbooks'].split(',').inject({}) do |result, cookbook|
+      APP_CONFIG[:cookbooks].split(',').inject({}) do |result, cookbook|
         cookbook = cookbook.strip
         result[cookbook] = cookbook
         result
