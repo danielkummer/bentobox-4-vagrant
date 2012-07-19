@@ -30,12 +30,12 @@ module ApplicationHelper
     end
   end
 
-  def true_false_label(bool)
+  def true_false_label(bool, icons = {:true => "icon-ok-sign", :false => "icon-remove-sign"})
     case bool
       when true
-        content_tag :span, content_tag(:i, "", :class => "icon-ok-sign"), :class => "badge badge-success"
+        content_tag :span, content_tag(:i, "", :class => icons[:true]), :class => "badge badge-success"
       when false
-        content_tag :span, content_tag(:i, "", :class => "icon-remove-sign"), :class => "badge badge-important"
+        content_tag :span, content_tag(:i, "", :class => icons[:false]), :class => "badge badge-important"
     end
   end
 end

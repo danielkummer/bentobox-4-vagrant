@@ -1,0 +1,69 @@
+
+.page-header
+  %h1
+    = @user.email
+    %small
+    .pull-right
+      = link_to edit_user_path(@user), :class => "btn btn-large" do
+        %i.icon-edit
+        Edit
+
+%p#notice= notice
+
+.row
+  .span2
+    %ul.thumbnails
+      %li.span2
+        .thumbnail
+          = image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=160&d=identicon", :style => 'padding-top:5px'
+
+  .span6
+
+    %h3
+      %i.icon-user
+      Chef client:
+    %p.lead
+      = @user.client_name
+
+    - unless @user.private_key.blank?
+      %h3
+        %i.icon-lock
+        Private key
+      .btn-group
+        %a.btn{'data-toggle' => "modal", href: "#privateKeyModal" }
+          %i.icon-eye-open
+          Show
+        = link_to download_key_user_path(@user),  :class => "btn" do
+          %i.icon-download-alt
+          Download
+        %a.btn.btn-info{'data-toggle' => "modal", href: "#privateKeyInfoModal" }
+          %i.icon-info-sign
+    %h3 Actions
+    .btn-group
+      = link_to edit_user_registration_path, :class => "btn" do
+        %i.icon-edit
+        Edit registration
+      - if @user.private_key.blank?
+        = link_to chef_client_path(@user, 'create_client'), :class => "btn" do
+          %i.icon-user
+          Create chef client
+      - else
+        = link_to chef_client_path(@user, 'delete_client'),  :class => "btn btn-warning" do
+          %i.icon-remove
+          Delete chef client
+
+#privateKeyModal.modal.hide
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3= "Private key for chef client: #{@user.client_name}"
+  .modal-body
+    %p= @user.private_key
+
+#privateKeyInfoModal.modal.hide
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3= "Info"
+  .modal-body
+    %p You need to download and put your private key into your chef configuration folder, usually located under <b>~/chef-repo/.chef/</b>
+
+

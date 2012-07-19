@@ -1,17 +1,17 @@
 include Warden::Test::Helpers
 
 
-describe "user sign in" do
+describe "users sign in" do
 
 =begin
  #sadly not working...
 
   before :each do
     Warden.test_mode!
-    @user = User.create!(:email => "someone@example.com",
+    @users = User.create!(:email => "someone@example.com",
                          :password => "ilovegrapes",
                          :password_confirmation => "ilovegrapes")
-    @user.save!
+    @users.save!
     Capybara.reset_sessions!
   end
 
