@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     render :file => File.join(Rails.root, "public", "chef_configuration_error"), :layout => false, :status => "404"
   end
 
-
   def authenticate_owner!
     params.has_key?('user_id') ? id = params['user_id'] : id = params['id']
     if user_signed_in? && current_user.id.to_s == id

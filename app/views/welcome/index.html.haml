@@ -44,6 +44,6 @@
         %dt Chef Server State
         %dd= true_false_label(ChefClient.connected?, {:true => "icon-globe", :false => "icon-globe"})
         %dt Server URL
-        %dd=APP_CONFIG[:chef]['chef_server_url']
+        %dd=APP_CONFIG[:chef_server_url]
         %dt Node Name
-        %dd=APP_CONFIG[:chef]['node_name']
+        %dd=APP_CONFIG[:chef_node_name]
