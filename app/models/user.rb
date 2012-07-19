@@ -22,11 +22,11 @@ class User
 
 
   before_validation :generate_client_name, :if => Proc.new { |user| user.client_name.blank? }
-  before_save :regenerate_chef_client, :if => Proc.new { |user| user.client_name_changed? }
+  before_save :regenerate_chef_client, :if => Proc.new { |user| user.client_name_changed? && !user.new_record? }
   before_destroy :delete_chef_client, :unless => Proc.new { |user| user.private_key.blank? }
 
   def generate_client_name
-    return unless self.client_name.empty?
+    return unless self.client_name.blank?
     self.client_name = self.email.gsub /(@|\.)/, "@" => "_at_", "." => "_"
   end
 

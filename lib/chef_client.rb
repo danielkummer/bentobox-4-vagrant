@@ -83,7 +83,7 @@ class ChefClient
 
     #deprecated #todo remove
     def bypass_chef_server?
-      APP_CONFIG.has_key?('cookbooks')
+      APP_CONFIG.has_key? :cookbooks
     end
 
     def config_cookbooks

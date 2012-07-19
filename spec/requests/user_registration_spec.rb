@@ -12,8 +12,6 @@ describe "users registration" do
 
       click_button "Sign up"
     end
-
-
     page.should have_content("Welcome! You have signed up successfully.")
   end
 end

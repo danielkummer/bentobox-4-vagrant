@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
 
   it "should have a valid factory" do
-    Fabricate.build(:users).should be_valid
+    Fabricate.build(:user).should be_valid
   end
 
   it { should have_many :bentoboxes }
