@@ -21,30 +21,26 @@ class User
   field :private_key, type: String
 
 
-
-
-  attr_writer :chef_regenerate_private_key, :chef_is_admin
-
-  def chef_regenerate_private_key?
-    @chef_regenerate_private_key || false
-  end
-
-  def chef_is_admin?
-    @chef_is_admin || false
-  end
-
-
-  before_validation :generate_client_name, :if => Proc.new { |user| user.client_name.empty? }
-  before_save :update_chef_client, :if => Proc.new { |user| user.client_name_changed? }
-  before_destroy :delete_chef_client
+  before_validation :generate_client_name, :if => Proc.new { |user| user.client_name.blank? }
+  before_save :regenerate_chef_client, :if => Proc.new { |user| user.client_name_changed? }
+  before_destroy :delete_chef_client, :unless => Proc.new { |user| user.private_key.blank? }
 
   def generate_client_name
     return unless self.client_name.empty?
     self.client_name = self.email.gsub /(@|\.)/, "@" => "_at_", "." => "_"
   end
 
-  def update_chef_client
-    ChefClient.update_client(self)
+  def regenerate_chef_client
+    delete_chef_client
+    begin
+      client = ChefClient.create_client(self)
+      if client.has_key?('private_key')
+        self.private_key = client['private_key']
+      end
+    rescue Net::HTTPServerException => e
+      errors.add(:client_name, e.message)
+      raise e.message
+    end
   end
 
   def delete_chef_client

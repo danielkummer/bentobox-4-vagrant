@@ -1,6 +1,6 @@
 module BentoboxesHelper
   def config_vm_box_name
-    ("config.vm.box = \"" + current_user.email + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4) + "\"").html_safe
+    ("config.vm.box = \"" + current_user.client_name + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4) + "\"").html_safe
   end
 
   def config_vm_box_url

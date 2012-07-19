@@ -27,10 +27,7 @@ VagrantCook::Application.routes.draw do
   end
 
 
-  match 'chef/create_client/:user_id' => 'chef#create_client', as: 'chef_create_client', via: :get
-  match 'chef/delete_client/:user_id' => 'chef#delete_client', as: 'chef_delete_client', via: :get
-  match 'chef/get_client/:user_id' => 'chef#get_client', as: 'chef_get_client', via: :get
-
+  match 'chef/client/:user_id/:action' => 'chef#client', as: 'chef_client', via: :get
 
   root :to => 'welcome#index'
 end

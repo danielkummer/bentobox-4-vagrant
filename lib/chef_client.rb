@@ -1,6 +1,11 @@
 require 'chef'
 
 class ChefClient
+  class Exceptions
+    class ConfigurationError < RuntimeError;
+    end
+  end
+
   class << self
     def rest
       @rest ||= begin
@@ -12,12 +17,10 @@ class ChefClient
       end
     end
 
-
     def connected?
       begin
-        rest.get_rest("/clients/#{Chef::Config[:node_name]}")
-      rescue Net::HTTPServerException => e
-        #e.response.code == "409"
+        rest.get_rest("/clients/#{APP_CONFIG[:chef]['node_name']}")
+      rescue Exception
         return false
       end
       return true
@@ -28,43 +31,47 @@ class ChefClient
       env = APP_CONFIG[:chef]['environment'] || nil
       num_versions = APP_CONFIG[:chef]['all_versions'] ? "num_versions=all" : "num_versions=1"
       api_endpoint = env ? "/environments/#{env}/cookbooks?#{num_versions}" : "/cookbooks?#{num_versions}"
-      cookbook_versions = rest.get_rest(api_endpoint)
-      format_cookbook_list(cookbook_versions)
-    end
 
-    #{
-    #  "name" : "monkeypants",
-    #  "chef_type" : "client",
-    #  "json_class" : "Chef::ApiClient",
-    #  "public_key" : "RSA PUBLIC KEY",
-    #  "_rev" : "1-68532bf2122a54464db6ad65a24e2225",
-    #  "admin" : true
-    #}
-    #def get_client(user)
-    #  rest.get_rest("clients/#{user.client_name}")
-    #end
+      begin
+        cookbook_versions = rest.get_rest(api_endpoint)
+        format_cookbook_list(cookbook_versions)
+      rescue Net::HTTPServerException => e
+        handle_authentication_exceptions(e)
+      end
+    end
 
     def create_client(user)
-      rest.post_rest("clients", {:name => user.client_name})
-      #throws 409 on conflict
-    end
-
-    def update_client(user)
-      params = {
-        :name => user.client_name,
-        :private_key => user.chef_regenerate_private_key?,
-        :admin => user.chef_is_admin?
-      }
-      user.client_name_changed? ? name = user.client_name_was : name = user.client_name
-      result = rest.put_rest("clients/#{name}", params) #other private_key => true for new private key
-      result
+      begin
+        rest.post_rest("clients", {:name => user.client_name})
+      rescue Net::HTTPServerException => e
+        handle_authentication_exceptions(e, false)
+        if e.response.code == "404"
+          raise ChefClient::Exceptions::ConfigurationError
+        end
+      end
     end
 
     def delete_client(user)
-      rest.delete_rest("clients/#{user.client_name}")
+      user.client_name_changed? ? name = user.client_name_was : name = user.client_name
+      begin
+        rest.delete_rest("clients/#{name}")
+      rescue Net::HTTPServerException => e
+        handle_authentication_exceptions(e, false)
+        if e.response.code == "404"
+          Rails.logger.debug "Chef delete client - client #{name} not found"
+        end
+      end
     end
 
     private
+    def handle_authentication_exceptions(exception, raise_exception = true)
+      if exception.response.code == '401' || exception.response.code == '403'
+        raise ChefClient::Exceptions::ConfigurationError
+      else
+        raise exception if raise_exception
+      end
+    end
+
     def format_cookbook_list(item)
       item.inject({}) do |cookbooks, (cookbook, versions)|
         cookbooks[cookbook] = cookbook
@@ -72,6 +79,7 @@ class ChefClient
       end
     end
 
+    #deprecated #todo remove
     def bypass_chef_server?
       APP_CONFIG[:chef].has_key?('cookbooks')
     end

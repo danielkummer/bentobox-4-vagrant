@@ -2,10 +2,9 @@ development: &defaults
   chef:
     node_name: test
     client_key: config/test.pem
-    chef_server_url: http://localhost:4000
+    #chef_server_url: http://localhost:4000
     #environment: _default
     #all_versions: false
-    cookbooks: apache2, mysql, third
 
 
 test:
