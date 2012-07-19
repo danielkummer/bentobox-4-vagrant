@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "user registration" do
+describe "users registration" do
 
   it "allows new users to register with an email address and password" do
     visit "/users/register"
@@ -12,8 +12,6 @@ describe "user registration" do
 
       click_button "Sign up"
     end
-
-
     page.should have_content("Welcome! You have signed up successfully.")
   end
 end

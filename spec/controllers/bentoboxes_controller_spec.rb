@@ -14,20 +14,20 @@ describe BentoboxesController do
 
   describe "GET index" do
     it "assigns all bentoboxes as @bentoboxes" do
-      bentobox = Fabricate(:bentobox, :user => @user)
+      bentobox = Fabricate(:bentobox, user: @user)
       get :index
       assigns(:bentoboxes).should eq([bentobox])
     end
   end
 
   describe "GET show" do
-    it "assigns the requested bentobox as @bentobox for the user who created it..." do
+    it "assigns the requested bentobox as @bentobox for the users who created it..." do
       bentobox = Fabricate(:bentobox, user: @user)
       get :show, {:id => bentobox.to_param}
       assigns(:bentobox).should eq(bentobox)
     end
 
-    it "assigns no bentobox because the user didn't create it" do
+    it "assigns no bentobox because the users didn't create it" do
       bentobox = Fabricate(:bentobox)
       expect { get :show, :id => bentobox.to_param}.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
@@ -51,18 +51,18 @@ describe BentoboxesController do
     describe "with valid params" do
       it "creates a new Bentobox" do
         expect {
-          post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, user: @user)}
+          post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, users: @user)}
         }.to change(Bentobox, :count).by(1)
       end
 
       it "assigns a newly created bentobox as @bentobox" do
-        post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, user: @user)}
+        post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, users: @user)}
         assigns(:bentobox).should be_a(Bentobox)
         assigns(:bentobox).should be_persisted
       end
 
       it "redirects to the created bentobox" do
-        post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, user: @user)}
+        post :create, {:user_id => @user.to_param, :bentobox => Fabricate.build(:bentobox, users: @user)}
         response.should redirect_to(Bentobox.last)
       end
     end

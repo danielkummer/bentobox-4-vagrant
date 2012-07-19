@@ -5,7 +5,7 @@ VagrantCook::Application.routes.draw do
                                      :sign_out => "logout",
                                      :settings => "settings"}
 
-  devise_scope :user do
+  devise_scope :users do
     get "login", :to => "devise/sessions#new"
     get "register", :to => "devise/registrations#new"
     get "settings", :to => "devise/registrations#edit"
@@ -18,9 +18,16 @@ VagrantCook::Application.routes.draw do
   resources :vagrantboxes, except: [:show]
   resources :additional_configurations, except: [:show]
 
-  resources :users, only: [] do
+  resources :users, only: [:show, :edit, :update, :destroy] do
+    member do
+      get 'download_key', as: 'download_key', action: 'download_key'
+    end
+
     resources :bentoboxes
   end
+
+
+  match 'chef/client/:user_id/:action' => 'chef#client', as: 'chef_client', via: :get
 
   root :to => 'welcome#index'
 end
