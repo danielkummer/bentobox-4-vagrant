@@ -38,16 +38,7 @@ class UsersController < ApplicationController
   end
 
   def download_key
-    send_data current_user.private_key, :disposition => 'attachment', :filename => "client.pem"
+    send_data current_user.private_key, :disposition => 'attachment', :filename => "#{current_user.client_name}.pem"
   end
 
-
-  private
-    def authenticate_owner!
-      if user_signed_in? && current_user.id.to_s == params[:id]
-        return true
-      end
-      redirect_to user_path(current_user), :notice => "You can only edit your own profile."
-      return false
-    end
 end

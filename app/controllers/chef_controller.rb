@@ -1,4 +1,22 @@
 class ChefController < ApplicationController
+  before_filter :authenticate_owner!
+
+=begin
+  def client
+    user = User.find(params[:user_id])
+
+    case params[:action]
+      when 'create'
+        create(user)
+      when 'delete'
+        delete(user)
+      else
+        redirect_to user, notice: "Action not found"
+    end
+
+  end
+=end
+
 
   def create_client
     user = User.find(params[:user_id])
@@ -22,13 +40,10 @@ class ChefController < ApplicationController
 
   def delete_client
     user = User.find(params[:user_id])
-    begin
-      ChefClient.delete_client(user)
-      message = "Chef client deleted successfully"
-    rescue Net::HTTPServerException => e
-      message = e.message
-    end
+    ChefClient.delete_client(user)
     user.update_attribute :private_key, nil
+    message = "Chef client deleted successfully"
+
     redirect_to user, notice: message
   end
 
