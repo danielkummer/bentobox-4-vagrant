@@ -2,17 +2,21 @@ require 'chef'
 
 class ChefClient
   class Exceptions
-    class ConfigurationError < RuntimeError;
-    end
+    class ConfigurationError < RuntimeError; end
+    class ConnectionError < RuntimeError; end
   end
 
   class << self
+
+
+
     def rest
       @rest ||= begin
         require 'chef/rest'
-        Chef::Config[:node_name]= APP_CONFIG[:chef_node_name]
-        Chef::Config[:client_key]= APP_CONFIG[:chef_client_key]
-        Chef::Config[:chef_server_url]= APP_CONFIG[:chef_server_url]
+        Chef::Config[:node_name] = APP_CONFIG[:chef_node_name]
+        Chef::Config[:client_key] = APP_CONFIG[:chef_client_key]
+        Chef::Config[:chef_server_url] = APP_CONFIG[:chef_server_url]
+        Chef::Config[:http_retry_count] = 1 #else will try 5 times to reconnect
 
         Chef::REST.new(Chef::Config[:chef_server_url])
       end
@@ -27,6 +31,7 @@ class ChefClient
       return true
     end
 
+    #todo implement caching
     def cookbooks_list
       return config_cookbooks if bypass_chef_server?
 
@@ -37,7 +42,7 @@ class ChefClient
       begin
         cookbook_versions = rest.get_rest(api_endpoint)
         format_cookbook_list(cookbook_versions)
-      rescue Net::HTTPServerException => e
+      rescue Exception => e
         handle_authentication_exceptions(e)
       end
     end
@@ -45,8 +50,8 @@ class ChefClient
     def create_client(user)
       begin
         rest.post_rest("clients", {:name => user.client_name})
-      rescue Net::HTTPServerException => e
-        handle_authentication_exceptions(e, false)
+      rescue Exception => e
+        handle_authentication_exceptions(e)
         if e.response.code == "404"
           raise ChefClient::Exceptions::ConfigurationError
         end
@@ -57,7 +62,7 @@ class ChefClient
       user.client_name_changed? ? name = user.client_name_was : name = user.client_name
       begin
         rest.delete_rest("clients/#{name}")
-      rescue Net::HTTPServerException => e
+      rescue Exception => e
         handle_authentication_exceptions(e, false)
         if e.response.code == "404"
           Rails.logger.debug "Chef delete client - client #{name} not found"
@@ -67,9 +72,11 @@ class ChefClient
 
     private
     def handle_authentication_exceptions(exception, raise_exception = true)
-      if exception.response.code == '401' || exception.response.code == '403'
+      if exception.instance_of?(Net::HTTPServerException) and (exception.response.code == '401' || exception.response.code == '403')
         raise ChefClient::Exceptions::ConfigurationError
-      else
+      else if exception.instance_of?(Errno::ECONNREFUSED)
+        raise ChefClient::Exceptions::ConnectionError
+      end
         raise exception if raise_exception
       end
     end
