@@ -2,8 +2,11 @@ require 'devise_helper.rb'
 class UsersController < ApplicationController
   respond_to :html
 
+  before_filter :authenticate_owner!
+
+
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     respond_with @user
   end
 
@@ -17,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:users])
+      if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -35,7 +38,16 @@ class UsersController < ApplicationController
   end
 
   def download_key
-    send_data current_user.private_key, :disposition => 'attachment'
+    send_data current_user.private_key, :disposition => 'attachment', :filename => "client.pem"
   end
 
+
+  private
+    def authenticate_owner!
+      if user_signed_in? && current_user.id.to_s == params[:id]
+        return true
+      end
+      redirect_to user_path(current_user), :notice => "You can only edit your own profile."
+      return false
+    end
 end

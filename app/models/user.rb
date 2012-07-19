@@ -6,45 +6,48 @@ class User
   include Mongoid::Document
   include DeviseExt
 
+  has_many :bentoboxes, dependent: :destroy
+  attr_accessible :bentobox_ids, :client_name, :private_key
+
   validates :email, uniqueness: {case_sensitive: false}
   validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/,
                              message: "Invalid email"}
 
   field :client_name, type: String
   validates :client_name, uniqueness: true
-  validates :client_name, format: {with: /\w*_*-*/,
-                                   message: "Invalid client name, only aphanumerical - and _ allowed"}
+  validates :client_name, format: {with: /^[\w-]+$/i,
+                                   message: "Invalid client name, only alphanumerical - and _ allowed"}
 
   field :private_key, type: String
 
-  has_many :bentoboxes, dependent: :destroy
 
-  after_create :generate_client_name
-  #after_create :create_chef_client
 
-  def generate_client_name(record)
-    result = record.email.gsub /@/, '_a_'
-    record.client_name = result.gsub(/\W/, '')
-    record.save
+
+  attr_writer :chef_regenerate_private_key, :chef_is_admin
+
+  def chef_regenerate_private_key?
+    @chef_regenerate_private_key || false
+  end
+
+  def chef_is_admin?
+    @chef_is_admin || false
   end
 
 
-  #client_create.rb
-  def create_chef_client(record)
-    #must use reset-api directly when not using couchdb
+  before_validation :generate_client_name, :if => Proc.new { |user| user.client_name.empty? }
+  before_save :update_chef_client, :if => Proc.new { |user| user.client_name_changed? }
+  before_destroy :delete_chef_client
 
-    client = Chef::ApiClient.new
-    client.name(record.name)
+  def generate_client_name
+    return unless self.client_name.empty?
+    self.client_name = self.email.gsub /(@|\.)/, "@" => "_at_", "." => "_"
+  end
 
+  def update_chef_client
+    ChefClient.update_client(self)
+  end
 
-    #output = edit_data(client)
-
-    # Chef::ApiClient.save will try to create a client and if it exists will update it instead silently
-    client.save
-
-    # We only get a private_key on client creation, not on client update.
-    if client['private_key']
-      record.private_key = client['private_key']
-    end
+  def delete_chef_client
+    ChefClient.delete_client(self)
   end
 end
