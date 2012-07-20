@@ -26,7 +26,7 @@
       %dd Base boxes are virtual machine images packed and uploaded for later use
 
 .row
-  .span9
+  .span12
     %h2
       Download a bentobox!
       %small ready to use, just a <i>vagrant up</i> away!
@@ -38,12 +38,3 @@
             .caption
               %h3= bentobox.name
               %p= bentobox.description
-  .span3
-    .well
-      %dl
-        %dt Chef Server State
-        %dd= true_false_label(ChefClient.connected?, {:true => "icon-globe", :false => "icon-globe"})
-        %dt Server URL
-        %dd=APP_CONFIG[:chef_server_url]
-        %dt Node Name
-        %dd=APP_CONFIG[:chef_node_name]
