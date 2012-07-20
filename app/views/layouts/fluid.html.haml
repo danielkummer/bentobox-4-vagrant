@@ -55,6 +55,21 @@
                     = link_to categories_path do
                       %i.icon-tags
                       Categories
+              %li.dropdown
+                %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+                  Chef Server
+                  = true_false_label(ChefClient.connected?, {:true => "icon-globe", :false => "icon-globe"})
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    = link_to APP_CONFIG[:chef_server_url] do
+                      =APP_CONFIG[:chef_server_url]
+                  %li
+                    = link_to '#' do
+                      = "Node Name: #{APP_CONFIG[:chef_node_name]}"
+
+
+
             - if current_user.blank?
               %ul.nav.pull-right
                 %li= link_to 'Sign Up', new_user_registration_path

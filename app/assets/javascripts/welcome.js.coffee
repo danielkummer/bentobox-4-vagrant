@@ -6,3 +6,6 @@ jQuery ->
   $('.dropdown-toggle').dropdown()
   $('.dropdown input, .dropdown label').click (e) ->
     e.stopPropagation()
+
+
+  $('#chefServerState').popover()
