@@ -1,3 +1,4 @@
+include Warden::Test::Helpers
 # module for helping request specs
 module ValidUserRequestHelper
   # for use in request specs
@@ -18,5 +19,19 @@ module ValidUserRequestHelper
     fill_in "user_email", :with => @current_user.email
     fill_in "user_password", :with => @current_user.password
     click_button "Login"
-    end
+  end
+
+  #not working
+=begin
+  def create_logged_in_user
+    user = Factory(:user)
+    login(user)
+    user
+  end
+
+
+  def login(user)
+    login_as user, scope: :user
+  end
+=end
 end
