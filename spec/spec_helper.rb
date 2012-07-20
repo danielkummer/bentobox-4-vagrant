@@ -37,9 +37,15 @@ Spork.prefork do
 
     config.include Devise::TestHelpers, :type => :controller
     config.include Devise::TestHelpers, :type => :helper
+
     config.extend ValidUserHelper, :type => :controller
     config.extend ValidUserHelper, :type => :helper
-    config.include ValidUserRequestHelper, :type => :request
+
+    #config.include ValidUserRequestHelper, :type => :request
+
+    config.include ValidUserRequestHelper, :example_group => {
+      :file_path => config.escaped_path(%w[spec (requests|integration)])
+    }
 
     # Clean up the database
     require 'database_cleaner'
