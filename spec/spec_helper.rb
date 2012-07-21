@@ -47,6 +47,9 @@ Spork.prefork do
       :file_path => config.escaped_path(%w[spec (requests|integration)])
     }
 
+    config.include LoginMacros
+
+
     # Clean up the database
     require 'database_cleaner'
     config.before(:suite) do

@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe "AdditionalConfigurations" do
 
-  before(:each) { login_with :user }
+  before do
+    login_as :user
+  end
 
   describe "GET /additional_configurations" do
     it "displays additional configurations" do
