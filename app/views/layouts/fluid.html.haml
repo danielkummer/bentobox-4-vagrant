@@ -113,10 +113,18 @@
       .content
         .row
           .span12
-            = yield
-    
+            -if params[:controller] == "welcome"
+              = yield
+            -else
+              .well.white
+                = yield
+
       %footer.footer
-        %p &copy; Code-n-Fold 2012
+        %p
+          &copy; Daniel Kummer,
+          /link_to '@0r1g4m14dd1c7','http://www.twitter.com/0r1g4m14dd1c7'
+          =link_to 'Code-n-Fold', 'http://code-n-fold.com'
+          , 2012
     /
       Javascripts
       \==================================================
