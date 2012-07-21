@@ -1,21 +1,16 @@
 class ChefController < ApplicationController
-  before_filter :authenticate_owner!
+  before_filter :authenticate_owner!, except: [:status]
 
-=begin
-  def client
-    user = User.find(params[:user_id])
+  caches_action :status, :expires_in => 5.minutes
 
-    case params[:action]
-      when 'create'
-        create(user)
-      when 'delete'
-        delete(user)
-      else
-        redirect_to user, notice: "Action not found"
+
+  def status
+    if ChefClient.connected?
+      head status: :ok
+    else
+      head status: 404
     end
-
   end
-=end
 
 
   def create_client
