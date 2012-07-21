@@ -58,7 +58,7 @@
               %li.dropdown
                 %a.dropdown-toggle{'data-toggle' => 'dropdown'}
                   Chef Server
-                  = true_false_label(ChefClient.connected?, {:true => "icon-globe", :false => "icon-globe"})
+                  %span#chef_server_status{"data-url" => chef_server_status_url}
                   %b.caret
                 %ul.dropdown-menu
                   %li

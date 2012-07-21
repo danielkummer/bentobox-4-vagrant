@@ -27,10 +27,9 @@
 // Example:
 // @linkColor: #ff0000;
 
-@basecolor:            #FFBB33;
+@basecolor: #FFBB33;
 
-.brand small {
-    //color: #479d2f;
+.brand small { //color: #479d2f;
     color: @basecolor;
     font-weight: bold;
 }
@@ -44,7 +43,6 @@ h1 {
     margin-top: 45px;
     padding: 35px 0 36px;
 }
-
 
 #bentobox_ingredient_ids {
     width: 450px;
@@ -70,7 +68,13 @@ body {
 
     p {
         color: #FFFFFF;
-        padding-top: 30px;
+        padding-top: 20px;
         font-weight: 200;
+        text-shadow: 0 4px 4px #000;
     }
+}
+
+.badge {
+    padding: 2px 4px 2px;
+    .border-radius(10px);
 }
