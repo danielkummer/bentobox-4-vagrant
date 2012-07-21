@@ -307,6 +307,7 @@ DEPENDENCIES
   mongoid-rspec
   nifty-generators
   rails (= 3.2.6)
+  rb-fsevent
   rspec-rails
   sass-rails (~> 3.2.3)
   simple_form
