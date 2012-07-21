@@ -28,6 +28,7 @@ VagrantCook::Application.routes.draw do
 
 
   match 'chef/client/:user_id/:action' => 'chef#client', as: 'chef_client', via: :get
+  match 'chef/status' => 'chef#status', as: 'chef_server_status', via: :get
 
   root :to => 'welcome#index'
 end
