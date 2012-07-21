@@ -1,7 +1,7 @@
 development: &defaults
   sessions:
     default: &default_session
-      database: vagrant_cook_development
+      database: bentobox_development
       hosts:
         - localhost:27017
       options:
@@ -19,7 +19,7 @@ test:
   sessions:
     default:
       <<: *default_session
-      database: vagrant_cook_test
+      database: bentobox_text
 
 # for heroku environment
 <% if ENV['MONGOHQ_URL'] %>
@@ -34,4 +34,11 @@ production:
       password: <%= uri.password %>
       hosts:
         - <%= uri.host %>:<%= uri.port %>
+<% else %>
+production:
+  <<: *defaults
+  sessions:
+    default:
+      <<: *default_session
+      database: bentobox_production
 <% end %>
