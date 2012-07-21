@@ -10,11 +10,8 @@ jQuery ->
 
   $('#chefServerState').popover()
 
-  $.ajax
-    async: true
-    url: $('#chef_server_status').data('url')
-    statusCode:
-      200: ->
-        $('#chef_server_status').html( $('<span class="badge badge-success"><i class="icon-globe"></i></span>') )
-      404: ->
-        $('#chef_server_status').html($('<span class="badge badge-important"><i class="icon-globe"></i></span>') )
+  $.getJSON $('#chef_server_status').data('url'), (data) ->
+    badge = (if data["response"] is "true" then "success" else "important")
+    $('#chef_server_status').html($('<span class="badge badge-' + badge + '"><i class="icon-globe"></i></span>'))
+
+
