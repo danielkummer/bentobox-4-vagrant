@@ -38,7 +38,7 @@ class BentoboxesController < ApplicationController
 
     respond_to do |format|
       if @bentobox.save
-        format.html { redirect_to @bentobox, notice: 'Bentobox was successfully created.' }
+        format.html { redirect_to @bentobox, notice: 'Bentobox was successfully created.' , only_path: true }
       else
         format.html { render action: "new" }
       end
@@ -50,7 +50,7 @@ class BentoboxesController < ApplicationController
 
     respond_to do |format|
       if @bentobox.update_attributes(params[:bentobox])
-        format.html { redirect_to @bentobox, notice: 'Bentobox was successfully updated.' }
+        format.html { redirect_to @bentobox, notice: 'Bentobox was successfully updated.' , only_path: true }
       else
         format.html { render action: "edit" }
       end
