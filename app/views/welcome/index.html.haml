@@ -21,14 +21,15 @@
 
 
 
-%h2
-  Download a bentobox!
-  %small ready to use, just a <i>vagrant up</i> away!
-%ul.thumbnails
-  - Bentobox.recent(5).all.each do |bentobox|
-    %li.span2
-      = link_to bentobox_url(bentobox,  params.merge(:format => :text, :download => true)), :class => "thumbnail", title: "Download Vagrantconfig" do
-        = image_tag 'vagrant_pack.png'
-        .caption
-          %h3= bentobox.name
-          %p= bentobox.description
+.well
+  %h2
+    Download a bentobox!
+    %small ready to use, just a <i>vagrant up</i> away!
+  %ul.thumbnails
+    - Bentobox.recent(5).all.each do |bentobox|
+      %li.span2
+        = link_to bentobox_url(bentobox,  params.merge(:format => :text, :download => true)), :class => "thumbnail", title: "Download Vagrantconfig" do
+          = image_tag 'vagrant_pack.png'
+          .caption
+            %h3= bentobox.name
+            %p= bentobox.description
