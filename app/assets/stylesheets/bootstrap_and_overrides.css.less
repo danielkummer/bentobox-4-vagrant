@@ -60,12 +60,11 @@ body {
 //@boxColor: #3E97D1;
 //@boxColor: #1D7074;
 //@boxColor: #01939A;
-@boxColor: #5DC8CD;
+@boxColor: #01939A;
 @boxSideColor: darken(@boxColor, 15%);
 
-
 .box {
-    .border-radius(2px);
+    .border-radius(5px);
 
     background: @boxColor;
 
@@ -84,7 +83,7 @@ body {
                 13px -13px @boxSideColor,
                 14px -14px @boxSideColor,
                 15px -15px @boxSideColor,
-                15px -15px 15px #444;
+                15px -15px 15px 5px #444;
 
     margin-right: 15px;
     margin-top: 30px;
@@ -92,8 +91,9 @@ body {
 
     h1 {
         color: @baseColor;
-        text-shadow: 0 4px 4px #000;
-        font-size: 40px;
+        //text-shadow: 3px 3px 0px @boxColor, 5px 5px 0px white;
+        text-shadow: 2px -3px 1px darken(@baseColor, 15%);
+        font-size: 60px;
         margin-bottom: 30px;
     }
 
@@ -101,7 +101,7 @@ body {
         color: #FFFFFF;
         padding-top: 20px;
         font-weight: 200;
-        text-shadow: 0 4px 4px #000;
+        text-shadow: 1px -1px 1px #000;
     }
 
 }
