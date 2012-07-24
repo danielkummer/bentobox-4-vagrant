@@ -60,11 +60,14 @@ body {
 //@boxColor: #3E97D1;
 //@boxColor: #1D7074;
 //@boxColor: #01939A;
-@boxColor: #01939A;
+@boxColor: #63AFD0;
 @boxSideColor: darken(@boxColor, 15%);
+@boxSideColor1: darken(@boxColor, 10%);
 
 .box {
-    .border-radius(5px);
+    .border-radius(20px);
+
+    border: 7px double darken(@boxColor, 30%);
 
     background: @boxColor;
 
@@ -83,7 +86,27 @@ body {
                 13px -13px @boxSideColor,
                 14px -14px @boxSideColor,
                 15px -15px @boxSideColor,
-                15px -15px 15px 5px #444;
+                15px -15px 15px 5px #444,
+
+
+                1px -1px @boxSideColor1 inset,
+                2px -2px @boxSideColor1 inset,
+                3px -3px @boxSideColor1 inset,
+                4px -4px @boxSideColor1 inset,
+                5px -5px @boxSideColor1 inset,
+                6px -6px @boxSideColor1 inset,
+                7px -7px @boxSideColor1 inset,
+                8px -8px @boxSideColor1 inset,
+                9px -9px @boxSideColor1 inset,
+                10px -10px @boxSideColor1 inset,
+                11px -11px @boxSideColor1 inset,
+                12px -12px @boxSideColor1 inset,
+                13px -13px @boxSideColor1 inset,
+                14px -14px @boxSideColor1 inset,
+                15px -15px @boxSideColor1 inset,
+                15px -15px 1px 1px darken(@boxColor, 30%) inset;
+
+    //box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
 
     margin-right: 15px;
     margin-top: 30px;
@@ -104,7 +127,9 @@ body {
         text-shadow: 1px -1px 1px #000;
     }
 
+
 }
+
 
 .badge {
     padding: 2px 4px 2px;
@@ -117,3 +142,57 @@ body {
 }
 
 
+
+.testlink {
+	position: relative;
+    background-color: rgba(219,87,5,1);
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: 700;
+    display: block;
+    padding: 4px;
+    color: white;
+    .border-radius(8px);
+
+    -webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    -moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+
+   /*box-shadow: 1px -1px @boxSideColor,
+                    2px -2px @boxSideColor,
+                    3px -3px @boxSideColor,
+                    4px -4px @boxSideColor,
+                    5px -5px @boxSideColor,
+                    6px -6px @boxSideColor,
+                    7px -7px @boxSideColor,
+                    8px -9px @boxSideColor,
+                    9px -9px @boxSideColor,
+                    9px -9px 25px @boxSideColor;
+*/
+    margin: 100px auto;
+	width: 160px;
+	text-align: center;
+
+	-webkit-transition: all .1s ease;
+	-moz-transition: all .1s ease;
+	-ms-transition: all .1s ease;
+	-o-transition: all .1s ease;
+	transition: all .1s ease;
+}
+
+.testlink:active {
+    -webkit-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    -moz-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+
+    /*box-shadow: 1px -1px @boxSideColor,
+                2px -2px @boxSideColor,
+                3px -3px @boxSideColor,
+                3px -3px 6px @boxSideColor;
+
+    top: -6px;
+    left: 6px;*/
+    top: 6px;
+    position: relative;
+}
