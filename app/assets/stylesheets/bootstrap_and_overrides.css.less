@@ -141,17 +141,17 @@ body {
 
 .testlink {
 	position: relative;
-    background-color: rgba(219,87,5,1);
+    background-color: @boxColor;
     font-weight: 700;
     display: block;
     padding: 4px;
     color: white;
     .border-radius(8px);
 
-    -webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-    -moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-    box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-    box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    -webkit-box-shadow: 0px 9px 0px @boxSideColor, 0px 9px 25px rgba(0,0,0,.7);
+    -moz-box-shadow: 0px 9px 0px @boxSideColor, 0px 9px 25px rgba(0,0,0,.7);
+    box-shadow: 0px 9px 0px @boxSideColor, 0px 9px 25px rgba(0,0,0,.7);
+    box-shadow: 0px 9px 0px @boxSideColor, 0px 9px 25px rgba(0,0,0,.7);
 
    /*box-shadow: 1px -1px @boxSideColor,
                     2px -2px @boxSideColor,
@@ -176,10 +176,10 @@ body {
 }
 
 .testlink:active {
-    -webkit-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
-    -moz-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
-    box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
-    box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    -webkit-box-shadow: 0px 3px 0px @boxSideColor, 0px 3px 6px rgba(0,0,0,.9);
+    -moz-box-shadow: 0px 3px 0px @boxSideColor, 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 0px @boxSideColor, 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 0px @boxSideColor, 0px 3px 6px rgba(0,0,0,.9);
 
     /*box-shadow: 1px -1px @boxSideColor,
                 2px -2px @boxSideColor,
