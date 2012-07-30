@@ -53,6 +53,17 @@ Additionally, the following environment variables must be set (replace the brack
 
 * The carrierwave-mongoid gem currently isn't working in conjunction with the mongoid 3 gem. Because of this there is no gridFs support for carrierwave!
 
+== Todos
+
+* Implement chef environment support aka
+
+    chef.environment = "development"
+
+* Implement role support aka
+
+    chef.add_role("database")
+
+
 
 
 
