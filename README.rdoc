@@ -36,15 +36,9 @@ the _config_ directory or the path supplied in the config file.
 
 == Deployment
 
-=== Capistrano ngix deployment
+=== Capistrano deployment
 
-Bentobox is configured for capistrano ngix deployment, the following additional capistrano tasks are available:
-
-    cap nginx:setup
-    cap nginx:reload
-
-They are automatically invoked with cap deploy:setup.
-
+Bentobox is configured for capistrano passenger deployment, visit deploy.rb for customization.
 
 === Heroku support
 

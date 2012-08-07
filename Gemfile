@@ -26,7 +26,6 @@ group :development, :test do
   gem 'spork'
   gem 'capistrano'
   gem 'capistrano_colors'
-  gem 'capistrano-nginx'
   gem 'rspec-rails'
   gem 'mongoid-rspec'
   gem 'fabrication'
