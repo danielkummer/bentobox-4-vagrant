@@ -1,7 +1,7 @@
 require 'capistrano_colors'
 
-#set :domain, "bentobox.yourdomain.com"
-set :application, "bentobox-4-vagrant"
+set :domain, "vagrant.namics.com"
+set :application, "vagrant.namics.com"
 set :repository,  "git://github.com/danielkummer/bentobox-4-vagrant.git"
 set :branch, "master"
 set :repository_cache, "git_cache"
@@ -31,11 +31,6 @@ role :app, domain
 role :db,  domain, :primary => true
 
 
-
-
-after "deploy:setup", "nginx:setup", "nginx:reload"
-
-
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
@@ -43,13 +38,11 @@ after "deploy:setup", "nginx:setup", "nginx:reload"
 # these http://github.com/rails/irs_process_scripts
 
 # If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+ namespace :deploy do
+   task :start do ; end
+   task :stop do ; end
+   task :restart, :roles => :app, :except => { :no_release => true } do
+     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+   end
+ end
 
-#require 'bundler/capistrano'
-#require 'capistrano/ext/multistage'
