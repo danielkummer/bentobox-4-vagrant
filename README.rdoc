@@ -34,7 +34,19 @@ the _config_ directory or the path supplied in the config file.
 * Cookbooks list gathered from a chef server (or static configuration)
 * Vagrantbox upload
 
-== Heroku support
+== Deployment
+
+=== Capistrano ngix deployment
+
+Bentobox is configured for capistrano ngix deployment, the following additional capistrano tasks are available:
+
+    cap nginx:setup
+    cap nginx:reload
+
+They are automatically invoked with cap deploy:setup.
+
+
+=== Heroku support
 
 Although the demo application is running on heroku, there are some additional steps needed for production.
 Heroku only supports carrierwave (file upload) in conjunction with an amazon S3 (or another cloud storage service).
@@ -48,6 +60,8 @@ Additionally, the following environment variables must be set (replace the brack
     heroku config:add S3_KEY=[YOUR_KEY]
     heroku config:add S3_SECRET=[YOUR_SECRET]
     heroku config:add S3_BUCKET=[THE_BUCKET]
+
+
 
 == Known Issues
 
