@@ -25,6 +25,8 @@ group :development, :test do
   gem 'nifty-generators'
   gem 'spork'
   gem 'capistrano'
+  gem 'capistrano_colors'
+  gem 'capistrano-nginx'
   gem 'rspec-rails'
   gem 'mongoid-rspec'
   gem 'fabrication'

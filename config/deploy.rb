@@ -1,13 +1,40 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+require 'capistrano_colors'
+
+#set :domain, "bentobox.yourdomain.com"
+set :application, "bentobox-4-vagrant"
+set :repository,  "git://github.com/danielkummer/bentobox-4-vagrant.git"
+set :branch, "master"
+set :repository_cache, "git_cache"
+set :deploy_via, :remote_cache
+
+
+
 
 set :scm, :git
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :git_shallow_clone, 1
+set :deploy_via, :checkout
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+ssh_options[:forward_agent] = true
+default_run_options[:pty] = true # Must be set for the password prompt from git to work
+set :use_sudo, true
+set :keep_releases, 5
+
+
+
+set :user, "namics"
+set :rails_env, "production"
+
+set :deploy_to, "/var/www/#{application}"
+
+role :web, domain
+role :app, domain
+role :db,  domain, :primary => true
+
+
+
+
+after "deploy:setup", "nginx:setup", "nginx:reload"
+
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -23,3 +50,6 @@ role :db,  "your slave db-server here"
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
+#require 'bundler/capistrano'
+#require 'capistrano/ext/multistage'
