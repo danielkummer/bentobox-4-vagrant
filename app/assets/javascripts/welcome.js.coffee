@@ -11,7 +11,7 @@ jQuery ->
   $('#chefServerState').popover()
 
   $.getJSON $('#chef_server_status').data('url'), (data) ->
-    badge = (if data["response"] is "true" then "success" else "important")
+    badge = (if data["reachable"] is "true" then "success" else "important")
     $('#chef_server_status').html($('<span class="badge badge-' + badge + '"><i class="icon-globe"></i></span>'))
 
 
