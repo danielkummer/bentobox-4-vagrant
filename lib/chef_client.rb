@@ -2,12 +2,13 @@ require 'chef'
 
 class ChefClient
   class Exceptions
-    class ConfigurationError < RuntimeError; end
-    class ConnectionError < RuntimeError; end
+    class ConfigurationError < RuntimeError;
+    end
+    class ConnectionError < RuntimeError;
+    end
   end
 
   class << self
-
 
 
     def rest
@@ -47,9 +48,28 @@ class ChefClient
       end
     end
 
+    def get_client(user)
+      begin
+        rest.get_rest("clients#{user.client_name}")
+      rescue Exception => e
+        handle_authentication_exceptions(e)
+      end
+    end
+
     def create_client(user)
       begin
         rest.post_rest("clients", {:name => user.client_name})
+      rescue Exception => e
+        handle_authentication_exceptions(e)
+        if e.response.code == "404"
+          raise ChefClient::Exceptions::ConfigurationError
+        end
+      end
+    end
+
+    def update_client(user, options = {private_key: true, admin: false})
+      begin
+        rest.put_rest("clients/#{user.client_name}", options)
       rescue Exception => e
         handle_authentication_exceptions(e)
         if e.response.code == "404"
@@ -74,9 +94,10 @@ class ChefClient
     def handle_authentication_exceptions(exception, raise_exception = true)
       if exception.instance_of?(Net::HTTPServerException) and (exception.response.code == '401' || exception.response.code == '403')
         raise ChefClient::Exceptions::ConfigurationError
-      else if exception.instance_of?(Errno::ECONNREFUSED)
-        raise ChefClient::Exceptions::ConnectionError
-      end
+      else
+        if exception.instance_of?(Errno::ECONNREFUSED)
+          raise ChefClient::Exceptions::ConnectionError
+        end
         raise exception if raise_exception
       end
     end
