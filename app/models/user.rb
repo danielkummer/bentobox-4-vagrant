@@ -28,6 +28,7 @@ class User
   def generate_client_name
     return unless self.client_name.blank?
     self.client_name = self.email.gsub /(@|\.)/, "@" => "_at_", "." => "_"
+    logger.debug = "generate new client name: #{self.client_name}"
   end
 
   def regenerate_chef_client
@@ -35,6 +36,7 @@ class User
     begin
       client = ChefClient.create_client(self)
       if client.has_key?('private_key')
+        logger.debug "got new chef client private key for user #{self.email}"
         self.private_key = client['private_key']
       end
     rescue Net::HTTPServerException => e
