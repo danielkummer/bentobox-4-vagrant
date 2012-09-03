@@ -16,7 +16,7 @@ describe ChefClient do
   end
 
   it "should throw an exception when trying to connecto to a chef server" do
-    APP_CONFIG[:chef_server_url] = nil
+    APP_CONFIG[:chef_server_api_url] = nil
     APP_CONFIG[:cookbooks] = nil
 
     expect {

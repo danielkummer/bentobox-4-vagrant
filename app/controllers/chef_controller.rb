@@ -13,10 +13,10 @@ class ChefController < ApplicationController
   end
 
 
-  def create_client
+  def update_client
     user = User.find(params[:user_id])
     begin
-      client = ChefClient.create_client(user)
+      client = ChefClient.update_client(user)
       if client.has_key?('private_key')
         if user.update_attribute(:private_key, client['private_key'])
           message = 'User was successfully updated.'
@@ -26,19 +26,11 @@ class ChefController < ApplicationController
       else
         message = 'Couldn\'t get private key'
       end
+      message
 
     rescue Net::HTTPServerException => e
       message = e.message
     end
-    redirect_to user, notice: message
-  end
-
-  def delete_client
-    user = User.find(params[:user_id])
-    ChefClient.delete_client(user)
-    user.update_attribute :private_key, nil
-    message = "Chef client deleted successfully"
-
     redirect_to user, notice: message
   end
 
