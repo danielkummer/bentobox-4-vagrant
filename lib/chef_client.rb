@@ -16,6 +16,7 @@ class ChefClient
         Chef::Config[:client_key] = APP_CONFIG[:chef_client_key]
         Chef::Config[:chef_server_api_url] = APP_CONFIG[:chef_server_api_url]
         Chef::Config[:http_retry_count] = 1   #else will try 5 times to reconnect
+        Chef::Config[:client_registration_retries] = 1 #else will try 5 times to create client - results in 409 error
         Chef::REST.new(Chef::Config[:chef_server_api_url])
 
         Rails.logger.debug "Creating REST interface with config; #{Chef::Config.inspect}"
@@ -74,16 +75,17 @@ class ChefClient
         rest.delete_rest("clients/#{name}")
         Rails.logger.debug "client #{name} deleted"
       rescue Exception => e
-        handle_authentication_exceptions(e, false)
-        if e.response.code == "404"
+        if !e.response.nil? && e.response.code == "404"
           Rails.logger.debug "Chef delete client - client #{name} not found"
+        else
+          handle_authentication_exceptions(e)
         end
       end
     end
 
     private
-    def handle_authentication_exceptions(exception, raise_exception = true)
-      Rails.logger.debug "try handling exception: #{exception}, #{exception.message}, raising again: #{raise_exception}"
+    def handle_authentication_exceptions(exception)
+      Rails.logger.debug "try handling exception: #{exception}, #{exception.message}"
       if exception.instance_of?(Net::HTTPServerException) and (exception.response.code == '401' || exception.response.code == '403')
         Rails.logger.debug "chef api returned 401 or 403 error - it's probably a configuration error"
         raise ChefClient::Exceptions::ConfigurationError
@@ -92,7 +94,8 @@ class ChefClient
           Rails.logger.debug "chef api returned connection refused error - it's probably a configuration error"
           raise ChefClient::Exceptions::ConnectionError
         end
-        raise exception if raise_exception
+        Rails.logger.debug "unable to handle chef api exception - propagating..."
+        raise exception
       end
     end
 

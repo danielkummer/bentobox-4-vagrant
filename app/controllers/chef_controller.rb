@@ -17,10 +17,11 @@ class ChefController < ApplicationController
     user = User.find(params[:user_id])
     begin
       user.create_chef_client
+      redirect_to user, notice: message
     rescue Exception => e
-      message = e.message
+      redirect_to user, alert: e.message
     end
-    redirect_to user, notice: message
+
   end
 
 end
