@@ -32,25 +32,19 @@ class User
   end
 
   def create_or_update_chef_client
+    delete_chef_client
+     begin
+       client = ChefClient.create_client(self)
+       if client.has_key?('private_key')
+         self.private_key = client['private_key']
+       end
+     rescue Net::HTTPServerException => e
+       errors.add(:client_name, e.message)
+       raise e.message
+     end
+   end
 
-    begin
-      if ChefClient.get_client(self).has_key?('public_key')
-        client = ChefClient.update_client(self)
-      else
-        client = ChefClient.create_client(self)
-      end
-
-      if client.has_key?('private_key')
-        logger.debug "got new chef client private key for user #{self.email}"
-        self.private_key = client['private_key']
-      end
-    rescue Net::HTTPServerException => e
-      errors.add(:client_name, e.message)
-      raise e.message
-    end
-  end
-
-  def delete_chef_client
-    ChefClient.delete_client(self)
-  end
+   def delete_chef_client
+     ChefClient.delete_client(self)
+   end
 end
