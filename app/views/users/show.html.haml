@@ -43,14 +43,9 @@
       = link_to edit_user_registration_path, :class => "btn" do
         %i.icon-edit
         Edit registration
-      - if @user.private_key.blank?
-        = link_to chef_client_path(@user, 'create_client'), :class => "btn" do
-          %i.icon-user
-          Create chef client
-      - else
-        = link_to chef_client_path(@user, 'delete_client'),  :class => "btn btn-warning" do
-          %i.icon-remove
-          Delete chef client
+      = link_to chef_client_path(@user, 'update_client'), :class => "btn" do
+        %i.icon-user
+          Regenerate chef client private key
 
 #privateKeyModal.modal.hide
   .modal-header

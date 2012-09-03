@@ -12,7 +12,7 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :chef_client do |chef|
 
-    chef.chef_server_url = "<%= APP_CONFIG[:chef_server_url] %>"
+    chef.chef_server_url = "<%= APP_CONFIG[:chef_server_api_url] %>"
     chef.node_name = "<%= current_user.client_name %>"
 
     #currently not using the validation key because every user can create an own key using the web interface
