@@ -27,6 +27,8 @@ If you'd like some example data use
 ingredients. To do this simple edit app_config.yml to your needs and place the private key generated from the chef-server in
 the _config_ directory or the path supplied in the config file.
 
+Just create a new client on the chef server (important: the client must be admin) and place the private key file (.pem) in the location specified by app_config.yml.
+
 == Features
 
 * Private and public bentoboxes
