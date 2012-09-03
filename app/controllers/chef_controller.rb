@@ -16,6 +16,7 @@ class ChefController < ApplicationController
   def update_client
     user = User.find(params[:user_id])
     begin
+=begin
       client = ChefClient.update_client(user)
       if client.has_key?('private_key')
         if user.update_attribute(:private_key, client['private_key'])
@@ -27,10 +28,13 @@ class ChefController < ApplicationController
         message = 'Couldn\'t get private key'
       end
       message
+=end
+      user.create_or_update_chef_client
 
-    rescue Net::HTTPServerException => e
+    rescue Exception => e
       message = e.message
     end
+
     redirect_to user, notice: message
   end
 
