@@ -64,56 +64,57 @@ body {
 @boxSideColor: darken(@boxColor, 15%);
 @boxSideColor1: darken(@boxColor, 10%);
 
+@linkBoxColor: #E0E0E0;
+@linkBoxSideColor: darken(@linkBoxColor, 15%);
+
 .box {
     .border-radius(20px);
-
     border: 7px double darken(@boxColor, 30%);
-
     background: @boxColor;
+    @shadow: 1px -1px @boxSideColor,
+        2px -2px @boxSideColor,
+        3px -3px @boxSideColor,
+        4px -4px @boxSideColor,
+        5px -5px @boxSideColor,
+        6px -6px @boxSideColor,
+        7px -7px @boxSideColor,
+        8px -8px @boxSideColor,
+        9px -9px @boxSideColor,
+        10px -10px @boxSideColor,
+        11px -11px @boxSideColor,
+        12px -12px @boxSideColor,
+        13px -13px @boxSideColor,
+        14px -14px @boxSideColor,
+        15px -15px @boxSideColor,
+        15px -15px 15px 5px #444,
+        1px -1px @boxSideColor1 inset,
+        2px -2px @boxSideColor1 inset,
+        3px -3px @boxSideColor1 inset,
+        4px -4px @boxSideColor1 inset,
+        5px -5px @boxSideColor1 inset,
+        6px -6px @boxSideColor1 inset,
+        7px -7px @boxSideColor1 inset,
+        8px -8px @boxSideColor1 inset,
+        9px -9px @boxSideColor1 inset,
+        10px -10px @boxSideColor1 inset,
+        11px -11px @boxSideColor1 inset,
+        12px -12px @boxSideColor1 inset,
+        13px -13px @boxSideColor1 inset,
+        14px -14px @boxSideColor1 inset,
+        15px -15px @boxSideColor1 inset,
+        15px -15px 1px 1px darken(@boxColor, 30%) inset;
 
-    box-shadow: 1px -1px @boxSideColor,
-                2px -2px @boxSideColor,
-                3px -3px @boxSideColor,
-                4px -4px @boxSideColor,
-                5px -5px @boxSideColor,
-                6px -6px @boxSideColor,
-                7px -7px @boxSideColor,
-                8px -8px @boxSideColor,
-                9px -9px @boxSideColor,
-                10px -10px @boxSideColor,
-                11px -11px @boxSideColor,
-                12px -12px @boxSideColor,
-                13px -13px @boxSideColor,
-                14px -14px @boxSideColor,
-                15px -15px @boxSideColor,
-                15px -15px 15px 5px #444,
-                1px -1px @boxSideColor1 inset,
-                2px -2px @boxSideColor1 inset,
-                3px -3px @boxSideColor1 inset,
-                4px -4px @boxSideColor1 inset,
-                5px -5px @boxSideColor1 inset,
-                6px -6px @boxSideColor1 inset,
-                7px -7px @boxSideColor1 inset,
-                8px -8px @boxSideColor1 inset,
-                9px -9px @boxSideColor1 inset,
-                10px -10px @boxSideColor1 inset,
-                11px -11px @boxSideColor1 inset,
-                12px -12px @boxSideColor1 inset,
-                13px -13px @boxSideColor1 inset,
-                14px -14px @boxSideColor1 inset,
-                15px -15px @boxSideColor1 inset,
-                15px -15px 1px 1px darken(@boxColor, 30%) inset;
+    .box-shadow(@shadow);
 
     margin-right: 15px;
     margin-top: 30px;
     padding: 40px;
 
     h1 {
-        color: @baseColor;
-        //text-shadow: 3px 3px 0px @boxColor, 5px 5px 0px white;
+        color: @baseColor; //text-shadow: 3px 3px 0px @boxColor, 5px 5px 0px white;
         text-shadow: 2px -3px 1px darken(@baseColor, 15%);
-        font-size: 60px;
-        margin-bottom: 30px;
+        font-size: 50px;
+        text-align: center;
     }
 
     p {
@@ -121,11 +122,10 @@ body {
         padding-top: 20px;
         font-weight: 200;
         text-shadow: 1px -1px 1px #000;
+        text-align: center;
     }
 
-
 }
-
 
 .badge {
     padding: 2px 4px 2px;
@@ -137,57 +137,45 @@ body {
     .box-shadow(1px 1px 1px rgba(0, 0, 0, 0.075) inset)
 }
 
-
-
-.testlink {
-	position: relative;
-    background-color: @boxColor;
+.bigbutton {
+    position: relative;
+    background-color: @linkBoxColor;
     font-weight: 700;
     display: block;
-    padding: 4px;
-    color: white;
+    padding: 10px;
     .border-radius(8px);
 
-    -webkit-box-shadow: 0px 9px 0px @boxSideColor, 0px 9px 25px rgba(0,0,0,.7);
-    -moz-box-shadow: 0px 9px 0px @boxSideColor, 0px 9px 25px rgba(0,0,0,.7);
-    box-shadow: 0px 9px 0px @boxSideColor, 0px 9px 25px rgba(0,0,0,.7);
-    box-shadow: 0px 9px 0px @boxSideColor, 0px 9px 25px rgba(0,0,0,.7);
+    @shadow: 0px 9px 0px @linkBoxSideColor, 0px 9px 25px rgba(0, 0, 0, .7);
+    .box-shadow(@shadow);
+    .transition(all .1s ease);
 
-   /*box-shadow: 1px -1px @boxSideColor,
-                    2px -2px @boxSideColor,
-                    3px -3px @boxSideColor,
-                    4px -4px @boxSideColor,
-                    5px -5px @boxSideColor,
-                    6px -6px @boxSideColor,
-                    7px -7px @boxSideColor,
-                    8px -9px @boxSideColor,
-                    9px -9px @boxSideColor,
-                    9px -9px 25px @boxSideColor;
-*/
-    //margin: 100px auto;
-	width: 160px;
-	text-align: center;
+    overflow: auto;
 
-	-webkit-transition: all .1s ease;
-	-moz-transition: all .1s ease;
-	-ms-transition: all .1s ease;
-	-o-transition: all .1s ease;
-	transition: all .1s ease;
+    img {
+        float: left;
+        width: 128px;
+        heigh: 128px;
+    }
+
+    .caption {
+        margin:25px 10px;
+        text-align: left;
+        float: right;
+        width: 70%;
+
+        h3 {
+            color: black;
+        }
+        p {
+            color: #979797;
+        }
+    }
 }
 
-.testlink:active {
-    -webkit-box-shadow: 0px 3px 0px @boxSideColor, 0px 3px 6px rgba(0,0,0,.9);
-    -moz-box-shadow: 0px 3px 0px @boxSideColor, 0px 3px 6px rgba(0,0,0,.9);
-    box-shadow: 0px 3px 0px @boxSideColor, 0px 3px 6px rgba(0,0,0,.9);
-    box-shadow: 0px 3px 0px @boxSideColor, 0px 3px 6px rgba(0,0,0,.9);
+.bigbutton:active {
+    @shadow: 0px 3px 0px @linkBoxSideColor, 0px 3px 6px rgba(0, 0, 0, .9);
+    .box-shadow(@shadow);
 
-    /*box-shadow: 1px -1px @boxSideColor,
-                2px -2px @boxSideColor,
-                3px -3px @boxSideColor,
-                3px -3px 6px @boxSideColor;
-
-    top: -6px;
-    left: 6px;*/
     top: 6px;
     position: relative;
 }

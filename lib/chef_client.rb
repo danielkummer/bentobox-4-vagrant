@@ -15,10 +15,10 @@ class ChefClient
         require 'chef/rest'
         Chef::Config[:node_name] = APP_CONFIG[:chef_node_name]
         Chef::Config[:client_key] = APP_CONFIG[:chef_client_key]
-        Chef::Config[:chef_server_url] = APP_CONFIG[:chef_server_url]
+        Chef::Config[:chef_server_api_url] = APP_CONFIG[:chef_server_api_url]
         Chef::Config[:http_retry_count] = 1 #else will try 5 times to reconnect
 
-        Chef::REST.new(Chef::Config[:chef_server_url])
+        Chef::REST.new(Chef::Config[:chef_server_api_url])
       end
     end
 

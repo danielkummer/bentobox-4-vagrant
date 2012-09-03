@@ -28,7 +28,7 @@ class User
   def generate_client_name
     return unless self.client_name.blank?
     self.client_name = self.email.gsub /(@|\.)/, "@" => "_at_", "." => "_"
-    logger.debug = "generate new client name: #{self.client_name}"
+    logger.debug "generate new client name: #{self.client_name}"
   end
 
   def regenerate_chef_client
