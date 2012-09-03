@@ -9,8 +9,6 @@ class ChefClient
   end
 
   class << self
-
-
     def rest
       @rest ||= begin
         require 'chef/rest'
@@ -69,7 +67,7 @@ class ChefClient
 
     def update_client(user, options = {private_key: true, admin: false})
       begin
-        rest.put_rest("clients/#{user.client_name}", options)
+        rest.put_rest("clients/#{user.client_name}", options.merge(name: user.client_name))
       rescue Exception => e
         handle_authentication_exceptions(e)
         if e.response.code == "404"
@@ -92,6 +90,7 @@ class ChefClient
 
     private
     def handle_authentication_exceptions(exception, raise_exception = true)
+      Rails.logger.debug "try handling exception: #{exception}, #{exception.message}"
       if exception.instance_of?(Net::HTTPServerException) and (exception.response.code == '401' || exception.response.code == '403')
         raise ChefClient::Exceptions::ConfigurationError
       else
