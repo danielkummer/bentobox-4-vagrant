@@ -78,8 +78,6 @@
                     = link_to '#' do
                       = "Node Name: #{APP_CONFIG[:chef_node_name]}"
 
-
-
             - if current_user.blank?
               %ul.nav.pull-right
                 %li= link_to 'Sign Up', new_user_registration_path
@@ -135,6 +133,7 @@
           /link_to '@0r1g4m14dd1c7','http://www.twitter.com/0r1g4m14dd1c7'
           =link_to 'Code-n-Fold', 'http://code-n-fold.com'
           , 2012
+          = GitHelper.tag_text.html_safe
     /
       Javascripts
       \==================================================
