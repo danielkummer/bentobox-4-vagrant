@@ -63,7 +63,7 @@ class IngredientsController < ApplicationController
   private
   def get_available_cookbooks
     begin
-      @available_cookbooks = ChefClient.cookbooks_list
+      @available_cookbooks = ChefClientApi.cookbooks_list
     rescue Exception => ex
       flash[:error] = "Can't connect to chef server, there might be an error in your configuration. Please check your app_config.yml file. Exception message: #{ex.message}"
     end
@@ -71,6 +71,6 @@ class IngredientsController < ApplicationController
 
   private
   def retrieve_cookbooks
-    @cookbooks = ChefClient.cookbooks_list
+    @cookbooks = ChefClientApi.cookbooks_list
   end
 end

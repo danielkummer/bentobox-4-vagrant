@@ -32,16 +32,12 @@ class User
   end
 
   def create_chef_client
-    delete_chef_client
+    ChefClientApi.delete_client(self)
      begin
-       client = ChefClient.create_client(self)
+       ChefClientApi.create_client(self)
      rescue Exception => e
        errors.add(:client_name, e.message)
        raise e.message
      end
-   end
-
-   def delete_chef_client
-     ChefClient.delete_client(self)
    end
 end

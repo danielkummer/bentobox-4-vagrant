@@ -1,6 +1,6 @@
 require 'chef'
 
-class ChefClient
+class ChefClientApi
   class Exceptions
     class ConfigurationError < RuntimeError;
     end
@@ -66,7 +66,7 @@ class ChefClient
       rescue Exception => e
         handle_authentication_exceptions(e)
         if e.response.code == "404"
-          raise ChefClient::Exceptions::ConfigurationError
+          raise ChefClientApi::Exceptions::ConfigurationError
         end
       end
     end
@@ -91,11 +91,11 @@ class ChefClient
       Rails.logger.debug "try handling exception: #{exception}, #{exception.message}"
       if exception.instance_of?(Net::HTTPServerException) and (exception.response.code == '401' || exception.response.code == '403')
         Rails.logger.debug "chef api returned 401 or 403 error - it's probably a configuration error"
-        raise ChefClient::Exceptions::ConfigurationError
+        raise ChefClientApi::Exceptions::ConfigurationError
       else
         if exception.instance_of?(Errno::ECONNREFUSED)
           Rails.logger.debug "chef api returned connection refused error - it's probably a configuration error"
-          raise ChefClient::Exceptions::ConnectionError
+          raise ChefClientApi::Exceptions::ConnectionError
         end
         Rails.logger.debug "unable to handle chef api exception - propagating..."
         raise exception
