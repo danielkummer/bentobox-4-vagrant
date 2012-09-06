@@ -1,6 +1,6 @@
 development: &defaults
   chef_node_name: bentobox
-  chef_client_key: config/bentobox.pem
+  chef_client_key: config/production.pem
   chef_server_api_url: http://vagrant.namics.com:4000
   chef_server_admin_url: http://vagrant.namics.com:4040
 

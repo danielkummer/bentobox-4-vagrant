@@ -36,7 +36,7 @@ class User
      begin
        client = ChefClient.create_client(self)
        if client.has_key?('private_key')
-         self.private_key = client['private_key']
+         self.update_attribute(:private_key, client['private_key'])
        end
      rescue Net::HTTPServerException => e
        errors.add(:client_name, e.message)
