@@ -17,9 +17,10 @@ class ChefClient
         Chef::Config[:chef_server_api_url] = APP_CONFIG[:chef_server_api_url]
         Chef::Config[:http_retry_count] = 1   #else will try 5 times to reconnect
         Chef::Config[:client_registration_retries] = 1 #else will try 5 times to create client - results in 409 error
-        Chef::REST.new(Chef::Config[:chef_server_api_url])
 
         Rails.logger.debug "Creating REST interface with config; #{Chef::Config.inspect}"
+
+        Chef::REST.new(Chef::Config[:chef_server_api_url])
       end
     end
 
@@ -61,6 +62,7 @@ class ChefClient
       begin
         result = rest.post_rest("clients", {:name => user.client_name})
         Rails.logger.debug "creating new client #{user.client_name}, got answer: #{result}"
+        result
       rescue Exception => e
         handle_authentication_exceptions(e)
         if e.response.code == "404"
@@ -72,8 +74,9 @@ class ChefClient
     def delete_client(user)
       user.client_name_changed? ? name = user.client_name_was : name = user.client_name
       begin
-        rest.delete_rest("clients/#{name}")
+        result = rest.delete_rest("clients/#{name}")
         Rails.logger.debug "client #{name} deleted"
+        result
       rescue Exception => e
         if !e.response.nil? && e.response.code == "404"
           Rails.logger.debug "Chef delete client - client #{name} not found"
