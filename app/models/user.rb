@@ -35,10 +35,7 @@ class User
     delete_chef_client
      begin
        client = ChefClient.create_client(self)
-       if client.has_key?('private_key')
-         self.update_attribute(:private_key, client['private_key'])
-       end
-     rescue Net::HTTPServerException => e
+     rescue Exception => e
        errors.add(:client_name, e.message)
        raise e.message
      end
