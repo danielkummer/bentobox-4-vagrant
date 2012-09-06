@@ -9,15 +9,16 @@ class ChefClient
   end
 
   class << self
-
-
     def rest
       @rest ||= begin
         require 'chef/rest'
         Chef::Config[:node_name] = APP_CONFIG[:chef_node_name]
         Chef::Config[:client_key] = APP_CONFIG[:chef_client_key]
         Chef::Config[:chef_server_api_url] = APP_CONFIG[:chef_server_api_url]
-        Chef::Config[:http_retry_count] = 1 #else will try 5 times to reconnect
+        Chef::Config[:http_retry_count] = 1   #else will try 5 times to reconnect
+        Chef::Config[:client_registration_retries] = 1 #else will try 5 times to create client - results in 409 error
+
+        Rails.logger.debug "Creating REST interface with config; #{Chef::Config.inspect}"
 
         Chef::REST.new(Chef::Config[:chef_server_api_url])
       end
@@ -25,7 +26,8 @@ class ChefClient
 
     def connected?
       begin
-        rest.get_rest("/clients/#{APP_CONFIG[:chef_node_name]}")
+        answer = rest.get_rest("/clients/#{APP_CONFIG[:chef_node_name]}")
+        Rails.logger.debug "chef server connection test, got answer: #{answer}"
       rescue Exception
         return false
       end
@@ -34,13 +36,11 @@ class ChefClient
 
     #todo implement caching
     def cookbooks_list
-      return config_cookbooks if bypass_chef_server?
-
       env = APP_CONFIG[:chef_environment] || nil
       num_versions = APP_CONFIG[:chef_cookbook_all_versions] ? "num_versions=all" : "num_versions=1"
       api_endpoint = env ? "/environments/#{env}/cookbooks?#{num_versions}" : "/cookbooks?#{num_versions}"
-
       begin
+        Rails.logger.debug "listing cookbook versions, api endpoint: #{api_endpoint}"
         cookbook_versions = rest.get_rest(api_endpoint)
         format_cookbook_list(cookbook_versions)
       rescue Exception => e
@@ -50,7 +50,9 @@ class ChefClient
 
     def get_client(user)
       begin
-        rest.get_rest("clients#{user.client_name}")
+        result = rest.get_rest("clients#{user.client_name}")
+        Rails.logger.debug "getting client #{user.client_name}, got answer: #{result}"
+        result
       rescue Exception => e
         handle_authentication_exceptions(e)
       end
@@ -58,18 +60,9 @@ class ChefClient
 
     def create_client(user)
       begin
-        rest.post_rest("clients", {:name => user.client_name})
-      rescue Exception => e
-        handle_authentication_exceptions(e)
-        if e.response.code == "404"
-          raise ChefClient::Exceptions::ConfigurationError
-        end
-      end
-    end
-
-    def update_client(user, options = {private_key: true, admin: false})
-      begin
-        rest.put_rest("clients/#{user.client_name}", options)
+        result = rest.post_rest("clients", {:name => user.client_name})
+        Rails.logger.debug "creating new client #{user.client_name}, got answer: #{result}"
+        result
       rescue Exception => e
         handle_authentication_exceptions(e)
         if e.response.code == "404"
@@ -81,44 +74,39 @@ class ChefClient
     def delete_client(user)
       user.client_name_changed? ? name = user.client_name_was : name = user.client_name
       begin
-        rest.delete_rest("clients/#{name}")
+        result = rest.delete_rest("clients/#{name}")
+        Rails.logger.debug "client #{name} deleted"
+        result
       rescue Exception => e
-        handle_authentication_exceptions(e, false)
-        if e.response.code == "404"
+        if !e.response.nil? && e.response.code == "404"
           Rails.logger.debug "Chef delete client - client #{name} not found"
+        else
+          handle_authentication_exceptions(e)
         end
       end
     end
 
     private
-    def handle_authentication_exceptions(exception, raise_exception = true)
+    def handle_authentication_exceptions(exception)
+      Rails.logger.debug "try handling exception: #{exception}, #{exception.message}"
       if exception.instance_of?(Net::HTTPServerException) and (exception.response.code == '401' || exception.response.code == '403')
+        Rails.logger.debug "chef api returned 401 or 403 error - it's probably a configuration error"
         raise ChefClient::Exceptions::ConfigurationError
       else
         if exception.instance_of?(Errno::ECONNREFUSED)
+          Rails.logger.debug "chef api returned connection refused error - it's probably a configuration error"
           raise ChefClient::Exceptions::ConnectionError
         end
-        raise exception if raise_exception
+        Rails.logger.debug "unable to handle chef api exception - propagating..."
+        raise exception
       end
     end
 
     def format_cookbook_list(item)
+      Rails.logger.debug "formating #{item.size} cookbooks..."
       item.inject({}) do |cookbooks, (cookbook, versions)|
         cookbooks[cookbook] = cookbook
         cookbooks
-      end
-    end
-
-    #deprecated #todo remove
-    def bypass_chef_server?
-      APP_CONFIG.has_key? :cookbooks
-    end
-
-    def config_cookbooks
-      APP_CONFIG[:cookbooks].split(',').inject({}) do |result, cookbook|
-        cookbook = cookbook.strip
-        result[cookbook] = cookbook
-        result
       end
     end
 

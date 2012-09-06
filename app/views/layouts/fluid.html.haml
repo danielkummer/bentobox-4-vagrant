@@ -78,8 +78,6 @@
                     = link_to '#' do
                       = "Node Name: #{APP_CONFIG[:chef_node_name]}"
 
-
-
             - if current_user.blank?
               %ul.nav.pull-right
                 %li= link_to 'Sign Up', new_user_registration_path
