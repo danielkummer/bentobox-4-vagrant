@@ -22,7 +22,7 @@ class User
 
 
   before_validation :generate_client_name, :if => Proc.new { |user| user.client_name.blank? }
-  before_save :create_or_update_chef_client, :if => Proc.new { |user| user.client_name_changed? or user.new_record? }
+  before_save :create_chef_client, :if => Proc.new { |user| user.client_name_changed? or user.new_record? }
   before_destroy :delete_chef_client, :unless => Proc.new { |user| user.private_key.blank? }
 
   def generate_client_name
@@ -31,26 +31,20 @@ class User
     logger.debug "generate new client name: #{self.client_name}"
   end
 
-  def create_or_update_chef_client
+  def create_chef_client
+    delete_chef_client
+     begin
+       client = ChefClient.create_client(self)
+       if client.has_key?('private_key')
+         self.update_attribute(:private_key, client['private_key'])
+       end
+     rescue Net::HTTPServerException => e
+       errors.add(:client_name, e.message)
+       raise e.message
+     end
+   end
 
-    begin
-      if ChefClient.get_client(self).has_key?('public_key')
-        client = ChefClient.update_client(self)
-      else
-        client = ChefClient.create_client(self)
-      end
-
-      if client.has_key?('private_key')
-        logger.debug "got new chef client private key for user #{self.email}"
-        self.private_key = client['private_key']
-      end
-    rescue Net::HTTPServerException => e
-      errors.add(:client_name, e.message)
-      raise e.message
-    end
-  end
-
-  def delete_chef_client
-    ChefClient.delete_client(self)
-  end
+   def delete_chef_client
+     ChefClient.delete_client(self)
+   end
 end
