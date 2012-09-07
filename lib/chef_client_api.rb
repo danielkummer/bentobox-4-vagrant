@@ -26,7 +26,7 @@ class ChefClientApi
 
     def connected?
       begin
-        answer = rest.get_rest("/clients/#{APP_CONFIG[:chef_node_name]}")
+        answer = rest.get_rest("clients/#{APP_CONFIG[:chef_node_name]}")
         Rails.logger.debug "chef server connection test, got answer: #{answer}"
       rescue Exception
         return false
@@ -50,7 +50,7 @@ class ChefClientApi
 
     def get_client(user)
       begin
-        result = rest.get_rest("clients#{user.client_name}")
+        result = rest.get_rest("clients/#{user.client_name}")
         Rails.logger.debug "getting client #{user.client_name}, got answer: #{result}"
         result
       rescue Exception => e
@@ -78,7 +78,7 @@ class ChefClientApi
         Rails.logger.debug "client #{name} deleted"
         result
       rescue Exception => e
-        if !e.response.nil? && e.response.code == "404"
+        if e.respond_to?(:response) && e.response.code == "404"
           Rails.logger.debug "Chef delete client - client #{name} not found"
         else
           handle_authentication_exceptions(e)
