@@ -29,11 +29,7 @@ module GitHelper
     end
 
     def tag_text
-      content_tag(:p) do
-        out = "Version: "
-        out.concat git_info[:tag]
-      end
-
+      "Version: ".concat git_info[:tag]
     end
   end
 end

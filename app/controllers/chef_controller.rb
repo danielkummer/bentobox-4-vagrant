@@ -7,7 +7,7 @@ class ChefController < ApplicationController
 
   def status
     result = Rails.cache.fetch('chef_server_reachable', :expires_in => 5.minutes) do
-      ChefClient.connected?.to_s
+      ChefClientApi.connected?.to_s
     end
     respond_with({:reachable => result}.to_json)
   end
