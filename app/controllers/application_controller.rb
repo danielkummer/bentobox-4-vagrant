@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
-  rescue_from ChefClient::Exceptions::ConnectionError, :with => :connection_error
-  rescue_from ChefClient::Exceptions::ConfigurationError, :with => :chef_configuration_error
+  rescue_from ChefClientApi::Exceptions::ConnectionError, :with => :connection_error
+  rescue_from ChefClientApi::Exceptions::ConfigurationError, :with => :chef_configuration_error
   #rescue_from ChefClient::Exceptions::ConnectionError, SocketError, :with => :chef_configuration_error
 
   def chef_configuration_error

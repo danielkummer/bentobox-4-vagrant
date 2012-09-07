@@ -35,6 +35,7 @@ group :development, :test do
   gem 'rb-fsevent'
   gem 'guard-spork'
   gem 'growl'
+  gem 'webmock'
 end
 
 gem 'database_cleaner', :group => :test

@@ -3,11 +3,14 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
+require 'webmock/rspec'
+
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 
 ENV["RAILS_ENV"] ||= 'test'
+Rails.env ||= 'test'
 
 def logger
   Rails.logger
@@ -56,23 +59,32 @@ Spork.prefork do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.orm = "mongoid"
     end
+
     config.before(:each) do
       DatabaseCleaner.start
+
+      #todo this isn't dynamic!
+      #note: it doesn't work with before :all
+      stub_request(:delete, "http://localhost:4000/clients/").
+        to_return(status: 200, body: {}.to_json, headers: {'Content-Type' => 'application/json'})
+      stub_request(:post, "http://localhost:4000/clients").
+        with(body: {name: /.*/}).
+        to_return(status: 200, headers: {'Content-Type' => 'application/json'}, body: {name: "some_client", admin: false, private_key: "----this is a private key-----"}.to_json)
     end
     config.after(:each) do
       DatabaseCleaner.clean
     end
 
     config.after(:all) do
-        # Get rid of the linked images
-        if Rails.env.test? || Rails.env.cucumber?
-          tmp = Fabricate(:vagrantbox)
-          store_path = File.dirname(File.dirname(tmp.box.url))
-          temp_path = tmp.box.cache_dir
-          FileUtils.rm_rf(Dir["#{Rails.root}/public/#{store_path}/[^.]*"])
-          FileUtils.rm_rf(Dir["#{temp_path}/[^.]*"])
-        end
+      # Get rid of the linked images
+      if Rails.env.test? || Rails.env.cucumber?
+        tmp = Fabricate(:vagrantbox)
+        store_path = File.dirname(File.dirname(tmp.box.url))
+        temp_path = tmp.box.cache_dir
+        FileUtils.rm_rf(Dir["#{Rails.root}/public/#{store_path}/[^.]*"])
+        FileUtils.rm_rf(Dir["#{temp_path}/[^.]*"])
       end
+    end
 
     config.mock_with :rspec
     config.infer_base_class_for_anonymous_controllers = false
