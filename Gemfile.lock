@@ -84,6 +84,7 @@ GEM
       execjs
     coffee-script-source (1.3.3)
     commonjs (0.2.6)
+    crack (0.3.1)
     database_cleaner (0.8.0)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
@@ -279,6 +280,9 @@ GEM
     uuidtools (2.1.3)
     warden (1.2.1)
       rack (>= 1.0)
+    webmock (1.8.9)
+      addressable (>= 2.2.7)
+      crack (>= 0.1.7)
     xpath (0.1.4)
       nokogiri (~> 1.3)
     yajl-ruby (1.1.0)
@@ -317,3 +321,4 @@ DEPENDENCIES
   spork
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  webmock
