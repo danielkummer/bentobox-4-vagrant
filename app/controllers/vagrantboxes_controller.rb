@@ -33,7 +33,7 @@ class VagrantboxesController < ApplicationController
 
     respond_to do |format|
       if @vagrantbox.update_attributes(params[:vagrantbox])
-        format.html { redirect_to @vagrantbox, notice: 'Vagrantbox was successfully updated.' }
+        format.html { redirect_to vagrantboxes_path, notice: 'Vagrantbox was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
