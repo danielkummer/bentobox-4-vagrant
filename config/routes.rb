@@ -1,5 +1,7 @@
 VagrantCook::Application.routes.draw do
 
+  resources :app_configurations
+
   devise_for :users, :path_names => {:sign_up => "register",
                                      :sign_in => "login",
                                      :sign_out => "logout",
@@ -28,6 +30,13 @@ VagrantCook::Application.routes.draw do
 
   match 'chef/status' => 'chef#status', as: 'chef_server_status', via: :get
   match 'chef/client_status/:id' => 'chef#client_status', as: 'chef_client_status', via: :get
+
+
+  namespace :admin do
+    post 'load_validation_key', to: "admin#load_validation_key"
+    post 'update', to: "admin#update_app_configuration"
+    root :to => 'admin#index'
+  end
 
   root :to => 'welcome#index'
 end
