@@ -12,7 +12,7 @@ module BentoboxesHelper
     first_record = true
     @bentobox.ingredients.with_network_config.each do |box_with_config|
       result << "#" if !first_record
-      result << 'config.vm.network  "' + box_with_config.networkconfig.to_s + '"'
+      result << 'config.vm.network  ' + box_with_config.networkconfig.to_s
       first_record = false
     end
     result << "# No vm.network configuration found - check your ingredients for one..." if result.empty?
