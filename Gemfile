@@ -35,8 +35,9 @@ group :development, :test do
   gem 'rb-fsevent'
   gem 'guard-spork'
   gem 'growl'
-  gem 'webmock'
 end
 
+
+gem 'webmock', :group => :test
 gem 'database_cleaner', :group => :test
 gem 'simplecov', :require => false, :group => :test
