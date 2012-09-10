@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def download_key
-    send_data current_user.private_key, :disposition => 'attachment', :filename => "#{current_user.client_name}.pem"
+    send_data current_user.private_key, :disposition => 'attachment', :filename => "client.pem"
   end
 
 end
