@@ -6,16 +6,21 @@ class AppConfiguration
   validates :name, uniqueness: true
   attr_readonly :name
 
-
-  #todo this is seed data!!
-  def self.defaults
-    {
-      validation_key_file_name: 'validation.pem',
-      validation_client_name: 'chef-validator',
-      chef_node_name: 'bentobox',
-      chef_client_key: 'config/production.pem',
-      chef_server_api_url: 'http://vagrant.namics.com:4000',
-      chef_server_admin_url: 'http://vagrant.namics.com:4040',
-    }
+  def self.get(key)
+    key = key.to_s
+    begin
+      config = where(name: key).first
+      config.value
+    rescue Exception
+      nil
+    end
   end
+
+  def self.put(key, value)
+    key = key.to_s
+    config = find_or_create_by(name: key)
+    config.value = value
+    config.save
+  end
+
 end

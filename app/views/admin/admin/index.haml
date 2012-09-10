@@ -1,31 +1,25 @@
 %h1 Administration
 
-%h2 Client validation
-
 .row
   .span5
-    %dt Validation client name
-    %dd= AppConfiguration.where(name: AppConfiguration.defaults[:validation_client_name]).exists? ? AppConfiguration.where(name: AppConfiguration.defaults[:validation_client_name]) : "not set"
-    %dt Validation client key (validation.pem)
-    %dd= AppConfiguration.where(name: AppConfiguration.defaults[:validation_key_file_name]).exists? ? AppConfiguration.where(name: AppConfiguration.defaults[:validation_key_file_name]).first.value : "not set"
-  .span5
     .well
-      %p Try to load the validation key contents automatically. At the moment only local loading of the validation key is supported. (It must be readable by the application user)
-
+      %h3 Load validation.pem file
+      %p Load the validation key content. (Only local loading supportet at the moment)
       = simple_form_for :load_validation_key, :url => admin_load_validation_key_url, html:{class: "form-horizontal"} do |f|
         = f.error_notification
         .fieldset
-          = f.input :file_path, label: 'Path to validation.pem file', input_html: {value: "/etc/chef/#{AppConfiguration.defaults[:validation_key_file_name]}"}
-          = f.submit 'Load key', class: "btn"
-
-= form_tag admin_update_path, class: "form-horizontal" do
-  %legend Application configuration
-  - @app_configurations.each do |app_configuration|
-    .control-group
-      = label_tag 'app_configuration[values][]', app_configuration.name, class: "control-label"
-      .controls
-        /= hidden_field_tag "app_configuration[names][]", app_configuration.name
-        = text_field_tag "app_configuration[#{app_configuration.name}]", app_configuration.value
-  .form-actions
-    = submit_tag 'Save', class: "btn btn-primary"
-    = link_to 'Back', admin_root_path, class: "btn"
+          = f.input :file_path, label: 'Path to file', input_html: {value: "/etc/chef/validation.pem"}
+          = f.submit 'Load key', class: "btn btn-success"
+.row
+  .span10
+    = form_tag admin_update_path, class: "form-horizontal" do
+      %legend Application configuration
+      - @app_configurations.each do |app_configuration|
+        .control-group
+          = label_tag 'app_configuration[values][]', app_configuration.name, class: "control-label"
+          .controls
+            /= hidden_field_tag "app_configuration[names][]", app_configuration.name
+            = text_field_tag "app_configuration[#{app_configuration.name}]", app_configuration.value
+      .form-actions
+        = submit_tag 'Save', class: "btn btn-primary"
+        = link_to 'Back', admin_root_path, class: "btn"

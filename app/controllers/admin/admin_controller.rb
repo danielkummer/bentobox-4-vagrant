@@ -12,7 +12,6 @@ class Admin::AdminController < ApplicationController
   end
 
   def index
-    @validation_key_exists = AppConfiguration.where(name: AppConfiguration.defaults[:validation_key_file_name]).exists?
     @app_configurations = AppConfiguration.all
   end
 
@@ -31,17 +30,8 @@ class Admin::AdminController < ApplicationController
     filename = params[:load_validation_key][:file_path]
     if File.exists? filename
       content = File.read filename
-      config = AppConfiguration.find_or_create_by(name: AppConfiguration.defaults[:validation_key_file_name])
-      config.value = content
-      respond_to do |format|
-        if config.save
-          notice = 'Validation key was successfully loaded.'
-        else
-          notice = 'Validation key could not be saved.'
-        end
-        format.html { redirect_to admin_root_path, notice: notice and return }
-      end
-    else
+      AppConfiguration.put('validation.pem', content)
+      redirect_to admin_root_path, notice: 'Validation key was successfully loaded.' and return
     end
     redirect_to admin_root_path, notice: 'File not found'
   end
