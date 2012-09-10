@@ -46,7 +46,7 @@
           Show
         = link_to download_key_user_path(@user),  :class => "btn" do
           %i.icon-download-alt
-          Download
+          Download private key
         %a.btn.btn-info{'data-toggle' => "modal", href: "#privateKeyInfoModal" }
           %i.icon-info-sign
     %h3
@@ -56,6 +56,12 @@
       = link_to edit_user_registration_path, :class => "btn" do
         %i.icon-edit
         Edit registration
+      = link_to download_validation_key_user_path, :class => "btn" do
+        %i.icon-download-alt
+        Download validation.pem key
+      %a.btn.btn-info{'data-toggle' => "modal", href: "#validationKeyInfoModal" }
+        %i.icon-info-sign
+
 
 #privateKeyModal.modal.hide
   .modal-header
@@ -70,5 +76,13 @@
     %h3= "Info"
   .modal-body
     %p You need to download and put your private key into your chef configuration folder, usually located under <b>/etc/chef</b>
+
+
+#validationKeyInfoModal.modal.hide
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3= "Info"
+  .modal-body
+    %p You need to download the validation.pem key and put it next to your downloaded Vagrantfile</b>
 
 

@@ -34,3 +34,9 @@ AdditionalConfiguration.create!(name: "2048MB RAM",value: 'config.vm.customize [
 User.create!(email: "admin@localhost", password: "123456", password_confirmation: "123456", admin: true)
 
 
+AppConfiguration.put('validation.pem', 'LOAD THE KEY FILE!')
+AppConfiguration.put('validation client name', 'chef-validator')
+AppConfiguration.put('chef client node name', 'bentobox')
+AppConfiguration.put('chef client key', 'config/production.pem')
+AppConfiguration.put('chef server api url', 'http://vagrant.namics.com:4000')
+AppConfiguration.put('chef server admin url', 'http://vagrant.namics.com:4040')
