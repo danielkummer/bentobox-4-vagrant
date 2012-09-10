@@ -14,8 +14,8 @@ class Networkconfig
   def to_s
     result = ""
     result << ":#{type}" unless type.nil?
-    result << ", #{second_parameter}" unless second_parameter.empty?
+    result << ", \"#{second_parameter}\"" unless second_parameter.empty?
     result << ", #{third_parameter}" unless third_parameter.empty?
-    result
+    result.html_safe
   end
 end
