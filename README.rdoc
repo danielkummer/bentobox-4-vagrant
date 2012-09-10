@@ -1,9 +1,9 @@
 == Bentobox 4 Vagrant
 
-Bentobox 4 Vagrant is a nifty tool for generating Vagrantconfig files.
+Bentobox 4 Vagrant is a nifty tool for generating Vagrantfile configurations.
 It's intended for use with a chef server which supplies the cookbooks and recepies.
 
-A bentobox is essentially a Vagrantconfig file consisting of a basebox and several ingredients.
+A bentobox is essentially a Vagrantfile file consisting of a basebox and several ingredients.
 An ingredient is simply a configuration which can include cookbooks, share folders, portmappings and network configurations.
 
 

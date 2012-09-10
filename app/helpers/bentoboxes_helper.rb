@@ -23,7 +23,7 @@ module BentoboxesHelper
     result = ""
     @bentobox.ingredients.each do |ingredient|
       ingredient.portmappings.each do |map|
-        result << "config.vm.forward_port #{map.mapping}\n  "
+        result << "config.vm.forward_port #{map.mapping.gsub(/:/, ", ")}\n  "
       end
     end
     result << "# No vm.forward_port configuration found - check your ingredients for one..." if result.empty?
