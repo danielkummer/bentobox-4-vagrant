@@ -16,7 +16,7 @@ module BentoboxesHelper
       first_record = false
     end
     result << "# No vm.network configuration found - check your ingredients for one..." if result.empty?
-    result
+    result.html_safe
   end
 
   def config_portmapping
