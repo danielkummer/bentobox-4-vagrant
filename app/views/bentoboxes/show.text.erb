@@ -5,19 +5,17 @@ Vagrant::Config.run do |config|
   # config.vm.boot_mode = :gui
 
   <%= config_network %>
-
   <%= config_portmapping %>
-
   <%= config_share_folders %>
 
   config.vm.provision :chef_client do |chef|
-
     chef.chef_server_url = "<%= APP_CONFIG[:chef_server_api_url] %>"
     chef.node_name = "<%= current_user.client_name %>"
 
-    #currently not using the validation key because every user can create an own key using the web interface
-    #chef.validation_key_path = "#{ENV['HOME']}/.chef/#{ENV['ORGNAME']}-validator.pem"
-    #chef.validation_client_name = "#{ENV['ORGNAME']}-validator"
+    chef.client_key_path = "/etc/chef/client.pem"
+    chef.validation_key_path = "validation.pem"
+    chef.validation_client_name = "chef-validator"
+
     <%= config_recipes %>
   end
 
