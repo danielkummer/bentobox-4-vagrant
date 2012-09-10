@@ -1,5 +1,7 @@
 VagrantCook::Application.routes.draw do
 
+  resources :app_configurations
+
   devise_for :users, :path_names => {:sign_up => "register",
                                      :sign_in => "login",
                                      :sign_out => "logout",
@@ -21,13 +23,21 @@ VagrantCook::Application.routes.draw do
   resources :users, only: [:show, :edit, :update, :destroy] do
     member do
       get 'download_key', as: 'download_key', action: 'download_key'
+      get 'download_validation_key', as: 'download_validation_key', action: 'download_validation_key'
     end
 
     resources :bentoboxes
   end
 
-  match 'chef/client/:user_id/:action' => 'chef#client', as: 'chef_client', via: :get
   match 'chef/status' => 'chef#status', as: 'chef_server_status', via: :get
+  match 'chef/client_status/:id' => 'chef#client_status', as: 'chef_client_status', via: :get
+
+
+  namespace :admin do
+    post 'load_validation_key', to: "admin#load_validation_key"
+    post 'update', to: "admin#update_app_configuration"
+    root :to => 'admin#index'
+  end
 
   root :to => 'welcome#index'
 end
