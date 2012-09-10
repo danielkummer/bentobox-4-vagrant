@@ -23,6 +23,7 @@ VagrantCook::Application.routes.draw do
   resources :users, only: [:show, :edit, :update, :destroy] do
     member do
       get 'download_key', as: 'download_key', action: 'download_key'
+      get 'download_validation_key', as: 'download_validation_key', action: 'download_validation_key'
     end
 
     resources :bentoboxes
