@@ -19,7 +19,7 @@
       %td= bentobox.name
       %td= bentobox.description
       %td
-        = link_to bentobox_url(bentobox,  params.merge(:format => :text, :download => true)), :class => "btn btn-info", title: "Download Vagrantconfig" do
+        = link_to bentobox_url(bentobox,  params.merge(:format => :text, :download => true)), :class => "btn btn-info", title: "Download Vagrantfile" do
           %i.icon-download-alt
         = link_to bentobox, class: "btn", title: "Show" do
           %i.icon-eye-open
