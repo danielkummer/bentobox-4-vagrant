@@ -13,7 +13,7 @@ Vagrant::Config.run do |config|
     chef.node_name = "<%= current_user.client_name %>"
 
     chef.client_key_path = "~/<%= current_user.client_name %>.pem"
-    chef.validation_key_path = "validation.pem"
+    chef.validation_key_path = "~/<%= current_user.client_name %>.pem"
     chef.validation_client_name = "chef-validator"
 
     <%= config_recipes %>
