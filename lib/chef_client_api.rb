@@ -12,9 +12,9 @@ class ChefClientApi
     def rest
       @rest ||= begin
         require 'chef/rest'
-        Chef::Config[:node_name] = APP_CONFIG[:chef_node_name]
-        Chef::Config[:client_key] = APP_CONFIG[:chef_client_key]
-        Chef::Config[:chef_server_api_url] = APP_CONFIG[:chef_server_api_url]
+        Chef::Config[:node_name] = AppConfiguration.get('chef client node name')
+        Chef::Config[:client_key] = AppConfiguration.get('chef client key')
+        Chef::Config[:chef_server_api_url] = AppConfiguration.get('chef server api url')
         Chef::Config[:http_retry_count] = 1   #else will try 5 times to reconnect
         Chef::Config[:client_registration_retries] = 1 #else will try 5 times to create client - results in 409 error
 
@@ -26,7 +26,7 @@ class ChefClientApi
 
     def connected?
       begin
-        answer = rest.get_rest("clients/#{APP_CONFIG[:chef_node_name]}")
+        answer = rest.get_rest("clients/#{AppConfiguration.get('chef client node name')}")
         Rails.logger.debug "chef server connection test, got answer: #{answer}"
       rescue Exception
         return false
@@ -46,8 +46,8 @@ class ChefClientApi
 
      #todo implement caching
     def cookbooks_list
-      env = APP_CONFIG[:chef_environment] || nil
-      num_versions = APP_CONFIG[:chef_cookbook_all_versions] ? "num_versions=all" : "num_versions=1"
+      env = AppConfiguration.get('chef environment')
+      num_versions = AppConfiguration.get('chef cookbook versions').blank? ? "num_versions=1" : AppConfiguration.get('chef cookbook versions')
       api_endpoint = env ? "/environments/#{env}/cookbooks?#{num_versions}" : "/cookbooks?#{num_versions}"
       begin
         Rails.logger.debug "listing cookbook versions, api endpoint: #{api_endpoint}"
