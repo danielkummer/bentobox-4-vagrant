@@ -34,7 +34,17 @@ class ChefClientApi
       return true
     end
 
-    #todo implement caching
+    def get_client(user)
+      begin
+        result = rest.get_rest("clients/#{user.client_name}")
+        Rails.logger.debug "getting client #{user.client_name}, got answer: #{result}"
+        result
+      rescue Exception => e
+        handle_authentication_exceptions(e)
+      end
+    end
+
+     #todo implement caching
     def cookbooks_list
       env = APP_CONFIG[:chef_environment] || nil
       num_versions = APP_CONFIG[:chef_cookbook_all_versions] ? "num_versions=all" : "num_versions=1"
@@ -43,16 +53,6 @@ class ChefClientApi
         Rails.logger.debug "listing cookbook versions, api endpoint: #{api_endpoint}"
         cookbook_versions = rest.get_rest(api_endpoint)
         format_cookbook_list(cookbook_versions)
-      rescue Exception => e
-        handle_authentication_exceptions(e)
-      end
-    end
-
-    def get_client(user)
-      begin
-        result = rest.get_rest("clients/#{user.client_name}")
-        Rails.logger.debug "getting client #{user.client_name}, got answer: #{result}"
-        result
       rescue Exception => e
         handle_authentication_exceptions(e)
       end
