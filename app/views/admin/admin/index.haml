@@ -5,13 +5,13 @@
     .well
       %h3 Load validation.pem file
       %p Load the validation key content. (Only local loading supportet at the moment)
-      = simple_form_for :load_validation_key, :url => admin_load_validation_key_url, html:{class: "form-horizontal"} do |f|
+      = simple_form_for :load_validation_key, :url => admin_load_validation_key_url, html:{class: "form-horizontal"}  do |f|
         = f.error_notification
         .fieldset
           = f.input :file_path, label: 'Path to file', input_html: {value: "/etc/chef/validation.pem"}
           = f.submit 'Load key', class: "btn btn-success"
 .row
-  .span10
+  .span5
     = form_tag admin_update_path, class: "form-horizontal" do
       %legend Application configuration
       - @app_configurations.each do |app_configuration|
@@ -23,3 +23,17 @@
       .form-actions
         = submit_tag 'Save', class: "btn btn-primary"
         = link_to 'Back', admin_root_path, class: "btn"
+
+.row
+  .span5
+    %h3 Users
+    %table.table.table-striped
+      %thead
+        %tr
+          %td User
+          %td
+      %tbody
+      - User.each do |u|
+        %tr
+          %td=u.email
+          %td= link_to 'Edit', edit_user_path(u), :class => "btn"
