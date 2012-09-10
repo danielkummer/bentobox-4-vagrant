@@ -17,7 +17,7 @@ class BentoboxesController < ApplicationController
     @bentobox = bentoboxes.find(params[:id])
 
     if params[:download]
-      send_data(render_to_string, :filename => "Vagrantconfig", :type => "text/plain")
+      send_data(render_to_string, :filename => "Vagrantfile", :type => "text/plain")
     else
       respond_with @bentobox
     end
