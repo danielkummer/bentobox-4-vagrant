@@ -38,7 +38,13 @@ class UsersController < ApplicationController
   end
 
   def download_key
-    send_data current_user.private_key, :disposition => 'attachment', :filename => "#{current_user.client_name}.pem"
+    send_data current_user.private_key, :disposition => 'attachment', :filename => "client.pem"
   end
+
+  def download_validation_key
+    send_data AppConfiguration.get('validation.pem'), :disposition => 'attachment', :filename => "validation.pem"
+  end
+
+
 
 end
