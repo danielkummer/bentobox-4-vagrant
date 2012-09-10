@@ -1,6 +1,15 @@
 module BentoboxesHelper
+
+  def config_unique_node_name
+    @unique_name ||= String.new do |s|
+      s = current_user.client_name + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4)
+    end
+    @unique_name
+  end
+
+
   def config_vm_box_name
-    ("config.vm.box = \"" + current_user.client_name + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4) + "\"").html_safe
+    ("config.vm.box = \"" + config_unique_node_name + "\"").html_safe
   end
 
   def config_vm_box_url
@@ -59,5 +68,6 @@ module BentoboxesHelper
     end
     result
   end
+
 
 end

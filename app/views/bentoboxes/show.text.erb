@@ -9,10 +9,9 @@ Vagrant::Config.run do |config|
   <%= config_share_folders %>
 
   config.vm.provision :chef_client do |chef|
-    chef.chef_server_url = "<%= APP_CONFIG[:chef_server_api_url] %>"
-    chef.node_name = "<%= current_user.client_name %>"
+    chef.chef_server_url = "<%= AppConfiguration.get('chef server api url') %>"
+    chef.node_name = "<%= config_unique_node_name %>"
 
-    chef.client_key_path = "~/<%= current_user.client_name %>.pem"
     chef.validation_key_path = "~/<%= current_user.client_name %>.pem"
     chef.validation_client_name = "chef-validator"
 

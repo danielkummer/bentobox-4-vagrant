@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from ChefClientApi::Exceptions::ConnectionError, :with => :connection_error
   rescue_from ChefClientApi::Exceptions::ConfigurationError, :with => :chef_configuration_error
-  #rescue_from ChefClient::Exceptions::ConnectionError, SocketError, :with => :chef_configuration_error
 
   def chef_configuration_error
     render :file => File.join(Rails.root, "public", "chef_configuration_error"), :layout => false, :status => "404"
