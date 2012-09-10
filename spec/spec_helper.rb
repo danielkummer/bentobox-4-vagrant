@@ -58,6 +58,9 @@ Spork.prefork do
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.orm = "mongoid"
+
+      #load seed data (mainly app config)
+      load "#{Rails.root}/db/seeds/test.rb"
     end
 
     config.before(:each) do

@@ -5,8 +5,7 @@ describe ChefClientApi do
 
   describe "configuration" do
     it "should throw an exception when trying to connecto to a chef server" do
-      APP_CONFIG[:chef_server_api_url] = nil
-      APP_CONFIG[:cookbooks] = nil
+      AppConfiguration.set('chef server api url', nil)
 
       expect {
         ChefClientApi.cookbooks_list
@@ -26,10 +25,10 @@ describe ChefClientApi do
 
 
     it "should return success on a succesful connection" do
-      stub_request(:get, "http://localhost:4000/clients/#{APP_CONFIG[:chef_node_name]}").to_return(body: {}.to_json, headers: {'Content-Type' => 'application/json'}, status: 200)
+      stub_request(:get, "http://localhost:4000/clients/#{AppConfiguration.get('chef client node name')}").to_return(body: {}.to_json, headers: {'Content-Type' => 'application/json'}, status: 200)
       result = ChefClientApi.connected?
       result.should be_true
-      a_request(:get, "http://localhost:4000/clients/#{APP_CONFIG[:chef_node_name]}").should have_been_made
+      a_request(:get, "http://localhost:4000/clients/#{AppConfiguration.get('chef client node name')}").should have_been_made
     end
 
     it "should get an existing client" do
@@ -45,12 +44,5 @@ describe ChefClientApi do
     end
 
   end
-
-
-  #getclient
-  #createclient
-  #deleteclient
-  #cookbooks list
-
 
 end
