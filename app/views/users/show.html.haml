@@ -22,8 +22,19 @@
     %h3
       %i.icon-user
       Chef client:
-    %p.lead
-      = @user.client_name
+    %dl.dl-horizontal
+      %dt Name
+      %dd= @user.client_name
+      %dt Server status
+      %dd
+        #chef_client_status{"data-url" => chef_client_status_url(@user)}
+          %span.badge.badge-warning
+            %i.icon.icon-question-sign
+              unknown, checking...
+
+      %dd.text-info The client is created with the first 'vagrant up' command you issue on your client machine. So don't be alarmed if it doesn't exist yet.
+
+
 
     - unless @user.private_key.blank?
       %h3
@@ -35,17 +46,22 @@
           Show
         = link_to download_key_user_path(@user),  :class => "btn" do
           %i.icon-download-alt
-          Download
+          Download private key
         %a.btn.btn-info{'data-toggle' => "modal", href: "#privateKeyInfoModal" }
           %i.icon-info-sign
-    %h3 Actions
+    %h3
+      %i.icon-cog
+      Actions
     .btn-group
       = link_to edit_user_registration_path, :class => "btn" do
         %i.icon-edit
         Edit registration
-      = link_to chef_client_path(@user, 'update_client'), :class => "btn" do
-        %i.icon-user
-          Create new private key
+      = link_to download_validation_key_user_path, :class => "btn" do
+        %i.icon-download-alt
+        Download validation.pem key
+      %a.btn.btn-info{'data-toggle' => "modal", href: "#validationKeyInfoModal" }
+        %i.icon-info-sign
+
 
 #privateKeyModal.modal.hide
   .modal-header
@@ -59,6 +75,14 @@
     %button.close{"data-dismiss" => "modal", :type => "button"} ×
     %h3= "Info"
   .modal-body
-    %p You need to download and put your private key into your chef configuration folder, usually located under <b>~/chef-repo/.chef/</b>
+    %p You need to download and put your private key into your chef configuration folder, usually located under <b>/etc/chef</b>
+
+
+#validationKeyInfoModal.modal.hide
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3= "Info"
+  .modal-body
+    %p You need to download the validation.pem key and put it next to your downloaded Vagrantfile</b>
 
 

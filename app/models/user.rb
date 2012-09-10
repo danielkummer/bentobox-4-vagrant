@@ -19,10 +19,11 @@ class User
                                    message: "Invalid client name, only alphanumerical - and _ allowed"}
 
   field :private_key, type: String
+  field :admin, type: Boolean, default: false
 
 
   before_validation :generate_client_name, :if => Proc.new { |user| user.client_name.blank? }
-  before_save :create_chef_client, :if => Proc.new { |user| user.client_name_changed? or user.new_record? }
+  before_save :create_chef_client, :if => Proc.new { |user| user.client_name_changed? }
   before_destroy :delete_chef_client, :unless => Proc.new { |user| user.private_key.blank? }
 
   def generate_client_name
@@ -39,5 +40,10 @@ class User
        errors.add(:client_name, e.message)
        raise e.message
      end
-   end
+  end
+
+  def delete_chef_client
+    ChefClientApi.delete_client(self)
+  end
+
 end

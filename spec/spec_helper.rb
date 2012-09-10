@@ -5,9 +5,7 @@ require 'rspec/autorun'
 require 'capybara/rspec'
 require 'webmock/rspec'
 
-
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
 
 ENV["RAILS_ENV"] ||= 'test'
 Rails.env ||= 'test'
@@ -29,8 +27,6 @@ Spork.prefork do
   end
 
   # This file is copied to spec/ when you run 'rails generate rspec:install'
-
-
   Spork.trap_class_method(Rails::Mongoid, :load_models)
   Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
 
@@ -58,13 +54,15 @@ Spork.prefork do
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.orm = "mongoid"
+
+      #load seed data (mainly app config)
+      load "#{Rails.root}/db/seeds/test.rb"
     end
 
     config.before(:each) do
       DatabaseCleaner.start
 
-      #todo this isn't dynamic!
-      #note: it doesn't work with before :all
+      #todo this isn't dynamic! ,note: it doesn't work with before :all
       stub_request(:delete, "http://localhost:4000/clients/").
         to_return(status: 200, body: {}.to_json, headers: {'Content-Type' => 'application/json'})
       stub_request(:post, "http://localhost:4000/clients").
@@ -76,7 +74,6 @@ Spork.prefork do
     end
 
     config.after(:all) do
-      # Get rid of the linked images
       if Rails.env.test? || Rails.env.cucumber?
         tmp = Fabricate(:vagrantbox)
         store_path = File.dirname(File.dirname(tmp.box.url))
@@ -99,8 +96,8 @@ Spork.each_run do
   Dir["#{File.dirname(__FILE__)}/fabricators/**/*.rb"].each { |e| require e }
 
   if ENV['DRB']
-    require 'simplecov'
-    SimpleCov.start 'rails'
+    #require 'simplecov'
+    #SimpleCov.start 'rails'
   end
 end
 
