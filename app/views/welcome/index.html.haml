@@ -22,7 +22,7 @@
               %p Choose a base box, add ingredients and spices and release it as a new preconfigured Bentobox.
 
         %li
-          = link_to '#', class: "bigbutton", title: "Update project team nodes" do
+          = link_to APP_CONFIG[:chef_server_admin_url] + "/nodes", class: "bigbutton", title: "Update project team nodes" do
             = image_tag 'update_project.png'
             .caption
               %h3 Update project team nodes
