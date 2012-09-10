@@ -26,3 +26,6 @@ AppConfiguration.put('chef client node name', 'bentobox')
 AppConfiguration.put('chef client key', 'config/production.pem')
 AppConfiguration.put('chef server api url', 'http://localhost:4000')
 AppConfiguration.put('chef server admin url', 'http://localhost:4040')
+
+
+#User.create!(email: "admin@local.host", password: "123456", password_confirmation: "123456", admin: true)
