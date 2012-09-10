@@ -5,9 +5,6 @@ class BentoboxesController < ApplicationController
   before_filter :authenticate_owner!, :only => [:edit, :update, :destroy]
   before_filter :grab_user_from_user_id
 
-  #skip_filter :authenticate_user!, only: [:show]
-
-
   def index
     @bentoboxes = bentoboxes.all.to_a
     respond_with @bentoboxes
