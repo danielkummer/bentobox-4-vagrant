@@ -19,10 +19,15 @@ class ApplicationController < ActionController::Base
 
   def authenticate_owner!
     params.has_key?('user_id') ? id = params['user_id'] : id = params['id']
-    if user_signed_in? && current_user.id.to_s == id
+    if user_signed_in? && (current_user.id.to_s == id or current_user.admin)
       return true
     end
     redirect_to user_path(current_user), :notice => "You can only edit your own profile."
     return false
   end
+
+  def download_validation_key
+    send_data AppConfiguration.get('validation.pem'), :disposition => 'attachment', :filename => "validation.pem"
+  end
+
 end

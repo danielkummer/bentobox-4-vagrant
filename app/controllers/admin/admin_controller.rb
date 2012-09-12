@@ -1,14 +1,10 @@
 class Admin::AdminController < ApplicationController
   def authenticate_admin!
-    #temp!!
-    return true
-=begin
       if current_user.admin
         return true
       end
       redirect_to root_path, :notice => "You don't have admin privileges."
       return false
-=end
   end
 
   def index
