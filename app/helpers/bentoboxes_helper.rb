@@ -1,10 +1,7 @@
 module BentoboxesHelper
 
   def config_unique_node_name
-    @unique_name ||= String.new do |s|
-      s = current_user.client_name + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4)
-    end
-    @unique_name
+    @unique_name ||= current_user.client_name + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4)
   end
 
 
