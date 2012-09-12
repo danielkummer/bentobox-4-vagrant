@@ -9,5 +9,3 @@
 
 AdditionalConfiguration.create!(name: "1024MB RAM",value: 'config.vm.customize ["modifyvm", :id, "--memory", 1024]')
 AdditionalConfiguration.create!(name: "2048MB RAM",value: 'config.vm.customize ["modifyvm", :id, "--memory", 2048]')
-
-User.create!(email: "admin@localhost", password: "123456", password_confirmation: "123456", admin: true)
