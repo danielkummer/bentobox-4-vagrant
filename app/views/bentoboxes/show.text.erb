@@ -12,7 +12,7 @@ Vagrant::Config.run do |config|
     chef.chef_server_url = "<%= AppConfiguration.get('chef server api url') %>"
     chef.node_name = "<%= config_unique_node_name %>"
 
-    chef.validation_key_path = "~/<%= current_user.client_name %>.pem"
+    chef.validation_key_path = "validation.pem"
     chef.validation_client_name = "chef-validator"
 
     <%= config_recipes %>
