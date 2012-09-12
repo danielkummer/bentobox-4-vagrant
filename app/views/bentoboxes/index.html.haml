@@ -7,6 +7,42 @@
         %i.icon-gift
         New Bentobox
 
+%h3 Make it work
+.row{style: "float:left;"}
+  .span2
+    .well
+      %ol
+        %li
+          %p Create a new folder for your files
+          = image_tag 'folder.png', class: "center"
+  .span2
+    .well
+      %ol{start: "2"}
+        %li
+          %p
+            Download the
+            =link_to 'validation.pem', download_validation_key_path
+            key
+
+          = image_tag 'lock.png', class: "center"
+  .span2
+    .well
+      %ol{start: "3"}
+        %li
+          %p Download your bentobox of choice
+          = image_tag 'bentobox.png', class: "center"
+  .span2
+    .well
+      %ol{start: "4"}
+        %li
+          %p cd into the directory and do run 'vagrant up'
+          = image_tag 'console.png', class: "center"
+  .span2
+    .well
+      %ol{start: "5"}
+        %li
+          %p Wait until vagrant is ready - done!
+          = image_tag 'wait.png', class: "center"
 
 %table{class: 'table table-striped'}
   %tr

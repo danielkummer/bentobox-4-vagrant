@@ -23,7 +23,6 @@ VagrantCook::Application.routes.draw do
   resources :users, only: [:show, :edit, :update, :destroy] do
     member do
       get 'download_key', as: 'download_key', action: 'download_key'
-      get 'download_validation_key', as: 'download_validation_key', action: 'download_validation_key'
     end
 
     resources :bentoboxes
@@ -31,6 +30,8 @@ VagrantCook::Application.routes.draw do
 
   match 'chef/status' => 'chef#status', as: 'chef_server_status', via: :get
   match 'chef/client_status/:id' => 'chef#client_status', as: 'chef_client_status', via: :get
+
+  match 'download_validation_key' => 'application#download_validation_key', as: 'download_validation_key', via: :get
 
 
   namespace :admin do
