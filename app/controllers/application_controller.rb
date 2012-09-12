@@ -25,4 +25,9 @@ class ApplicationController < ActionController::Base
     redirect_to user_path(current_user), :notice => "You can only edit your own profile."
     return false
   end
+
+  def download_validation_key
+    send_data AppConfiguration.get('validation.pem'), :disposition => 'attachment', :filename => "validation.pem"
+  end
+
 end
