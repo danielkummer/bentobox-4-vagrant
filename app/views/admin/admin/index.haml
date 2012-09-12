@@ -12,8 +12,8 @@
           = f.submit 'Load key', class: "btn btn-success"
 .row
   .span5
+    %h3 Application configuration
     = form_tag admin_update_path, class: "form-horizontal" do
-      %legend Application configuration
       - @app_configurations.each do |app_configuration|
         .control-group
           = label_tag 'app_configuration[values][]', app_configuration.name, class: "control-label"
@@ -23,8 +23,6 @@
       .form-actions
         = submit_tag 'Save', class: "btn btn-primary"
         = link_to 'Back', admin_root_path, class: "btn"
-
-.row
   .span5
     %h3 Users
     %table.table.table-striped
