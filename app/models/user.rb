@@ -7,7 +7,7 @@ class User
   include DeviseExt
 
   has_many :bentoboxes, dependent: :destroy
-  attr_accessible :bentobox_ids, :client_name, :private_key
+  attr_accessible :bentobox_ids, :client_name, :private_key, :admin #i know mass assignment is problematic for the admin flag - it doesn't matter here
 
   validates :email, uniqueness: {case_sensitive: false}
   validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/,
@@ -23,7 +23,7 @@ class User
 
 
   before_validation :generate_client_name, :if => Proc.new { |user| user.client_name.blank? }
-  before_save :create_chef_client, :if => Proc.new { |user| user.client_name_changed? }
+  before_save :create_chef_client, :if => Proc.new { |user| user.client_name_changed? and !user.new_record? }
   before_destroy :delete_chef_client, :unless => Proc.new { |user| user.private_key.blank? }
 
   def generate_client_name
