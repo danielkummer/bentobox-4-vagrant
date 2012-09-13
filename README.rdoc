@@ -23,11 +23,9 @@ If you'd like some example data use
 
     rake db:seed
 
-* app_config.yml: You need to configure bentobox-4-vagrant as a chef client in order to list the available cookbooks when creating or editing
-ingredients. To do this simple edit app_config.yml to your needs and place the private key generated from the chef-server in
-the _config_ directory or the path supplied in the config file.
-
-Just create a new client on the chef server (important: the client must be admin) and place the private key file (.pem) in the location specified by app_config.yml.
+* application configuration: You need to configure bentobox-4-vagrant as a chef client in order to list the available cookbooks when creating or editing
+ingredients. The chef client connection is also used when optaining a new private key. To edit the settings log in as an administrator and browse to the simple admin page.
+Load the validation.pem key to permit clients to download it and register themselves at the chef server.
 
 == Features
 
@@ -58,20 +56,9 @@ Additionally, the following environment variables must be set (replace the brack
     heroku config:add S3_BUCKET=[THE_BUCKET]
 
 
-
 == Known Issues
 
 * The carrierwave-mongoid gem currently isn't working in conjunction with the mongoid 3 gem. Because of this there is no gridFs support for carrierwave!
-
-== Todos
-
-* Implement chef environment support aka
-
-    chef.environment = "development"
-
-* Implement role support aka
-
-    chef.add_role("database")
 
 
 
