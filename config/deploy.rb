@@ -17,7 +17,6 @@ default_run_options[:pty] = true # Must be set for the password prompt from git 
 set :use_sudo, true
 set :keep_releases, 5
 
-
 set :user, "namics"
 set :rails_env, "production"
 
@@ -26,6 +25,10 @@ set :deploy_to, "/var/www/#{application}"
 role :web, domain
 role :app, domain
 role :db, domain, :primary => true
+
+task :production do
+  set :bundle_without, [:development, :test, :demo]
+end
 
 namespace :deploy do
   task :start do

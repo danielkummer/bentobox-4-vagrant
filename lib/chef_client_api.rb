@@ -48,7 +48,7 @@ class ChefClientApi
     def cookbooks_list
       env = AppConfiguration.get('chef environment')
       num_versions = AppConfiguration.get('chef cookbook versions').blank? ? "num_versions=1" : AppConfiguration.get('chef cookbook versions')
-      api_endpoint = !env.blank? ? "/environments/#{env}/cookbooks?#{num_versions}" : "/cookbooks?#{num_versions}"
+      api_endpoint = !env.blank? ? "environments/#{env}/cookbooks?#{num_versions}" : "cookbooks?#{num_versions}"
       begin
         Rails.logger.debug "listing cookbook versions, api endpoint: #{api_endpoint}"
         cookbook_versions = rest.get_rest(api_endpoint)

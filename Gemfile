@@ -38,9 +38,8 @@ group :development, :test do
 end
 
 
-group :test, :demo do
-  gem 'webmock'
-end
+gem 'webmock', :group => :test
+gem 'webmock', :group => :demo
 
 gem 'database_cleaner', :group => :test
 gem 'simplecov', :require => false, :group => :test
