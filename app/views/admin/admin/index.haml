@@ -4,12 +4,10 @@
   .span5
     .well
       %h3 Load validation.pem file
-      %p Load the validation key content. (Only local loading supportet at the moment)
+      %p Load the validation key content. (load from /etc/chef/validation.pem)
       = simple_form_for :load_validation_key, :url => admin_load_validation_key_url, html:{class: "form-horizontal"}  do |f|
         = f.error_notification
-        .fieldset
-          = f.input :file_path, label: 'Path to file', input_html: {value: "/etc/chef/validation.pem"}
-          = f.submit 'Load key', class: "btn btn-success"
+        = f.submit 'Load key', class: "btn btn-success"
 .row
   .span5
     %h3 Application configuration
