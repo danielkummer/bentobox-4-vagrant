@@ -1,4 +1,6 @@
 if ENV['DEMO']
+  require 'webmock/rspec'
+
   stub_request(:delete, "http://localhost:4000/clients/").
     to_return(status: 200, body: {}.to_json, headers: {'Content-Type' => 'application/json'})
   stub_request(:post, "http://localhost:4000/clients").
