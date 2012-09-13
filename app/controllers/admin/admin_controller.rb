@@ -23,7 +23,7 @@ class Admin::AdminController < ApplicationController
   end
 
   def load_validation_key
-    filename = params[:load_validation_key][:file_path]
+    filename = '/etc/chef/validation.pem'
     if File.exists? filename
       content = File.read filename
       AppConfiguration.put('validation.pem', content)
