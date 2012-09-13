@@ -65,7 +65,7 @@ class IngredientsController < ApplicationController
     begin
       @available_cookbooks = ChefClientApi.cookbooks_list
     rescue Exception => ex
-      flash[:error] = "Can't connect to chef server, there might be an error in your configuration. Please check your app_config.yml file. Exception message: #{ex.message}"
+      flash[:error] = "Can't connect to chef server, there might be an error in your configuration. Exception message: #{ex.message}"
     end
   end
 
