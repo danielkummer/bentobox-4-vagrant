@@ -15,6 +15,7 @@ def logger
 end
 
 Spork.prefork do
+
   unless ENV['DRB']
     require 'simplecov'
     SimpleCov.start 'rails'
