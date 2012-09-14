@@ -4,7 +4,7 @@ class Vagrantbox
 
   field :name, type: String
   mount_uploader :box, VagrantboxUploader
-
+                                                           a
   validates :name, :box, :presence => true
   validates :name, :uniqueness => true
 
