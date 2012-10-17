@@ -118,19 +118,14 @@
             %a.close{ 'data-dismiss' => 'alert'} x
             = msg
         - else
-          .alert.alert-error{ style: "font-size:36px; font-weight:200; line-height:55px" }
+          .alert.alert-error{ style: "font-size:24px; font-weight:200; line-height:40px" }
             %a.close{ 'data-dismiss' => 'alert'} x
             %i.icon-warning-sign
             = msg
       .content
         .row
           .span12
-            -if params[:controller] == "welcome"
-              = yield
-            -else
-              .well.white
-                = yield
-
+            = yield
       %footer.footer
         %p
           &copy; Daniel Kummer,
