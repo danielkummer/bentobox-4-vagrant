@@ -16,6 +16,20 @@ Vagrant::Config.run do |config|
     chef.validation_client_name = "chef-validator"
 
     <%= config_recipes %>
+
+    # Todo add configure options for recepies e.g
+    # chef.add_recipe "nodejs"
+    # chef.json =	{
+    #   "nodejs" => {
+    #   "version" => "0.5.0"
+    #   }
+    # }
+    # Todo add runlist support e.g
+    # adjust the run list to suit your testing needs
+    #  chef.run_list = [
+    #   "recipe[some_cookbook::some_recipe]"
+    #  "role[some_role]"
+    #  ]
   end
 
   <%=  config_additional_configurations %>
