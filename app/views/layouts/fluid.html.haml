@@ -91,7 +91,7 @@
                     Sign In
                     %strong.caret
                   .dropdown-menu{style: "padding: 15px; padding-bottom:0px"}
-                    = form_for("users", :url => user_session_path) do |f|
+                    = form_for("user", :url => user_session_path) do |f|
                       = f.text_field :email, placeholder: "Email"
                       = f.password_field :password, placeholder: "Password"
 
