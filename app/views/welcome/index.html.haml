@@ -1,55 +1,69 @@
 .hero-unit.box
-  %h1 Welcome to the Bentobox 4 Vagrant Server
+  %h1
+    Bentobox
+    %span.huge
+      4
+    Vagrant
   %p Pack different ingredients, spices and a vagrant base box together to form a bentobox - <b>a complete Vagrantfile configuration</b> ready to deploy!
 
-.row
-  .span7
-    .well
-      %h2 What do you want do do?
-      %ul.thumbnails
-        %li
-          = link_to bentoboxes_url, class: "bigbutton", title: "Join a project" do
-            = image_tag 'join_project.png'
-            .caption
-              %h3 Join a project
-              %p Directly get your preconfigured project setup and instantly start developing - in no time!
+.row-fluid
+  .span8
+    %h2 What do you want do do?
+    %ul.thumbnails
+      %li.span4
+        = link_to bentoboxes_url, class: "thumbnail", title: "Join a project" do
+          = image_tag 'join_project.png'
+          .caption
+            %h3 Join a project
+            %p Directly get your preconfigured project setup and instantly start developing - in no time!
 
-        %li
-          = link_to new_user_bentobox_path(current_user), class: "bigbutton", title: "Create a new project setup" do
-            = image_tag 'new_project.png'
-            .caption
-              %h3 Create a new project setup
-              %p Choose a base box, add ingredients and spices and release it as a new preconfigured Bentobox.
+      %li.span4
+        = link_to new_user_bentobox_path(current_user), class: "thumbnail", title: "Create a new project setup" do
+          = image_tag 'create_project.png'
+          .caption
+            %h3 New project setup
+            %p Choose a base box, add ingredients and spices and release it as a new preconfigured Bentobox.
 
-        %li
-          = link_to AppConfiguration.get('chef server admin url') + "/nodes", class: "bigbutton", title: "Update project team nodes" do
-            = image_tag 'update_project.png'
-            .caption
-              %h3 Update project team nodes
-              %p Update the developer nodes with new configurations, software versions and content.
-  .span5
-    .well
-      %h3 Vagrant
-      %ul.unstyled
-        %li= link_to 'Why?','http://vagrantup.com/v1/docs/getting-started/why.html'
-        %li= link_to 'Getting started', 'http://vagrantup.com/v1/docs/getting-started/index.html'
-        %li= link_to 'Documentation', 'http://vagrantup.com/v1/docs/index.html'
-        %li= link_to 'Help', 'http://vagrantup.com/support.html'
-    .well
-      %p
-        %b
-          %i.icon-chevron-right
-          Bento (弁当 bentō) [ˈbɛntəʊ]
-          %br/
-          A thin box, made of plastic or lacquered wood, divided into compartments which contain small separate dishes comprising a meal or lunch
+      %li.span4
+        = link_to AppConfiguration.get('chef server admin url') + "/nodes", class: "thumbnail", title: "Update project team nodes" do
+          = image_tag 'update_team.png'
+          .caption
+            %h3 Update team nodes
+            %p Update the developer nodes with new configurations, software versions and content.
 
-    .well
-      %dl
-        %dt Bentobox
-        %dd Represents a Vagrantfile configuration consisting of a base box, ingredients and spices
-        %dt Ingredient
-        %dd Ingredients are configurations, an ingredient can consist of several chef cookbooks, shared folders, portmappings and can have a network configuration intended for the virtual machine
-        %dt Spice
-        %dd Spices are additional global configuration options for the Vagrantfile, with this you can, f.e. adjust the amount of RAM of the virtual machine
-        %dt Base Box
-        %dd Base boxes are virtual machine images packed and uploaded for later use
+
+  .span4
+    %h3 Information
+    .thumbnail
+      %ul.nav.nav-tabs{'data-tabs' => 'tabs'}
+        %li
+          %a.active{href: "#vagrant", 'data-toggle' => 'tab'} Vagrant
+        %li
+          %a{href: "#chef", 'data-toggle' => 'tab'} Chef
+        %li
+          %a{href: "#bentobox", 'data-toggle' => 'tab'} Bentobox
+      #side-tabs-content.tab-content
+        #vagrant.tab-pane.active
+          %ul.unstyled
+            %li= link_to 'Why?','http://vagrantup.com/v1/docs/getting-started/why.html'
+            %li= link_to 'Getting started', 'http://vagrantup.com/v1/docs/getting-started/index.html'
+            %li= link_to 'Documentation', 'http://vagrantup.com/v1/docs/index.html'
+            %li= link_to 'Help', 'http://vagrantup.com/support.html'
+        #chef.tab-pane
+        #bentobox.tab-pane
+          .well
+            %p
+              %b
+                %i.icon-chevron-right
+                Bento (弁当 bentō) [ˈbɛntəʊ]
+                %br/
+                A thin box, made of plastic or lacquered wood, divided into compartments which contain small separate dishes comprising a meal or lunch
+          %dl
+            %dt Bentobox
+            %dd Represents a Vagrantfile configuration consisting of a base box, ingredients and spices
+            %dt Ingredient
+            %dd Ingredients are configurations, an ingredient can consist of several chef cookbooks, shared folders, portmappings and can have a network configuration intended for the virtual machine
+            %dt Spice
+            %dd Spices are additional global configuration options for the Vagrantfile, with this you can, f.e. adjust the amount of RAM of the virtual machine
+            %dt Base Box
+            %dd Base boxes are virtual machine images packed and uploaded for later use

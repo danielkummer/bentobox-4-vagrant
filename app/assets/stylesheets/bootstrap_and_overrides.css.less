@@ -24,36 +24,51 @@
 @linkColorHover: darken(@linkColor, 15%);
 
 .brand small {
-    color: @baseColor;
-    font-weight: bold;
+  color: @baseColor;
+  font-weight: bold;
 }
 
 h1 {
-    color: @baseColor;
+  color: @baseColor;
 }
 
 .navbar {
-    border-style: none none solid;
-    border-width: 0 0 3px;
-    color: @baseColor;
+  border-style: none none solid;
+  border-width: 0 0 3px;
+  color: @baseColor;
 }
 
 .footer {
-    border-top: 1px solid #E5E5E5;
-    margin-top: 45px;
-    padding: 35px 0 36px;
+  border-top: 1px solid #E5E5E5;
+  margin-top: 45px;
+  padding: 35px 0 36px;
 }
 
 #bentobox_ingredient_ids {
-    width: 450px;
+  width: 450px;
 }
 
 body {
-    padding-top: 60px;
-    padding-left: 20px;
-    //background: url("/assets/escheresque.png") repeat scroll 0 40px #FFFFFF;
-    background: #FFFFFF;
-    padding-bottom: 40px;
+  padding-top: 60px;
+  padding-left: 20px; //background: url("/assets/escheresque.png") repeat scroll 0 40px #FFFFFF;
+  background: #FFFFFF;
+  padding-bottom: 40px;
+}
+
+.tab-content {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+a.thumbnail:hover {
+  text-decoration: none;
+}
+
+.caption {
+  min-height: 150px;
+  h3 {
+    font-size: 22px;
+  }
 }
 
 //@boxColor: #DDCBA5;
@@ -61,7 +76,7 @@ body {
 //@boxColor: #3E97D1;
 //@boxColor: #1D7074;
 //@boxColor: #01939A;
-@boxColor: #0F5CA1;
+@boxColor: #0087D1;
 @boxSideColor: darken(@boxColor, 15%);
 @boxSideColor1: darken(@boxColor, 10%);
 
@@ -69,116 +84,107 @@ body {
 @linkBoxSideColor: darken(@linkBoxColor, 15%);
 
 .box {
-    .border-radius(20px);
-    border: 7px double darken(@boxColor, 30%);
-    background: @boxColor;
-    @shadow: 1px -1px @boxSideColor,
-        2px -2px @boxSideColor,
-        3px -3px @boxSideColor,
-        4px -4px @boxSideColor,
-        5px -5px @boxSideColor,
-        6px -6px @boxSideColor,
-        7px -7px @boxSideColor,
-        8px -8px @boxSideColor,
-        9px -9px @boxSideColor,
-        10px -10px @boxSideColor,
-        11px -11px @boxSideColor,
-        12px -12px @boxSideColor,
-        13px -13px @boxSideColor,
-        14px -14px @boxSideColor,
-        15px -15px @boxSideColor,
-        15px -15px 15px 5px #444,
-        1px -1px @boxSideColor1 inset,
-        2px -2px @boxSideColor1 inset,
-        3px -3px @boxSideColor1 inset,
-        4px -4px @boxSideColor1 inset,
-        5px -5px @boxSideColor1 inset,
-        6px -6px @boxSideColor1 inset,
-        7px -7px @boxSideColor1 inset,
-        8px -8px @boxSideColor1 inset,
-        9px -9px @boxSideColor1 inset,
-        10px -10px @boxSideColor1 inset,
-        11px -11px @boxSideColor1 inset,
-        12px -12px @boxSideColor1 inset,
-        13px -13px @boxSideColor1 inset,
-        14px -14px @boxSideColor1 inset,
-        15px -15px @boxSideColor1 inset,
-        15px -15px 1px 1px darken(@boxColor, 30%) inset;
+  .border-radius(20px);
+  border: 7px double darken(@boxColor, 30%);
+  background: @boxColor;
+  @shadow: 1px -1px @boxSideColor,
+    2px -2px @boxSideColor,
+    3px -3px @boxSideColor,
+    4px -4px @boxSideColor,
+    5px -5px @boxSideColor,
+    6px -6px @boxSideColor,
+    7px -7px @boxSideColor,
+    8px -8px @boxSideColor,
+    9px -9px @boxSideColor,
+    10px -10px 5px 5px #767676,
+    1px -1px @boxSideColor1 inset,
+    2px -2px @boxSideColor1 inset,
+    3px -3px @boxSideColor1 inset,
+    4px -4px @boxSideColor1 inset,
+    5px -5px @boxSideColor1 inset,
+    6px -6px @boxSideColor1 inset,
+    7px -7px @boxSideColor1 inset,
+    8px -8px @boxSideColor1 inset,
+    9px -9px @boxSideColor1 inset,
+    10px -10px 1px 1px darken(@boxColor, 30%) inset;
+  .box-shadow(@shadow);
 
-    .box-shadow(@shadow);
+  margin-right: 10px;
+  margin-top: 30px;
+  padding: 20px;
 
-    margin-right: 15px;
-    margin-top: 30px;
-    padding: 40px;
+  h1 {
+    color: @baseColor; //text-shadow: 3px 3px 0px @boxColor, 5px 5px 0px white;
+    text-shadow: 2px -3px 1px darken(@baseColor, 15%);
+    font-size: 50px;
+    text-align: center;
 
-    h1 {
-        color: @baseColor; //text-shadow: 3px 3px 0px @boxColor, 5px 5px 0px white;
-        text-shadow: 2px -3px 1px darken(@baseColor, 15%);
-        font-size: 50px;
-        text-align: center;
+    span.huge {
+      font-size: 1.5em;
     }
+  }
 
-    p {
-        color: #FFFFFF;
-        padding-top: 20px;
-        font-weight: 200;
-        text-shadow: 1px -1px 1px #000;
-        text-align: center;
-    }
+  p {
+    color: #FFFFFF;
+    padding-top: 20px;
+    font-weight: 200;
+    text-shadow: 1px -1px 1px #000;
+    text-align: center;
+  }
 
 }
 
 .badge {
-    padding: 2px 4px 2px;
-    .border-radius(10px);
+  padding: 2px 4px 2px;
+  .border-radius(10px);
 }
 
 .white {
-    background-color: white;
-    .box-shadow(1px 1px 1px rgba(0, 0, 0, 0.075) inset)
+  background-color: white;
+  .box-shadow(1px 1px 1px rgba(0, 0, 0, 0.075) inset)
 }
 
 .bigbutton {
-    position: relative;
-    background-color: @linkBoxColor;
-    font-weight: 700;
-    display: block;
-    padding: 10px;
-    .border-radius(8px);
+  position: relative;
+  background-color: @linkBoxColor;
+  font-weight: 700;
+  display: block;
+  padding: 10px;
+  .border-radius(8px);
 
-    @shadow: 0px 9px 0px @linkBoxSideColor, 0px 9px 25px rgba(0, 0, 0, .7);
-    .box-shadow(@shadow);
-    .transition(all .1s ease);
+  @shadow: 0px 9px 0px @linkBoxSideColor, 0px 9px 25px rgba(0, 0, 0, .7);
+  .box-shadow(@shadow);
+  .transition(all .1s ease);
 
-    overflow: auto;
+  overflow: auto;
 
-    img {
-        float: left;
-        width: 128px;
-        heigh: 128px;
+  img {
+    float: left;
+    width: 128px;
+    heigh: 128px;
+  }
+
+  .caption {
+    margin: 25px 10px;
+    text-align: left;
+    float: right;
+    width: 70%;
+
+    h3 {
+      color: black;
     }
-
-    .caption {
-        margin:25px 10px;
-        text-align: left;
-        float: right;
-        width: 70%;
-
-        h3 {
-            color: black;
-        }
-        p {
-            color: #979797;
-        }
+    p {
+      color: #979797;
     }
+  }
 }
 
 .bigbutton:active {
-    @shadow: 0px 3px 0px @linkBoxSideColor, 0px 3px 6px rgba(0, 0, 0, .9);
-    .box-shadow(@shadow);
+  @shadow: 0px 3px 0px @linkBoxSideColor, 0px 3px 6px rgba(0, 0, 0, .9);
+  .box-shadow(@shadow);
 
-    top: 6px;
-    position: relative;
+  top: 6px;
+  position: relative;
 }
 
 .center {
