@@ -40,17 +40,15 @@ namespace :deploy do
   task :restart, :roles => :app, :except => {:no_release => true} do
     run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
   end
+end
 
+namespace :customs do
   desc "Symlink shared configs and folders on each release."
-  task :symlink_shared do
+  task :symlink do
     run "ln -nfs #{shared_path}/config/production.pem #{release_path}/config/production.pem"
-  end
-
-  task :symlink_uploads do
-    run "rm -rf #{release_path}/public/uploads} && ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
+    #run "rm -rf #{release_path}/public/uploads} && ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
+    run "ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared'
-after 'deploy:update_code', 'deploy:symlink_uploads'
-
+after 'deploy:symlink','customs:symlink'

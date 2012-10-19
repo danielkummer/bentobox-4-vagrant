@@ -1,6 +1,6 @@
 CarrierWave.configure do |config|
-  config.root = Rails.root.join('tmp')
-  config.cache_dir = 'uploads'
+  config.root = Rails.root
+  config.cache_dir = "#{Rails.root}/tmp/uploads"
 
   # S3 doesn't allow for "+" or "-"...
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.]/
@@ -12,6 +12,8 @@ CarrierWave.configure do |config|
 
 =begin
   # amazon S3 config for heroku deployment
+    config.root = Rails.root.join('tmp')
+    config.cache_dir = "#{Rails.root}/tmp/uploads"
     config.storage = :fog
     config.fog_credentials = {
       :provider => 'AWS',
