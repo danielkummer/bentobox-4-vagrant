@@ -10,7 +10,7 @@ module BentoboxesHelper
   end
 
   def config_vm_box_url
-    ("config.vm.box_url = \"" + root_url.chop + @bentobox.vagrantbox.box.url + "\"").html_safe
+    ("config.vm.box_url = \"" + root_url.chop + @bentobox.vagrantbox.box_url + "\"").html_safe
   end
 
   def config_network
