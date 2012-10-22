@@ -19,6 +19,8 @@
       %td= vagrantbox.name
       %td= vagrantbox.box_filename
       %td
+        = link_to vagrantbox.box_url.to_s, class: "btn", title: "Download" do
+          %i.icon-download
         = link_to edit_vagrantbox_path(vagrantbox), class: "btn", title: "Edit" do
           %i.icon-edit
         = link_to vagrantbox, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger", title: "Delete" do
