@@ -20,4 +20,8 @@ class VagrantboxUploader < CarrierWave::Uploader::Base
     true
   end
 
+  def move_to_cache
+    true
+  end
+
 end
