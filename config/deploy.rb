@@ -51,4 +51,4 @@ namespace :customs do
   end
 end
 
-after 'deploy:symlink','customs:symlink'
+after 'deploy:create_symlink','customs:symlink'
