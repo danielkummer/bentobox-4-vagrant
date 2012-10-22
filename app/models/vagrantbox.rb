@@ -1,6 +1,6 @@
 class Vagrantbox
   include Mongoid::Document
-  has_many :bentoboxes
+  has_many :bentoboxes, dependent: :restrict
 
   field :name, type: String
   mount_uploader :box, VagrantboxUploader
