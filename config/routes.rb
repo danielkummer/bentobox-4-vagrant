@@ -25,7 +25,14 @@ VagrantCook::Application.routes.draw do
       get 'download_key', as: 'download_key', action: 'download_key'
     end
 
-    resources :bentoboxes
+    resources :bentoboxes do
+      collection do
+        get 'update', as: 'update', to: "updates#index"
+      end
+    end
+
+
+
   end
 
   match 'chef/status' => 'chef#status', as: 'chef_server_status', via: :get
