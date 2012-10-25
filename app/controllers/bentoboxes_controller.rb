@@ -5,6 +5,8 @@ class BentoboxesController < ApplicationController
   before_filter :authenticate_owner!, :only => [:edit, :update, :destroy]
   before_filter :grab_user_from_user_id
 
+  helper_method :unique_node_name
+
   def index
     @bentoboxes = bentoboxes.all.to_a
     respond_with @bentoboxes
@@ -14,6 +16,7 @@ class BentoboxesController < ApplicationController
     @bentobox = bentoboxes.find(params[:id])
 
     if params[:download]
+      @bentobox.add_client_node_for(current_user, unique_node_name(@bentobox))
       send_data(render_to_string, :filename => "Vagrantfile", :type => "text/plain")
     else
       respond_with @bentobox
@@ -64,6 +67,11 @@ class BentoboxesController < ApplicationController
   end
 
   private
+  def unique_node_name(bentobox)
+     @unique_name ||= current_user.client_name + "_" + bentobox.name.gsub(' ', '_') + "_" + bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4)
+   end
+
+
   def grab_user_from_user_id
     @user = User.find(params[:user_id]) if params[:user_id]
   end
