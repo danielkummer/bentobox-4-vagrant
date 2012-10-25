@@ -1,0 +1,41 @@
+.page-header
+  %h1
+    Update Bentoboxes
+    %small update and automatically distribute your configuration
+
+.alert.alert-info
+  %h3 Important
+  %p Please tell your clients to restart their vagrant, only then will the new configuration be distributed
+
+.tabbable.tabs-left
+  %ul.nav.nav-tabs
+    - @bentoboxes.each_with_index do |bentobox, index|
+      %li{class: "#{"active" if index == 0}"}
+        = link_to "#box_#{bentobox._id}", title: bentobox.name, 'data-toggle' => 'tab' do
+          %h3= bentobox.name
+          %p= bentobox.description
+
+
+  .tab-content
+    - @bentoboxes.each_with_index do |bentobox, index|
+      .tab-pane{:id=>"box_#{bentobox._id}", class: "#{"active" if index == 0}"}
+        %table{class: 'table table-striped'}
+          %tr
+            %th User
+            %th Node Name
+          - bentobox.client_nodes.each do |client_node|
+            %tr
+              %td= client_node.user.email
+              %td= client_node.name
+        =link_to bentobox_url(bentobox), class: "btn btn-success" do
+          %i.icon-update
+          Update configuration
+
+
+
+
+
+
+
+
+

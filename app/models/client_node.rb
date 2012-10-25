@@ -12,5 +12,5 @@ class ClientNode
   validates :bentobox, presence: true
 
 
-  attr_accessible :name, :bentobox
+  attr_accessible :name, :bentobox, :user
 end
