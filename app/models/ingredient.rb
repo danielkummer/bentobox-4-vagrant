@@ -11,10 +11,12 @@ class Ingredient
 
   field :name, type: String
   field :cookbooks, type: Array
+  field :json_config, type: String
 
 
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
+  validate :json_format
 
 
   accepts_nested_attributes_for :networkconfig,
@@ -25,6 +27,7 @@ class Ingredient
   attr_accessible :name,
                   :category,
                   :cookbooks,
+                  :json_config,
                   :portmappings_attributes, :portmappings,
                   :share_folders_attributes, :share_folders,
                   :networkconfig_attributes, :networkconfig
@@ -37,6 +40,11 @@ class Ingredient
   #remove stupid empty array content form form
   before_validation do |model|
     model.cookbooks.reject!(&:blank?) if model.cookbooks
+  end
+
+  private
+  def json_format
+    errors.add(:json_config, "not in json format") unless json_config.is_json?
   end
 
 end

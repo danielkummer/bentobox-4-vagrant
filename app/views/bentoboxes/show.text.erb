@@ -16,6 +16,8 @@ Vagrant::Config.run do |config|
     chef.validation_client_name = "chef-validator"
 
     <%= config_recipes %>
+    <%= config_json %>
+
 
     # Todo add configure options for recepies e.g
     # chef.add_recipe "nodejs"
