@@ -14,7 +14,11 @@ VagrantCook::Application.routes.draw do
     get "logout", :to => "devise/sessions#destroy"
   end
 
-  resources :bentoboxes, only: [:index, :show]
+  resources :bentoboxes, only: [:index, :show] do
+    member do
+      get 'run_list', as: 'run_list', action: 'run_list'
+    end
+  end
   resources :ingredients
   resources :categories, except: [:show]
   resources :vagrantboxes

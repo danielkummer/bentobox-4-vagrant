@@ -48,13 +48,7 @@ module BentoboxesHelper
   end
 
   def config_recipes
-    result = ""
-    @bentobox.ingredients.where(:cookbooks.ne => "", :cookbooks.exists => true).each do |ingredient|
-      ingredient.cookbooks.each do |cookbook|
-        result << "chef.add_recipe(\"#{cookbook.strip}\")\n    "
-      end
-    end
-    result.html_safe
+    "chef.run_list = \"`curl -L #{run_list_bentobox_url(@bentobox)} `\"".html_safe
   end
 
   def config_additional_configurations
