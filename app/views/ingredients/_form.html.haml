@@ -1,7 +1,7 @@
 = simple_form_for @ingredient, html:{class: "form-horizontal"} do |f|
   = f.error_notification
   .fieldset
-    %legend overall information
+    %legend Overall information
     = f.input :name
     = f.input :category, :collection => Category.all, :prompt => "Choose a Category"
 
@@ -10,6 +10,10 @@
   .fieldset
     %legend Recipes and cookbooks
     = f.input :cookbooks, :collection => @available_cookbooks, :selected => @ingredient.cookbooks, :input_html => { multiple: true }, :include_blank => false
+
+  .fieldset
+    %legend JSON configuration for recipes and cookbooks
+    = f.input :json_config, as: :text,:input_html => { :rows => 5, :cols => 50}
 
   .fieldset
     %legend Network configuration

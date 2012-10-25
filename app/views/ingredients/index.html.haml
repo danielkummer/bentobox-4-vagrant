@@ -12,6 +12,7 @@
     %th Name
     %th Category
     %th Cookbooks
+    %th JSON configs
     %th Portmappings
     %th Share Folder
     %th Network Config
@@ -22,6 +23,7 @@
       %td= ingredient.name
       %td= ingredient.category.name
       %td= true_false_label(!ingredient.cookbooks.blank?)
+      %td= true_false_label(!ingredient.json_config.blank?)
       %td= true_false_label(!ingredient.portmappings.blank?)
       %td= true_false_label(!ingredient.share_folders.blank?)
       %td= true_false_label(!ingredient.networkconfig.blank?)

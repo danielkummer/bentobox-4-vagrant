@@ -1,3 +1,4 @@
+require 'json'
 class BentoboxesController < ApplicationController
   respond_to :html
   respond_to :text, only: [:show]
@@ -5,7 +6,7 @@ class BentoboxesController < ApplicationController
   before_filter :authenticate_owner!, :only => [:edit, :update, :destroy]
   before_filter :grab_user_from_user_id
 
-  skip_filter :authenticate_user!, only: [:run_list]
+  skip_filter :authenticate_user!, only: [:run_list, :json_config]
 
   helper_method :unique_node_name
 
@@ -80,6 +81,15 @@ class BentoboxesController < ApplicationController
       end
     end
     render text: "[" + result.join(",") + "]\n"
+  end
+
+  def json_config
+    result = {}
+    bentobox = bentoboxes.find(params[:id])
+    bentobox.ingredients.where(:json_config.ne => "", :json_config.exists => true).each do |ingredient|
+      result.merge!(JSON.parse(ingredient.json_config))
+    end
+    render json: result
   end
 
   private

@@ -17,6 +17,7 @@ VagrantCook::Application.routes.draw do
   resources :bentoboxes, only: [:index, :show] do
     member do
       get 'run_list', as: 'run_list', action: 'run_list'
+      get 'json_config', as: 'json_config', action: 'json_config'
     end
   end
   resources :ingredients
