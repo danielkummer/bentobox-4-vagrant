@@ -7,6 +7,7 @@ describe User do
   end
 
   it { should have_many :bentoboxes }
+  it { should have_many :client_nodes }
 
 
   before(:each) do

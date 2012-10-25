@@ -1,12 +1,11 @@
 module BentoboxesHelper
 
-  def config_unique_node_name
-    @unique_name ||= current_user.client_name + "_" + @bentobox.name.gsub(' ', '_') + "_" + @bentobox.vagrantbox.name.gsub(' ', '_') + "_" + SecureRandom.hex(4)
+  def config_vm_box_name
+    ("config.vm.box = \"" + unique_node_name(@bentobox) + "\"").html_safe
   end
 
-
-  def config_vm_box_name
-    ("config.vm.box = \"" + config_unique_node_name + "\"").html_safe
+  def config_node_name
+    unique_node_name(@bentobox)
   end
 
   def config_vm_box_url

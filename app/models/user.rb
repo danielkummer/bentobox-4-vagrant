@@ -7,6 +7,9 @@ class User
   include DeviseExt
 
   has_many :bentoboxes, dependent: :destroy
+  has_many :client_nodes, dependent: :destroy
+
+
   attr_accessible :bentobox_ids, :client_name, :private_key, :admin #i know mass assignment is problematic for the admin flag - it doesn't matter here
 
   validates :email, uniqueness: {case_sensitive: false}
