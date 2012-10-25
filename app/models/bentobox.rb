@@ -5,6 +5,7 @@ class Bentobox
 
   belongs_to :user
   belongs_to :vagrantbox
+  has_many :client_nodes
   has_and_belongs_to_many :ingredients, :inverse_of => :bentoboxes
   has_and_belongs_to_many :additional_configurations, :inverse_of => :bentoboxes, dependent: :restrict
 
@@ -29,5 +30,9 @@ class Bentobox
   }
 
   scope :recent, ->(limit) { desc(:created_at).limit(limit) }
+
+  def add_client_node_for(user, node_name)
+    client_nodes.create!(name: node_name, user: user, bentobox: self)
+  end
 
 end
