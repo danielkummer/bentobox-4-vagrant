@@ -25,7 +25,7 @@
             %p Choose a base box, add ingredients and spices and release it as a new preconfigured Bentobox.
 
       %li.span4
-        = link_to AppConfiguration.get('chef server admin url') + "/nodes", class: "thumbnail", title: "Update project team nodes" do
+        = link_to update_user_bentoboxes_path(current_user), class: "thumbnail", title: "Update project team nodes" do
           = image_tag 'update_team.png'
           .caption
             %h3 Update team nodes
