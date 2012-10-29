@@ -51,13 +51,15 @@
           %dd= true_false_label(!@bentobox.additional_configurations.blank?)
 
 
-    - if @bentobox.user == current_user
+    - if @bentobox.owners.include?(current_user)
       = link_to edit_user_bentobox_path(current_user, @bentobox), class: "btn" do
         %i.icon-edit
         Edit
-    = link_to 'Back', bentoboxes_path, class: "btn" if @bentobox.user == current_user
+    = link_to 'Back', bentoboxes_path, class: "btn" if @bentobox.owners.include?(current_user)
 
   .span4
     .well
-      %dt Owner
-      %dd= @bentobox.user.email
+      %h3 Owners
+      %ul.unstyled
+        - @bentobox.owners.each do |o|
+          %li= o.email

@@ -6,6 +6,8 @@ jQuery ->
   $("#bentobox_ingredient_ids").chosen()
   $("#bentobox_additional_configuration_ids").chosen()
 
+  $("#bentobox_owner_ids").chosen()
+
   toggleAdditional = ->
     $("#additional_configuration").toggle()
     $("#toggle_additional_configuration").children(":first").toggleClass("icon-eye-open").toggleClass "icon-eye-close"

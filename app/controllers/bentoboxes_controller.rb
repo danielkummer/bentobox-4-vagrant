@@ -28,6 +28,7 @@ class BentoboxesController < ApplicationController
 
   def new
     @bentobox = bentoboxes.new
+    @bentobox.owners << current_user
     respond_with @bentobox
   end
 
@@ -103,7 +104,7 @@ class BentoboxesController < ApplicationController
   end
 
   def bentoboxes
-    @user ? @user.bentoboxes : Bentobox.visible_to_user(current_user)
+    @user ? @user.owner_of : Bentobox.visible_to_user(current_user)
   end
 
 
