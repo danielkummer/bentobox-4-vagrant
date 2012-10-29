@@ -7,51 +7,57 @@
       = link_to params.merge(:format => :text, :download => true), :class => "btn btn-large btn-info" do
         %i.icon-download-alt
         Get Vagrantfile
-.row
-  .span2
-    %ul.thumbnails
-      %li.span2
-        .thumbnail
-          = image_tag 'vagrant_box.png'
-
-  .span6
-    %h2 Base box
-    = @bentobox.vagrantbox.name
-
-.row
-  .span2
-    %ul.thumbnails
-      %li.span2
-        .thumbnail
-          = image_tag 'vagrant_add.png'
-  .span6
-    %h2 Ingredients
-    .control-group
-      %ul.unstyled
-        -for ingredient in @bentobox.ingredients
-          %li= ingredient.name
 
 .row
   .span8
-    %dl.well
-      %dt Public box?
-      %dd=true_false_label(@bentobox.public).html_safe
-      %dt Network configuration?
-      %dd= true_false_label(!@bentobox.ingredients.with_network_config.blank?)
-      %dt Share folders?
-      %dd= true_false_label(!@bentobox.ingredients.with_share_folders.blank?)
-      %dt Portmappings?
-      %dd= true_false_label(!@bentobox.ingredients.with_portmappings.blank?)
-      %dt Additional configurations?
-      %dd= true_false_label(!@bentobox.additional_configurations.blank?)
+    .row
+      .span2
+        %ul.thumbnails
+          %li.span2
+            .thumbnail
+              = image_tag 'vagrant_box.png'
+
+      .span6
+        %h2 Base box
+        = @bentobox.vagrantbox.name unless @bentobox.vagrantbox.blank?
+
+    .row
+      .span2
+        %ul.thumbnails
+          %li.span2
+            .thumbnail
+              = image_tag 'vagrant_add.png'
+      .span6
+        %h2 Ingredients
+        .control-group
+          %ul.unstyled
+            -for ingredient in @bentobox.ingredients
+              %li= ingredient.name
+
+    .row
+      .span8
+        %dl.well
+          %dt Public box?
+          %dd=true_false_label(@bentobox.public).html_safe
+          %dt JSON configuration?
+          %dd= true_false_label(!@bentobox.ingredients.with_json_config.blank?)
+          %dt Network configuration?
+          %dd= true_false_label(!@bentobox.ingredients.with_network_config.blank?)
+          %dt Share folders?
+          %dd= true_false_label(!@bentobox.ingredients.with_share_folders.blank?)
+          %dt Portmappings?
+          %dd= true_false_label(!@bentobox.ingredients.with_portmappings.blank?)
+          %dt Additional configurations?
+          %dd= true_false_label(!@bentobox.additional_configurations.blank?)
 
 
+    - if @bentobox.user == current_user
+      = link_to edit_user_bentobox_path(current_user, @bentobox), class: "btn" do
+        %i.icon-edit
+        Edit
+    = link_to 'Back', bentoboxes_path, class: "btn" if @bentobox.user == current_user
 
-
-
-
-- if @bentobox.user == current_user
-  = link_to edit_user_bentobox_path(current_user, @bentobox), class: "btn" do
-    %i.icon-edit
-    Edit
-= link_to 'Back', bentoboxes_path, class: "btn" if @bentobox.user == current_user
+  .span4
+    .well
+      %dt Owner
+      %dd= @bentobox.user.email
