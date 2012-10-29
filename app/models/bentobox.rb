@@ -3,7 +3,7 @@ class Bentobox
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  has_and_belongs_to_many :owners, inverse_of: :owner_of, class_name: "User"
+  has_and_belongs_to_many :owners, inverse_of: :owned_boxes, class_name: "User"
 
   belongs_to :vagrantbox
   has_many :client_nodes
