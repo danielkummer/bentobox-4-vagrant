@@ -104,7 +104,7 @@ class BentoboxesController < ApplicationController
   end
 
   def bentoboxes
-    @user ? @user.owner_of : Bentobox.visible_to_user(current_user)
+    @user ? @user.owned_boxes : Bentobox.visible_to_user(current_user)
   end
 
 

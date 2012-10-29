@@ -12,6 +12,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'devise'
 gem 'simple_form'
 gem 'chef', '~> 10.12.0'
+gem 'mongoid_rails_migrations'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
