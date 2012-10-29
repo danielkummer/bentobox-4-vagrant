@@ -10,13 +10,13 @@
 %h3 Make it work
 .row{style: "float:left;"}
   .span2
-    .well
+    .well.step-box
       %ol
         %li
           %p Create a new folder for your files
           = image_tag 'folder.png', class: "center"
   .span2
-    .well
+    .well.step-box
       %ol{start: "2"}
         %li
           %p
@@ -25,20 +25,20 @@
             key
 
           = image_tag 'lock.png', class: "center"
-  .span2
-    .well
+  .span3
+    .well.step-box
       %ol{start: "3"}
         %li
           %p Download your bentobox of choice (you have to remove the .txt file ending if it was appended automatically)
           = image_tag 'bentobox.png', class: "center"
   .span2
-    .well
+    .well.step-box
       %ol{start: "4"}
         %li
           %p cd into the directory and do run 'vagrant up'
           = image_tag 'console.png', class: "center"
   .span2
-    .well
+    .well.step-box
       %ol{start: "5"}
         %li
           %p Wait until vagrant is ready - done!
@@ -52,14 +52,17 @@
 
   - @bentoboxes.each do |bentobox|
     %tr
-      %td= bentobox.name
+      %td
+        = bentobox.name
+        -if bentobox.owners.include?(current_user)
+          %span.label.label-success OWNED
       %td= bentobox.description
       %td
         = link_to bentobox_url(bentobox,  params.merge(:format => :text, :download => true)), :class => "btn btn-info", title: "Download Vagrantfile" do
           %i.icon-download-alt
         = link_to bentobox, class: "btn", title: "Show" do
           %i.icon-eye-open
-        -if bentobox.owners.include?(current_user)
+
           =link_to edit_user_bentobox_path(current_user, bentobox), class: "btn", title: "Edit" do
             %i.icon-edit
           =link_to bentobox, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger", title: "Delete" do
