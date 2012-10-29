@@ -35,6 +35,7 @@ class Ingredient
   scope :with_network_config, excludes(:networkconfig => nil)
   scope :with_share_folders, excludes(:share_folders => nil)
   scope :with_portmappings, excludes(:portmappings => nil)
+  scope :with_json_config, excludes(:json_config => nil)
 
 
   #remove stupid empty array content form form
