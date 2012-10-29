@@ -6,7 +6,7 @@ class User
   include Mongoid::Document
   include DeviseExt
 
-  has_many :bentoboxes, dependent: :destroy
+  has_and_belongs_to_many :owner_of, :inverse_of => :owners, class_name: "Bentobox", dependent: :restrict
   has_many :client_nodes, dependent: :destroy
 
 
