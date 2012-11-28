@@ -52,3 +52,5 @@ namespace :customs do
 end
 
 after 'deploy:create_symlink','customs:symlink'
+after "deploy:update", "deploy:cleanup"
+
