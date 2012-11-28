@@ -52,7 +52,7 @@ module BentoboxesHelper
   end
 
   def config_json
-    "chef.json.merge!(`curl -L #{json_config_bentobox_url(@bentobox)} `)"
+    "chef.json.merge!(JSON.parse(`curl -L #{json_config_bentobox_url(@bentobox)} `))"
   end
 
   def config_additional_configurations
