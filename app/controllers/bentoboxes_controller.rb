@@ -78,10 +78,10 @@ class BentoboxesController < ApplicationController
     bentobox.ingredients.where(:cookbooks.ne => "", :cookbooks.exists => true).each do |ingredient|
       cookbooks = ingredient.cookbooks
       cookbooks.each do |cookbook|
-        result << "\"recipe[#{cookbook.strip}]\""
+        result << "chef.add_recipe('#{cookbook}')"
       end
     end
-    render text: "[" + result.join(",") + "]\n"
+    render text: result.join("\n")
   end
 
   def json_config
