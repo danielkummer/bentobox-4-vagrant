@@ -15,7 +15,7 @@ gem 'chef', '~> 10.12.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'less'
+  gem 'less-rails'
   gem 'therubyracer', :platform => :ruby
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'

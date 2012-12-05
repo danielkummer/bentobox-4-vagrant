@@ -142,6 +142,9 @@ GEM
     json (1.6.1)
     less (2.2.2)
       commonjs (~> 0.2.6)
+    less-rails (2.2.3)
+      actionpack (>= 3.1)
+      less (~> 2.2.0)
     libv8 (3.3.10.4)
     libwebsocket (0.1.7.1)
       addressable
@@ -315,7 +318,7 @@ DEPENDENCIES
   guard-spork
   haml-rails
   jquery-rails
-  less
+  less-rails
   mongoid (~> 3.0.0.rc)
   mongoid-rspec
   nifty-generators
