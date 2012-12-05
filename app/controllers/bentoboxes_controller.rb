@@ -73,15 +73,13 @@ class BentoboxesController < ApplicationController
   ## render the vagrantconfig run list, ex: ["recipe[foo]", "role[bar]"]
   #todo refactor to use map
   def run_list
-    result = []
+    result = ''
     bentobox = bentoboxes.find(params[:id])
     bentobox.ingredients.where(:cookbooks.ne => "", :cookbooks.exists => true).each do |ingredient|
       cookbooks = ingredient.cookbooks
-      cookbooks.each do |cookbook|
-        result << "chef.add_recipe('#{cookbook}')"
-      end
+      cookbooks.each { |cookbook| result << %Q*"#{cookbook.strip}" * }
     end
-    render text: result.join("\n")
+    render text: result.to_s
   end
 
   def json_config
