@@ -48,7 +48,7 @@ module BentoboxesHelper
   end
 
   def config_recipes
-    "`curl -L #{run_list_bentobox_url(@bentobox)} `".html_safe!
+    "`curl -L #{run_list_bentobox_url(@bentobox)} `".html_safe
   end
 
   def config_json
