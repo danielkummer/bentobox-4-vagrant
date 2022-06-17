@@ -86,6 +86,7 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     commonjs (0.2.6)
+    concurrent-ruby (1.1.9)
     crack (0.3.1)
     database_cleaner (0.9.1)
     devise (2.1.2)
@@ -133,7 +134,8 @@ GEM
       railties (>= 3.1, < 4.1)
     highline (1.6.15)
     hike (1.2.1)
-    i18n (0.6.1)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     ipaddress (0.8.0)
     journey (1.0.4)
     jquery-rails (2.1.4)
